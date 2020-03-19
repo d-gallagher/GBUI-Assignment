@@ -60,8 +60,6 @@ public class MoveWithCrane : MonoBehaviour
 
         }
 
-
-
     }
 
     /// <summary>
