@@ -11,24 +11,25 @@ public class PlayerMove : MonoBehaviour
     public GameObject myoGameObject;
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
-    public float rotationSpeed = 5f;
-    public float rotationSensitivity = .01f;
-    public float deadZoneBorder = 15;
+    //public float rotationSpeed = 5f;
+    //public float rotationSensitivity = .01f;
+    //public float deadZoneBorder = 15;
 
 
     private ThalmicMyo _myo;
     private CharacterController _characterController;
+    private Transform _player;
 
     private Vector3 _originalRotation = Vector3.zero;
     private Vector3 _currentRotation = Vector3.zero;
 
-    public float xAngle, yAngle, zAngle;
 
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _myo = myoGameObject.GetComponent<ThalmicMyo>();
         _originalRotation = transform.localRotation.eulerAngles;
+        _player = GetComponent<Transform>();
     }
 
     void FixedUpdate()
@@ -40,7 +41,7 @@ public class PlayerMove : MonoBehaviour
 
         UpdateCraneRotation();
 
-        transform.Rotate(xAngle, yAngle, zAngle, Space.Self);
+              
         if (Input.GetKey(KeyCode.Space))
         {
             Debug.Log("Original Rotation: "+_originalRotation);
@@ -60,16 +61,7 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateCraneRotation()
     {
-        // Get Myo rotation in z
-        //_originalRotation = _currentRotation;
-
-        float myoYRot = _myo.transform.localRotation.eulerAngles.y;
-        if (myoYRot <= 360 && myoYRot >= 270)
-        {
-            myoYRot -= 360;
-        }
-        _currentRotation = new Vector3(0f, _myo.transform.localRotation.eulerAngles.y, 0f);
-
+        _player.eulerAngles = new Vector3(0f, _myo.transform.localRotation.eulerAngles.y, 0f);
 
     }
 }
