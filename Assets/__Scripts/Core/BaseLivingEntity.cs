@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Base class for any 'Living' game entities.
@@ -15,6 +16,10 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     protected bool isDead;
     #endregion
 
+    #region Events
+    public event Action OnDeath;
+    #endregion
+
     #region Unity Methods
     protected virtual void Start() => health = startingHealth;
     #endregion
@@ -29,6 +34,7 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     protected void Die()
     {
         isDead = true;
+        OnDeath?.Invoke();
         Destroy(gameObject);
     }
 }
