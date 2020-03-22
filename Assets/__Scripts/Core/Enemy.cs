@@ -19,6 +19,8 @@ public class Enemy : BaseLivingEntity
     float attackDistanceThreshold = .5f;
     [SerializeField]
     float timeBetweenAttacks = 1;
+    [SerializeField]
+    float _damage = 1;
 
     private NavMeshAgent _pathfinder;
     private Transform _target;
@@ -105,9 +107,16 @@ public class Enemy : BaseLivingEntity
         float percent = 0;
 
         _skinMaterial.color = Color.red;
+        bool hasAppliedDamage = false;
 
         while (percent <= 1)
         {
+            if (percent >= .5f && !hasAppliedDamage)
+            {
+                hasAppliedDamage = true;
+                _targetEntity.TakeDamage(_damage);
+            }
+
             percent += Time.deltaTime * attackSpeed;
             float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
             transform.position = Vector3.Lerp(originalPosition, attackPosition, interpolation);
