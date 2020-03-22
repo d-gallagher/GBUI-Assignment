@@ -2,10 +2,11 @@
 
 public class Gun : MonoBehaviour
 {
-	/// <summary>
-	/// Postion of the end of the gun barrel.
-	/// </summary>
-	public Transform gunBarrelPosition;
+    #region Public Variables
+    /// <summary>
+    /// Postion of the end of the gun barrel.
+    /// </summary>
+    public Transform gunBarrelPosition;
 	public Projectile projectile;
 
 	/// <summary>
@@ -16,10 +17,13 @@ public class Gun : MonoBehaviour
 	/// Initial speed of projectile fired from gun.
 	/// </summary>
 	public float shotVelocity = 35;
+    #endregion
 
-	private float _nextShotTime;
+    #region Private Variables
+    private float _nextShotTime;
+    #endregion
 
-	public void Shoot()
+    public void Shoot()
 	{
 
 		if (Time.time > _nextShotTime)

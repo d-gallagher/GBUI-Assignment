@@ -4,30 +4,37 @@ using UnityEngine.AI;
 
 /// <summary>
 /// Enemy Script
-/// <para>Basic Enemy AI script using NavMeshAgent</para>
+/// <para>Basic Enemy AI script - expects NavMeshAgent component on GameObject</para>
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-	private NavMeshAgent _pathfinder;
+    #region Private Variables
+    private NavMeshAgent _pathfinder;
 	private Transform _target;
+    #endregion
 
-	void Start()
+    #region Unity Methods
+    void Start()
 	{
 		_pathfinder = GetComponent<NavMeshAgent>();
 		_target = GameObject.FindGameObjectWithTag("Player").transform;
-
+		// Begin the coroutine to follow the Player.
 		StartCoroutine(UpdatePath());
 	}
+    #endregion
 
-	IEnumerator UpdatePath()
+    IEnumerator UpdatePath()
 	{
+		// Limit the frequency of updates to ease CPU cycles.
 		float refreshRate = .25f;
 
 		while (_target != null)
 		{
+			// Get Player position and move towards.
 			Vector3 targetPosition = new Vector3(_target.position.x, 0, _target.position.z);
 			_pathfinder.SetDestination(targetPosition);
+			// Wait until next path update.
 			yield return new WaitForSeconds(refreshRate);
 		}
 	}
