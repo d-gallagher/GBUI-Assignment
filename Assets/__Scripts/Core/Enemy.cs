@@ -101,10 +101,17 @@ public class Enemy : BaseLivingEntity
 
         while (_target != null)
         {
-            // Get Player position and move towards.
-            Vector3 targetPosition = new Vector3(_target.position.x, 0, _target.position.z);
-            // Only update path if enemy is still alive...
-            if (!isDead) _pathfinder.SetDestination(targetPosition);
+            if (_currentState == EnemyState.Chasing)
+            {
+                // Get Player position and move towards.
+                Vector3 dirToTarget = (_target.position - transform.position).normalized;
+                Vector3 targetPosition = _target.position - dirToTarget * (_myCollisionRadius + _targetCollisionRadius + attackDistanceThreshold / 2);
+                if (!isDead)
+                {
+                    // Only update path if enemy is still alive...
+                    _pathfinder.SetDestination(targetPosition);
+                }
+            }
             // Wait until next path update.
             yield return new WaitForSeconds(refreshRate);
         }
