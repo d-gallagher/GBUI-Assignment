@@ -9,7 +9,7 @@ public class GunController : MonoBehaviour
     /// <summary>
     /// Weapon mount position.
     /// </summary>
-    public Transform weaponHold;
+    public Transform weaponMountPosition;
     /// <summary>
     /// Gun to equip on start.
     /// </summary>
@@ -36,8 +36,8 @@ public class GunController : MonoBehaviour
         {
             Destroy(_equippedGun.gameObject);
         }
-        _equippedGun = Instantiate(gunToEquip, weaponHold.position, weaponHold.rotation) as Gun;
-        _equippedGun.transform.parent = weaponHold;
+        _equippedGun = Instantiate(gunToEquip, weaponMountPosition.position, weaponMountPosition.rotation) as Gun;
+        _equippedGun.transform.parent = weaponMountPosition;
     }
 
     public void Shoot()

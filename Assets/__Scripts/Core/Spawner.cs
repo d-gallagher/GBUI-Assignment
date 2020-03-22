@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Script for sapwning Enemny Waves.
+/// Script for spawning Enemny Waves.
 /// </summary>
 public class Spawner : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    private void Start() => NextWave();
+    private void Start() => SpawnNewWave();
 
     private void Update()
     {
@@ -30,22 +30,26 @@ public class Spawner : MonoBehaviour
             _nextSpawnTime = Time.time + _currentWave.timeBetweenSpawns;
 
             Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
+            // Add the OnEnemyDeath method to the OnDeath action of the enemy...
             spawnedEnemy.OnDeath += OnEnemyDeath;
         }
     }
     #endregion
 
-    void OnEnemyDeath()
+    /// <summary>
+    /// Check to see if any enemies remain in this wave and spawn a new wave if needed.
+    /// </summary>
+    private void OnEnemyDeath()
     {
         _enemiesRemainingAlive--;
 
-        if (_enemiesRemainingAlive == 0)
-        {
-            NextWave();
-        }
+        if (_enemiesRemainingAlive == 0) SpawnNewWave();
     }
 
-    void NextWave()
+    /// <summary>
+    /// Spawn a new wave of enemies if there are waves remaining.
+    /// </summary>
+    private void SpawnNewWave()
     {
         _currentWaveNumber++;
         print("Wave: " + _currentWaveNumber);
@@ -57,5 +61,4 @@ public class Spawner : MonoBehaviour
             _enemiesRemainingAlive = _enemiesRemainingToSpawn;
         }
     }
-
 }
