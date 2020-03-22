@@ -6,7 +6,7 @@
 /// </summary>
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(GunController))]
-public class Player : MonoBehaviour
+public class Player : BaseLivingEntity
 {
     #region Public Variables
     /// <summary>
@@ -22,8 +22,9 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _playerController = GetComponent<PlayerController>();
         _gunController = GetComponent<GunController>();
         _cam = Camera.main;

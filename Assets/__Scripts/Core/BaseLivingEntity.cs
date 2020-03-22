@@ -12,7 +12,7 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
 
     #region Protected Variables
     protected float health;
-    protected bool dead;
+    protected bool isDead;
     #endregion
 
     #region Unity Methods
@@ -23,12 +23,12 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     {
         health -= damage;
 
-        if (health <= 0 && !dead) Die();
+        if (health <= 0 && !isDead) Die();
     }
 
     protected void Die()
     {
-        dead = true;
-        GameObject.Destroy(gameObject);
+        isDead = true;
+        Destroy(gameObject);
     }
 }
