@@ -15,9 +15,22 @@ public class Projectile : MonoBehaviour
     private float _speed = 10;
     [SerializeField]
     private float _damage = 1;
+    [SerializeField]
+    float _lifetime = 3;
+    [SerializeField]
+    float _skinWidth = .1f;
+
     #endregion
 
     #region Unity Methods
+    private void Start()
+    {
+        Destroy(gameObject, _lifetime);
+
+        Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .1f, collisionMask);
+        if (initialCollisions.Length > 0) OnHitObject(initialCollisions[0]);
+    }
+
     private void Update()
     {
         float moveDistance = _speed * Time.deltaTime;
@@ -46,6 +59,13 @@ public class Projectile : MonoBehaviour
         IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();
         if (damageableObject != null) damageableObject.TakeHit(_damage, hit);
         // Destroy this projectile.
+        Destroy(gameObject);
+    }
+
+    private void OnHitObject(Collider c)
+    {
+        IDamageable damageableObject = c.GetComponent<IDamageable>();
+        if (damageableObject != null) damageableObject.TakeDamage(_damage);
         Destroy(gameObject);
     }
 }
