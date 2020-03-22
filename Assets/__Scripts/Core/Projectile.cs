@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
         // Cast a ray forward from the projectile.
         Ray ray = new Ray(transform.position, transform.forward);
         // Check if the ray hit anything on the layer...
-        if (Physics.Raycast(ray, out RaycastHit hit, moveDistance, collisionMask, QueryTriggerInteraction.Collide))
+        if (Physics.Raycast(ray, out RaycastHit hit, moveDistance + _skinWidth, collisionMask, QueryTriggerInteraction.Collide))
         {
             // Raycast hit, handle hitting the GameObject
             OnHitObject(hit);
