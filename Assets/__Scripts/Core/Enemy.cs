@@ -22,12 +22,15 @@ public class Enemy : BaseLivingEntity
 
     private NavMeshAgent _pathfinder;
     private Transform _target;
+    private BaseLivingEntity _targetEntity;
     private Material _skinMaterial;
     private Color _originalColour;
 
     private float _nextAttackTime;
     private float _myCollisionRadius;
     private float _targetCollisionRadius;
+
+    private bool _hasTarget;
     #endregion
 
     #region Unity Methods
@@ -41,30 +44,53 @@ public class Enemy : BaseLivingEntity
 
         // Pathfinding
         _pathfinder = GetComponent<NavMeshAgent>();
+
+        // Check that player exists and is still alive...
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            _currentState = EnemyState.Chasing;
+            _hasTarget = true;
+
+            // Set up target variables.
+            _target = GameObject.FindGameObjectWithTag("Player").transform;
+            _targetEntity = _target.GetComponent<BaseLivingEntity>();
+            _targetEntity.OnDeath += OnTargetDeath;
+
+            // Set up collision variables.
+            _myCollisionRadius = GetComponent<CapsuleCollider>().radius;
+            _targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
+
+            // Begin the coroutine to follow the Player.
+            StartCoroutine(UpdatePath());
+        }
+
         _currentState = EnemyState.Chasing;
         _target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // Set up other variables.
-        _myCollisionRadius = GetComponent<CapsuleCollider>().radius;
-        _targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
-
-        // Begin the coroutine to follow the Player.
-        StartCoroutine(UpdatePath());
     }
 
     private void Update()
     {
-        if (Time.time > _nextAttackTime)
+        if (_hasTarget)
         {
-            float sqrDstToTarget = (_target.position - transform.position).sqrMagnitude;
-            if (sqrDstToTarget < Mathf.Pow(attackDistanceThreshold + _myCollisionRadius + _targetCollisionRadius, 2))
+            if (Time.time > _nextAttackTime)
             {
-                _nextAttackTime = Time.time + timeBetweenAttacks;
-                StartCoroutine(Attack());
+                float sqrDstToTarget = (_target.position - transform.position).sqrMagnitude;
+                if (sqrDstToTarget < Mathf.Pow(attackDistanceThreshold + _myCollisionRadius + _targetCollisionRadius, 2))
+                {
+                    _nextAttackTime = Time.time + timeBetweenAttacks;
+                    StartCoroutine(Attack());
+                }
             }
         }
     }
     #endregion
+
+    void OnTargetDeath()
+    {
+        _hasTarget = false;
+        _currentState = EnemyState.Idle;
+    }
 
     IEnumerator Attack()
     {
@@ -99,7 +125,7 @@ public class Enemy : BaseLivingEntity
         // Limit the frequency of updates to ease CPU cycles.
         float refreshRate = .25f;
 
-        while (_target != null)
+        while (_hasTarget)
         {
             if (_currentState == EnemyState.Chasing)
             {
