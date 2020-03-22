@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Gun Controller Script
+/// </summary>
 public class GunController : MonoBehaviour
 {
+    #region Public Variables
     /// <summary>
     /// Weapon mount position.
     /// </summary>
@@ -10,15 +14,21 @@ public class GunController : MonoBehaviour
     /// Gun to equip on start.
     /// </summary>
     public Gun startingGun;
+    #endregion
+
+    #region Private Variables
     /// <summary>
     /// Currently equipped gun.
     /// </summary>
     private Gun _equippedGun;
+    #endregion
 
-    void Start()
+    #region Unity Methods
+    private void Start()
     {
         if (startingGun != null) EquipGun(startingGun);
     }
+    #endregion
 
     public void EquipGun(Gun gunToEquip)
     {
