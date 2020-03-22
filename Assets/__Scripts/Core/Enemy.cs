@@ -3,8 +3,9 @@ using System.Collections;
 using UnityEngine.AI;
 
 /// <summary>
-/// Enemy Script
-/// <para>Basic Enemy AI script - expects NavMeshAgent component on GameObject</para>
+/// Enemy Script - Basic Enemy AI script.
+/// <para>Expects NavMeshAgent component on GameObject</para>
+/// <para>Expects a GameObject with tag "Player" to be present in scene.</para>
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour

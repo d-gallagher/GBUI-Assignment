@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Gun Script
+/// <para>Set gunBarrelPosition to transform where projectile will spawn.</para>
+/// <para>Set Should projectile to the object to spawn wwhen gun is fired.</para>
+/// </summary>
 public class Gun : MonoBehaviour
 {
     #region Public Variables
@@ -20,6 +25,7 @@ public class Gun : MonoBehaviour
     #endregion
 
     #region Private Variables
+	// Keep tranck of when next projectile can be fired.
     private float _nextShotTime;
     #endregion
 
