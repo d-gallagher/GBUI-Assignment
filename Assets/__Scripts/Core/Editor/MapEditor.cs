@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapEditor : MonoBehaviour
 {
     #region Public Variables
     public Transform tilePrefab;
