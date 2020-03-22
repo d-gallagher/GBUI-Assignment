@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class MyoTestScript_J : MonoBehaviour
+public abstract class BaseMyoBehaviour : MonoBehaviour
 {
-    ThalmicMyo _thalmicMyo;
-    private Thalmic.Myo.Pose _lastPose;
+    protected ThalmicMyo _thalmicMyo;
+    protected Thalmic.Myo.Pose _lastPose;
 
     // Start is called before the first frame update
-    void Start()
+    protected void OnStart()
     {
         _thalmicMyo = FindObjectOfType<ThalmicMyo>();
         bool myoFound = _thalmicMyo != null;
@@ -14,7 +14,7 @@ public class MyoTestScript_J : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void OnUpdate()
     {
         if (_thalmicMyo.pose != _lastPose)
         {
@@ -23,7 +23,7 @@ public class MyoTestScript_J : MonoBehaviour
         }
     }
 
-    private void OnNewPose(Thalmic.Myo.Pose newPose)
+    protected void OnNewPose(Thalmic.Myo.Pose newPose)
     {
         switch (newPose)
         {
@@ -53,39 +53,17 @@ public class MyoTestScript_J : MonoBehaviour
         }
     }
 
-    private void OnRest()
-    {
-        Debug.Log("Rest");
-    }
+    protected abstract void OnRest();
 
-    private void OnFist()
-    {
-        Debug.Log("Fist");
-    }
+    protected abstract void OnFist();
 
-    private void OnWaveIn()
-    {
-        Debug.Log("Wave In");
-    }
+    protected abstract void OnWaveIn();
 
-    private void OnWaveOut()
-    {
-        Debug.Log("Wave Out");
-    }
+    protected abstract void OnWaveOut();
 
-    private void OnFingerSpread()
-    {
-        Debug.Log("Finger Spread");
-    }
+    protected abstract void OnFingerSpread();
 
-    private void OnDoubleTap()
-    {
-        Debug.Log("Double Tap");
-    }
+    protected abstract void OnDoubleTap();
 
-    private void OnUnknown()
-    {
-        Debug.Log("Unknown");
-    }
-
+    protected abstract void OnUnknown();
 }
