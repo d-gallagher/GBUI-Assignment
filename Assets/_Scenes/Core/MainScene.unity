@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 1692177708}
   - component: {fileID: 1692177707}
   - component: {fileID: 1692177712}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -635,6 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530f36b3a49f24d4ea2d3117b4767bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 5
 --- !u!1001 &6829391616295236049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -651,6 +652,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
+        type: 3}
+      propertyPath: startingHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829391615241780345, guid: c8fed8f3cdf57c345a8d67e89190b033,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
