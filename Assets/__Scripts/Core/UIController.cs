@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
@@ -30,4 +31,7 @@ public class UIController : MonoBehaviour
             yield return null;
         }
     }
+
+    // Input
+    public void StartNewGame() => SceneManager.LoadScene("MainScene");
 }
