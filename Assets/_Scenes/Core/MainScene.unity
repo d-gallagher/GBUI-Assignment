@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 31563799}
   - component: {fileID: 31563798}
   - component: {fileID: 31563797}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
