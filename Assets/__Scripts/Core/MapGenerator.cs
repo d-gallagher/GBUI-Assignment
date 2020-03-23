@@ -31,7 +31,7 @@ public class MapGenerator : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    private void Start() => FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
+    private void Awake() => FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
     #endregion
 
     private void OnNewWave(int waveNumber)
