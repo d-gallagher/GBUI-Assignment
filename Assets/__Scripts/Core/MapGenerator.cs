@@ -24,7 +24,7 @@ public class MapGenerator : MonoBehaviour
     #region Private Variables
     private List<Coord> _allTileCoords;
     private Queue<Coord> _shuffledTileCoords;
-    private Coord _mapCentre;
+    
     private GameMap currentMap;
     #endregion
 
