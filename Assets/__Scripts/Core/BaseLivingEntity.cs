@@ -24,13 +24,9 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     protected virtual void Start() => health = startingHealth;
     #endregion
 
-    public void TakeHit(float damage, RaycastHit hit)
-    {
-        // TODO: May need to use RayCastHit here in future...
-        TakeDamage(damage);
-    }
+    public virtual void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) => TakeDamage(damage);
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
 
@@ -44,4 +40,5 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
         OnDeath?.Invoke();
         Destroy(gameObject);
     }
+
 }

@@ -12,6 +12,8 @@ using static Enums;
 public class Enemy : BaseLivingEntity
 {
 
+    public ParticleSystem deathEffect;
+
     #region Private/Serialized Variables
     [SerializeField]
     private EnemyState _currentState;
@@ -85,6 +87,18 @@ public class Enemy : BaseLivingEntity
                 }
             }
         }
+    }
+    #endregion
+
+    #region Overrides
+    public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        if(_damage>=health)
+        {
+            // TODO: remove obsolete code
+            Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)) as GameObject, deathEffect.startLifetime);
+        }
+        base.TakeHit(damage, hitPoint, hitDirection);
     }
     #endregion
 
