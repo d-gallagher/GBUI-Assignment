@@ -31,8 +31,14 @@ public class MapGenerator : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    void Start() => GenerateMap();
+    private void Awake() => FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
     #endregion
+
+    private void OnNewWave(int waveNumber)
+    {
+        mapIndex = waveNumber - 1;
+        GenerateMap();
+    }
 
     public void GenerateMap()
     {

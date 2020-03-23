@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -29,6 +30,10 @@ public class Spawner : MonoBehaviour
     private bool _isCamping;
 
     private bool _isDisabled;
+    #endregion
+
+    #region Events
+    public event Action<int> OnNewWave;
     #endregion
 
     #region Unity Methods
@@ -97,6 +102,8 @@ public class Spawner : MonoBehaviour
 
     private void OnPlayerDeath() => _isDisabled = true;
 
+    private void ResetPlayerPosition() => _playerTransform.position = _map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+
     /// <summary>
     /// Check to see if any enemies remain in this wave and spawn a new wave if needed.
     /// </summary>
@@ -120,6 +127,10 @@ public class Spawner : MonoBehaviour
 
             _enemiesRemainingToSpawn = _currentWave.enemyCount;
             _enemiesRemainingAlive = _enemiesRemainingToSpawn;
+
+            OnNewWave?.Invoke(_currentWaveNumber);
+
+            ResetPlayerPosition();
         }
     }
 }

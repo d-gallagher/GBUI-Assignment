@@ -37,6 +37,7 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
         if (health <= 0 && !isDead) Die();
     }
 
+    [ContextMenu("Self Destruct")]
     protected void Die()
     {
         isDead = true;
