@@ -241,17 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194199f4a8b84254986f12e934e139cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maps:
-  - mapSize:
-      x: 0
-      y: 0
-    obstaclePercent: 0.02
-    seed: 123
-    minObstacleHeight: 0.43
-    maxObstacleHeight: 0.15
-    foregroundColour: {r: 0, g: 0, b: 0, a: 0}
-    backgroundColour: {r: 0, g: 0, b: 0, a: 0}
-  mapIndex: 10
+  maps: []
+  mapIndex: 0
   tilePrefab: {fileID: 7316892307743400215, guid: a0647621513fdad4b9a84777765e7742,
     type: 3}
   obstaclePrefab: {fileID: 5181026928653788208, guid: 620c02297fd93b249919cf1d34e45913,
@@ -259,12 +250,12 @@ MonoBehaviour:
   navmeshFloor: {fileID: 438453769}
   navmeshMaskPrefab: {fileID: 1396991900228669569, guid: d1a5eb4a7ee56a5498f8103976e789d7,
     type: 3}
-  mapSize: {x: 15, y: 12}
-  maxMapSize: {x: 30, y: 33}
-  outlinePercent: 0.194
-  obstaclePercent: 0.176
-  seed: 161
-  tileSize: 5.5
+  mapSize: {x: 0, y: 0}
+  maxMapSize: {x: 0, y: 0}
+  outlinePercent: 0
+  obstaclePercent: 0
+  seed: 0
+  tileSize: 0
 --- !u!4 &31563799
 Transform:
   m_ObjectHideFlags: 0
