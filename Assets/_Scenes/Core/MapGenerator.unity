@@ -3451,7 +3451,7 @@ NavMeshObstacle:
   m_GameObject: {fileID: 381213432}
   m_Enabled: 1
   serializedVersion: 3
-  m_Shape: 1
+  m_Shape: 0
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
@@ -15033,6 +15033,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1640829196}
   - component: {fileID: 1640829197}
+  - component: {fileID: 1640829198}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -15068,14 +15069,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194199f4a8b84254986f12e934e139cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maps:
+  - mapSize:
+      x: 0
+      y: 0
+    obstaclePercent: 0.054
+    seed: 12
+    minObstacleHeight: 1.14
+    maxObstacleHeight: 4.35
+    foregroundColour: {r: 0.9433962, g: 0.04004982, b: 0.04004982, a: 0}
+    backgroundColour: {r: 0.8423841, g: 0.8867924, b: 0.04601282, a: 0}
+  mapIndex: 10
   tilePrefab: {fileID: 7316892307743400215, guid: a0647621513fdad4b9a84777765e7742,
     type: 3}
   obstaclePrefab: {fileID: 5181026928653788208, guid: 620c02297fd93b249919cf1d34e45913,
     type: 3}
+  navmeshFloor: {fileID: 1750735954}
+  navmeshMaskPrefab: {fileID: 1396991900228669569, guid: d1a5eb4a7ee56a5498f8103976e789d7,
+    type: 3}
   mapSize: {x: 15, y: 12}
-  outlinePercent: 0.026
-  obstaclePercent: 0.223
-  seed: 14
+  maxMapSize: {x: 30, y: 33}
+  outlinePercent: 0.194
+  obstaclePercent: 0.176
+  seed: 49
+  tileSize: 5.5
+--- !u!65 &1640829198
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640829195}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1654097579
 GameObject:
   m_ObjectHideFlags: 0
@@ -16022,8 +16052,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750735953}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.52, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 30, y: 30, z: 0}
   m_Children: []
   m_Father: {fileID: 1640829196}
   m_RootOrder: 0
