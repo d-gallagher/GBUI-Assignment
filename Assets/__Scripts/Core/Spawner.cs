@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -29,6 +30,10 @@ public class Spawner : MonoBehaviour
     private bool _isCamping;
 
     private bool _isDisabled;
+    #endregion
+
+    #region Events
+    public event Action<int> OnNewWave;
     #endregion
 
     #region Unity Methods
@@ -119,6 +124,11 @@ public class Spawner : MonoBehaviour
 
             _enemiesRemainingToSpawn = _currentWave.enemyCount;
             _enemiesRemainingAlive = _enemiesRemainingToSpawn;
+
+            if (OnNewWave != null)
+            {
+                OnNewWave(_currentWaveNumber);
+            }
         }
     }
 }
