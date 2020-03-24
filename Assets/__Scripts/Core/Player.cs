@@ -14,6 +14,7 @@ public class Player : BaseLivingEntity
     /// </summary>
     public float moveSpeed = 5;
     public Crosshairs crosshairs;
+    public float minCrosshairDistance = 1.0f;
     #endregion
 
     #region References
@@ -51,6 +52,12 @@ public class Player : BaseLivingEntity
             // Set crosshairs on mouse point
             crosshairs.transform.position = point;
             crosshairs.DetectTargets(ray);
+
+            // Fix aiming - do not allow crosshair to pass through player, causing odd gun rotation.
+            if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > minCrosshairDistance)
+            {
+                _gunController.Aim(point);
+            }
         }
 
         // Weapon Input
