@@ -19,7 +19,7 @@ public class MuzzleFlash : MonoBehaviour
         flashHolder.SetActive(true);
 
         int flashSpriteIndex = UnityEngine.Random.Range(0, flashSprites.Length);
-        for (int i = 0; i < flashSprites.Length; i++)
+        for (int i = 0; i < flashSpriteRenderers.Length; i++)
         {
             flashSpriteRenderers[i].sprite = flashSprites[flashSpriteIndex];
         }
