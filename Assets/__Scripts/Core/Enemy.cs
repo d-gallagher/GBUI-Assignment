@@ -113,7 +113,7 @@ public class Enemy : BaseLivingEntity
         if (_hasTarget) _damage = Mathf.Ceil(_targetEntity.startingHealth / hitsToKillPlayer);
         startingHealth = enemyHealth;
         // Appearance
-        _skinMaterial = GetComponent<Renderer>().material;
+        _skinMaterial = GetComponent<Renderer>().sharedMaterial;
         _skinMaterial.color = skinColor;
         _originalColour = _skinMaterial.color;
     }
