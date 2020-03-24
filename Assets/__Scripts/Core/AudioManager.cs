@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using static Enums;
 
 public class AudioManager : MonoBehaviour
 {
@@ -20,25 +21,61 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         // Assign singleton
-        instance = this;
-
-        _soundLibrary = GetComponent<SoundLibrary>();
-
-        _musicSources = new AudioSource[2];
-        for (int i = 0; i < 2; i++)
+        if (instance != null) Destroy(gameObject);
+        else
         {
-            GameObject newMusicSource = new GameObject("Music source " + (i + 1));
-            _musicSources[i] = newMusicSource.AddComponent<AudioSource>();
-            newMusicSource.transform.parent = transform;
-        }
+            instance = this;
 
-        _audioListenerTransform = FindObjectOfType<AudioListener>().transform;
-        _playerTransform = FindObjectOfType<Player>().transform;
+            _soundLibrary = GetComponent<SoundLibrary>();
+
+            _musicSources = new AudioSource[2];
+            for (int i = 0; i < 2; i++)
+            {
+                GameObject newMusicSource = new GameObject("Music source " + (i + 1));
+                _musicSources[i] = newMusicSource.AddComponent<AudioSource>();
+                newMusicSource.transform.parent = transform;
+            }
+
+            _audioListenerTransform = FindObjectOfType<AudioListener>().transform;
+            _playerTransform = FindObjectOfType<Player>().transform;
+
+            masterVolumePercent = PlayerPrefs.GetFloat("master vol");
+            sfxVolumePercent = PlayerPrefs.GetFloat("sfx vol");
+            musicVolumePercent = PlayerPrefs.GetFloat("music vol");
+        }
     }
 
     private void Update()
     {
         if (_playerTransform != null) _audioListenerTransform.position = _playerTransform.position;
+    }
+
+    public void SetVolume(float volumePercent, AudioChannel channel)
+    {
+        switch (channel)
+        {
+            case AudioChannel.Master:
+                masterVolumePercent = volumePercent;
+                break;
+
+            case AudioChannel.Sfx:
+                sfxVolumePercent = volumePercent;
+                break;
+
+            case AudioChannel.Music:
+                musicVolumePercent = volumePercent;
+                break;
+
+            default:
+                break;
+        }
+
+        _musicSources[0].volume = musicVolumePercent * masterVolumePercent;
+        _musicSources[1].volume = musicVolumePercent * masterVolumePercent;
+
+        PlayerPrefs.SetFloat("master vol", masterVolumePercent);
+        PlayerPrefs.SetFloat("sfx vol", sfxVolumePercent);
+        PlayerPrefs.SetFloat("music vol", musicVolumePercent);
     }
 
     public void PlayMusic(AudioClip clip, float fadeDuration = 1)
