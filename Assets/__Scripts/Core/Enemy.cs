@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.AI;
 using static Enums;
+using System;
 
 /// <summary>
 /// Enemy Script - Basic Enemy AI script.
@@ -38,38 +39,39 @@ public class Enemy : BaseLivingEntity
     #endregion
 
     #region Unity Methods
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
-
-        // Appearance
-        _skinMaterial = GetComponent<Renderer>().material;
-        _originalColour = _skinMaterial.color;
-
         // Pathfinding
         _pathfinder = GetComponent<NavMeshAgent>();
 
         // Check that player exists and is still alive...
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            _currentState = EnemyState.Chasing;
             _hasTarget = true;
-
             // Set up target variables.
             _target = GameObject.FindGameObjectWithTag("Player").transform;
             _targetEntity = _target.GetComponent<BaseLivingEntity>();
-            _targetEntity.OnDeath += OnTargetDeath;
 
             // Set up collision variables.
             _myCollisionRadius = GetComponent<CapsuleCollider>().radius;
             _targetCollisionRadius = _target.GetComponent<CapsuleCollider>().radius;
+        }
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        // Check that player exists and is still alive...
+        if (_hasTarget)
+        {
+            _hasTarget = true;
+            _currentState = EnemyState.Chasing;
+            _targetEntity.OnDeath += OnTargetDeath;
 
             // Begin the coroutine to follow the Player.
             StartCoroutine(UpdatePath());
         }
-
-        _currentState = EnemyState.Chasing;
-        _target = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
 
@@ -93,14 +95,28 @@ public class Enemy : BaseLivingEntity
     #region Overrides
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
-        if(_damage>=health)
+        if (_damage >= health)
         {
             // TODO: remove obsolete code
             Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)) as GameObject, deathEffect.startLifetime);
         }
         base.TakeHit(damage, hitPoint, hitDirection);
     }
+
     #endregion
+
+    public void SetCharacteristics(float moveSpeed, int hitsToKillPlayer, float enemyHealth, Color skinColor)
+    {
+        // Speed
+        _pathfinder.speed = moveSpeed;
+        // Damage and Health
+        if (_hasTarget) _damage = Mathf.Ceil(_targetEntity.startingHealth / hitsToKillPlayer);
+        startingHealth = enemyHealth;
+        // Appearance
+        _skinMaterial = GetComponent<Renderer>().material;
+        _skinMaterial.color = skinColor;
+        _originalColour = _skinMaterial.color;
+    }
 
     void OnTargetDeath()
     {

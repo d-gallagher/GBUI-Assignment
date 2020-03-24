@@ -62,7 +62,7 @@ public class Spawner : MonoBehaviour
                 _campPositionOld = _playerTransform.position;
             }
 
-            if (_enemiesRemainingToSpawn > 0 && Time.time > _nextSpawnTime)
+            if (_enemiesRemainingToSpawn > 0 || _currentWave.isInfiniteWave && Time.time > _nextSpawnTime)
             {
                 _enemiesRemainingToSpawn--;
                 _nextSpawnTime = Time.time + _currentWave.timeBetweenSpawns;
@@ -97,6 +97,7 @@ public class Spawner : MonoBehaviour
         Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
         // Add the OnEnemyDeath method to the OnDeath action of the enemy...
         spawnedEnemy.OnDeath += OnEnemyDeath;
+        spawnedEnemy.SetCharacteristics(_currentWave.moveSpeed, _currentWave.hitsToKillPlayer, _currentWave.enemyHealth, _currentWave.skinColor);
     }
 
     private void OnPlayerDeath() => _isDisabled = true;
