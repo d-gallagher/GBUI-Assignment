@@ -13,6 +13,8 @@ public class Player : BaseLivingEntity
     /// Player Movement Speed
     /// </summary>
     public float moveSpeed = 5;
+    public Crosshairs crosshairs;
+    public float minCrosshairDistance = 1.0f;
     #endregion
 
     #region References
@@ -39,7 +41,7 @@ public class Player : BaseLivingEntity
 
         // Look Input
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.up * _gunController.GunHeight);
 
         if (groundPlane.Raycast(ray, out float rayDistance))
         {
@@ -47,6 +49,15 @@ public class Player : BaseLivingEntity
             Debug.DrawLine(ray.origin, point, Color.red);
             //Debug.DrawRay(ray.origin,ray.direction * 100,Color.red);
             _playerController.LookAt(point);
+            // Set crosshairs on mouse point
+            crosshairs.transform.position = point;
+            crosshairs.DetectTargets(ray);
+
+            // Fix aiming - do not allow crosshair to pass through player, causing odd gun rotation.
+            if ((new Vector2(point.x, point.z) - new Vector2(transform.position.x, transform.position.z)).sqrMagnitude > minCrosshairDistance)
+            {
+                _gunController.Aim(point);
+            }
         }
 
         // Weapon Input

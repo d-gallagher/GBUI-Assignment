@@ -66,6 +66,8 @@ public class Gun : MonoBehaviour
         _shotRemainingInBurst = burstCount;
     }
 
+    public void Aim(Vector3 aimPoint) => transform.LookAt(aimPoint);
+
     private void Shoot()
     {
         if (Time.time > _nextShotTime)
