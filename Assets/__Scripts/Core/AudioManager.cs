@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private float _masterVolumePercent = .2f;
-    private float _sfxVolumePercent = 1;
-    private float _musicVolumePercent = 1f;
+    public float masterVolumePercent = 1;
+    public float sfxVolumePercent = 1;
+    public float musicVolumePercent = 1f;
 
     private AudioSource[] _musicSources;
     private int _activeMusicSourceIndex;
@@ -13,8 +13,8 @@ public class AudioManager : MonoBehaviour
     // Singleton
     public static AudioManager instance;
 
-    Transform audioListener;
-    Transform playerT;
+    private Transform _audioListenerTransform;
+    private Transform _playerTransform;
 
     void Awake()
     {
@@ -29,13 +29,13 @@ public class AudioManager : MonoBehaviour
             newMusicSource.transform.parent = transform;
         }
 
-        audioListener = FindObjectOfType<AudioListener>().transform;
-        playerT = FindObjectOfType<Player>().transform;
+        _audioListenerTransform = FindObjectOfType<AudioListener>().transform;
+        _playerTransform = FindObjectOfType<Player>().transform;
     }
 
     void Update()
     {
-        if (playerT != null) audioListener.position = playerT.position;
+        if (_playerTransform != null) _audioListenerTransform.position = _playerTransform.position;
     }
 
     public void PlayMusic(AudioClip clip, float fadeDuration = 1)
@@ -49,18 +49,17 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip, Vector3 pos)
     {
-        if (clip != null) AudioSource.PlayClipAtPoint(clip, pos, _sfxVolumePercent * _masterVolumePercent);
+        if (clip != null) AudioSource.PlayClipAtPoint(clip, pos, sfxVolumePercent * masterVolumePercent);
     }
 
     IEnumerator AnimateMusicCrossfade(float duration)
     {
         float percent = 0;
-
         while (percent < 1)
         {
             percent += Time.deltaTime * 1 / duration;
-            _musicSources[_activeMusicSourceIndex].volume = Mathf.Lerp(0, _musicVolumePercent * _masterVolumePercent, percent);
-            _musicSources[1 - _activeMusicSourceIndex].volume = Mathf.Lerp(_musicVolumePercent * _masterVolumePercent, 0, percent);
+            _musicSources[_activeMusicSourceIndex].volume = Mathf.Lerp(0, musicVolumePercent * masterVolumePercent, percent);
+            _musicSources[1 - _activeMusicSourceIndex].volume = Mathf.Lerp(musicVolumePercent * masterVolumePercent, 0, percent);
             yield return null;
         }
     }

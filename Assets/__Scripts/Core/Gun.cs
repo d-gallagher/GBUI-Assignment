@@ -45,6 +45,11 @@ public class Gun : MonoBehaviour
     // Shell
     public Transform shell;
     public Transform shellEjectionPoint;
+
+    [Header("Audio")]
+    public AudioClip shootAudio;
+    public AudioClip reloadAudio;
+
     #endregion
 
     #region Private Variables
@@ -110,7 +115,11 @@ public class Gun : MonoBehaviour
     public void Reload()
     {
         // Only reload if not already and mag is not full
-        if (!_isReloading && _roundsRemainingInMag != roundsPerMag) StartCoroutine(AnimateReload());
+        if (!_isReloading && _roundsRemainingInMag != roundsPerMag)
+        {
+            StartCoroutine(AnimateReload());
+            AudioManager.instance.PlaySound(reloadAudio, transform.position);
+        }
     }
     #endregion
 
@@ -155,6 +164,8 @@ public class Gun : MonoBehaviour
             transform.localPosition = Vector3.forward * Random.Range(minMaxRecoilAmount.x, minMaxRecoilAmount.y);
             _recoilAngle += Random.Range(minMaxRecoilAngle.x, minMaxRecoilAngle.y);
             _recoilAngle = Mathf.Clamp(_recoilAngle, 0, 30.0f);
+
+            AudioManager.instance.PlaySound(shootAudio, transform.position);
         }
     }
 
