@@ -21,25 +21,38 @@ public class UIController : MonoBehaviour
 
     [Header("Score")]
     public Text scoreUI;
+
+    [Header("Health")]
+    public RectTransform healthBar;
+    public Text healthUI;
     #endregion
 
     #region Private Variables
+    private Player _player;
     private Spawner _spawner;
     #endregion
 
     #region Unity Methods
+    private void Start()
+    {
+        _player = FindObjectOfType<Player>();
+        _player.OnDeath += OnGameOver;
+    }
+
     private void Awake()
     {
         _spawner = FindObjectOfType<Spawner>();
         _spawner.OnNewWave += OnNewWave;
     }
 
-    private void Start()
+    private void Update()
     {
-        FindObjectOfType<Player>().OnDeath += OnGameOver;
-    }
+        scoreUI.text = ScoreKeeper.Score.ToString("D6");
 
-    private void Update() => scoreUI.text = ScoreKeeper.Score.ToString("D6");
+        float healthPercent = 0;
+        if (_player != null) healthPercent = _player.health / _player.startingHealth;
+        healthBar.localScale = new Vector3(healthPercent, 1, 1);
+    }
     #endregion
 
     private void OnNewWave(int waveNumber)
