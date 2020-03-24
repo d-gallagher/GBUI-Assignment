@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class Shell : MonoBehaviour
 {
+    #region Public Variables
     public Rigidbody _rb;
     public float forceMin;
     public float forceMax;
 
     public float lifetime = 4.0f;
     public float fadeTime = 2.0f;
+    #endregion
 
+    #region Unity Methods
     private void Start()
     {
         float force = Random.Range(forceMin, forceMax);
@@ -17,6 +20,7 @@ public class Shell : MonoBehaviour
         _rb.AddTorque(Random.insideUnitSphere * force);
         StartCoroutine(Fade());
     }
+    #endregion
 
     private IEnumerator Fade()
     {

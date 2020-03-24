@@ -8,6 +8,7 @@
 public class Gun : MonoBehaviour
 {
     #region Public Variables
+    [Header("Gun Settings")]
     /// <summary>
     /// Postion of the end of the gun barrel.
     /// </summary>
@@ -23,6 +24,7 @@ public class Gun : MonoBehaviour
     /// </summary>
     public float shotVelocity = 35;
 
+    [Header("Shell Settings")]
     // Shell
     public Transform shell;
     public Transform shellEjectionPoint;
