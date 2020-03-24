@@ -94,7 +94,7 @@ public class Spawner : MonoBehaviour
             yield return null;
         }
 
-        Enemy spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as Enemy;
+        Enemy spawnedEnemy = Instantiate(enemy, spawnTile.position, Quaternion.identity) as Enemy;
         // Add the OnEnemyDeath method to the OnDeath action of the enemy...
         spawnedEnemy.OnDeath += OnEnemyDeath;
         spawnedEnemy.SetCharacteristics(_currentWave.moveSpeed, _currentWave.hitsToKillPlayer, _currentWave.enemyHealth, _currentWave.skinColor);
