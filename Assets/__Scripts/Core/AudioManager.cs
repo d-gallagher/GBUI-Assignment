@@ -15,11 +15,14 @@ public class AudioManager : MonoBehaviour
 
     private Transform _audioListenerTransform;
     private Transform _playerTransform;
+    private SoundLibrary _soundLibrary;
 
-    void Awake()
+    private void Awake()
     {
         // Assign singleton
         instance = this;
+
+        _soundLibrary = GetComponent<SoundLibrary>();
 
         _musicSources = new AudioSource[2];
         for (int i = 0; i < 2; i++)
@@ -33,7 +36,7 @@ public class AudioManager : MonoBehaviour
         _playerTransform = FindObjectOfType<Player>().transform;
     }
 
-    void Update()
+    private void Update()
     {
         if (_playerTransform != null) _audioListenerTransform.position = _playerTransform.position;
     }
@@ -52,7 +55,10 @@ public class AudioManager : MonoBehaviour
         if (clip != null) AudioSource.PlayClipAtPoint(clip, pos, sfxVolumePercent * masterVolumePercent);
     }
 
-    IEnumerator AnimateMusicCrossfade(float duration)
+    public void PlaySound(string soundName, Vector3 pos) => PlaySound(_soundLibrary.GetClipFromName(soundName), pos);
+
+
+    private IEnumerator AnimateMusicCrossfade(float duration)
     {
         float percent = 0;
         while (percent < 1)
