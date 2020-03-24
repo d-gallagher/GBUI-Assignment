@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
 {
     #region Public Variables
     public LayerMask collisionMask;
+    public Color trailColor;
     #endregion
 
     #region Private Serialized Variables
@@ -29,6 +30,8 @@ public class Projectile : MonoBehaviour
 
         Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .1f, collisionMask);
         if (initialCollisions.Length > 0) OnHitObject(initialCollisions[0], transform.position);
+
+        GetComponent<TrailRenderer>().material.SetColor("_TintColor", trailColor);
     }
 
     private void Update()
