@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using static Enums;
 
 /// <summary>
@@ -30,8 +31,12 @@ public class Gun : MonoBehaviour
     public int burstCount;
     public int roundsPerMag;
 
+    [Header("Reload")]
+    public float reloadTime = 1.0f;
+    public float maxReloadAngle = 30.0f;
+
     [Header("Recoil")]
-    public Vector2 minMaxRecoilAmount = new Vector2(3,5);
+    public Vector2 minMaxRecoilAmount = new Vector2(3, 5);
     public Vector2 minMaxRecoilAngle = new Vector2(0.05f, 0.2f);
     public float recoilMoveSettleTime = 0.1f;
     public float recoilRotationSettleTime = 0.1f;
@@ -56,6 +61,11 @@ public class Gun : MonoBehaviour
     private Vector3 _recoilSmoothDampVelocity;
     private float _recoilRotationSmoothDampVelocity;
     private float _recoilAngle;
+
+    // Reload
+    private bool _isReloading;
+
+
     #endregion
 
     #region Unity Methods
@@ -72,9 +82,13 @@ public class Gun : MonoBehaviour
         transform.localPosition = Vector3.SmoothDamp(transform.localPosition, Vector3.zero, ref _recoilSmoothDampVelocity, recoilMoveSettleTime);
         _recoilAngle = Mathf.SmoothDamp(_recoilAngle, 0, ref _recoilRotationSmoothDampVelocity, recoilRotationSettleTime);
         transform.localEulerAngles = transform.localEulerAngles + Vector3.left * _recoilAngle;
+
+        // Reload if not already reloading and mag is empty.
+        if (!_isReloading && _roundsRemainingInMag == 0) Reload();
     }
     #endregion
 
+    #region Public Methods
     public void OnTriggerHold()
     {
         Shoot();
@@ -87,11 +101,23 @@ public class Gun : MonoBehaviour
         _shotRemainingInBurst = burstCount;
     }
 
-    public void Aim(Vector3 aimPoint) => transform.LookAt(aimPoint);
+    public void Aim(Vector3 aimPoint)
+    {
+        // Only aim if not reloading
+        if (!_isReloading) transform.LookAt(aimPoint);
+    }
 
+    public void Reload()
+    {
+        // Only reload if not already and mag is not full
+        if (!_isReloading && _roundsRemainingInMag != roundsPerMag) StartCoroutine(AnimateReload());
+    }
+    #endregion
+
+    #region Private Methods
     private void Shoot()
     {
-        if (Time.time > _nextShotTime && _roundsRemainingInMag > 0)
+        if (!_isReloading && Time.time > _nextShotTime && _roundsRemainingInMag > 0)
         {
             switch (fireMode)
             {
@@ -132,4 +158,28 @@ public class Gun : MonoBehaviour
         }
     }
 
+    private IEnumerator AnimateReload()
+    {
+        _isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+
+        float reloadSpeed = 1f / reloadTime;
+        float percent = 0;
+        Vector3 initialRotation = transform.eulerAngles;
+
+        while (percent < 1)
+        {
+            percent += Time.deltaTime * reloadSpeed;
+            float interpolation = (Mathf.Pow(percent, 2) + percent) * 4;
+            float reloadAngle = Mathf.Lerp(0, maxReloadAngle, interpolation);
+            transform.localEulerAngles = initialRotation + Vector3.left * reloadAngle;
+
+
+            yield return null;
+        }
+
+        _isReloading = false;
+        _roundsRemainingInMag = roundsPerMag;
+    }
+    #endregion
 }
