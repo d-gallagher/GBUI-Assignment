@@ -31,6 +31,12 @@ public class Gun : MonoBehaviour
     #region Private Variables
     // Keep tranck of when next projectile can be fired.
     private float _nextShotTime;
+
+    private MuzzleFlash _muzzleFlash;
+    #endregion
+
+    #region Unity Methods
+    private void Start() => _muzzleFlash = GetComponent<MuzzleFlash>();
     #endregion
 
     public void Shoot()
@@ -42,6 +48,7 @@ public class Gun : MonoBehaviour
             newProjectile.SetSpeed(shotVelocity);
 
             Instantiate(shell, shellEjectionPoint.position, shellEjectionPoint.rotation);
+            _muzzleFlash.Activate();
         }
     }
 }
