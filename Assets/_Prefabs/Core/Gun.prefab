@@ -67,12 +67,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashHolder: {fileID: 4428971755081009179}
-  flashTime: 0.1
+  flashTime: 1
   flashSprites:
   - {fileID: -1103826506024865825, guid: 1315d802f07956f4eae2a8ee9c0d79b5, type: 3}
   - {fileID: -7278697522162196308, guid: 1315d802f07956f4eae2a8ee9c0d79b5, type: 3}
   - {fileID: -942794450678265046, guid: 1315d802f07956f4eae2a8ee9c0d79b5, type: 3}
-  - {fileID: 8743899569753028588, guid: 1315d802f07956f4eae2a8ee9c0d79b5, type: 3}
+  - {fileID: -942794450678265046, guid: 1315d802f07956f4eae2a8ee9c0d79b5, type: 3}
   flashSpriteRenderers:
   - {fileID: 4968616319430169074}
   - {fileID: 17620160586438204}
