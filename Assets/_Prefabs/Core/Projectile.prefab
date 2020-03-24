@@ -95,6 +95,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
+  trailColor: {r: 0.990566, g: 0.6224314, b: 0.4532307, a: 0.32941177}
   _speed: 10
   _damage: 1
   _lifetime: 3
