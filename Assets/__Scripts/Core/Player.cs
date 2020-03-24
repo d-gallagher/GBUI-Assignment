@@ -32,7 +32,7 @@ public class Player : BaseLivingEntity
         FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
     }
 
-    protected override void Start()=>base.Start();
+    protected override void Start() => base.Start();
 
     private void Update()
     {
@@ -68,6 +68,12 @@ public class Player : BaseLivingEntity
         if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
     }
     #endregion
+
+    protected override void Die()
+    {
+        AudioManager.instance.PlaySound("Player Death", Vector3.zero);
+        base.Die();
+    }
 
     private void OnNewWave(int waveNumber)
     {

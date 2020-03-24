@@ -34,7 +34,7 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     }
 
     [ContextMenu("Self Destruct")]
-    protected void Die()
+    protected virtual void Die()
     {
         isDead = true;
         OnDeath?.Invoke();
