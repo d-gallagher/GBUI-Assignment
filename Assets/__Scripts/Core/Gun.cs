@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     /// <summary>
     /// Postion of the end of the gun barrel.
     /// </summary>
-    public Transform gunBarrelPosition;
+    public Transform[] projectileSpawnPoints;
     public Projectile projectile;
 
     /// <summary>
@@ -88,10 +88,15 @@ public class Gun : MonoBehaviour
                     break;
             }
 
-            _nextShotTime = Time.time + timeBetweenShots / 1000;
-            Projectile newProjectile = Instantiate(projectile, gunBarrelPosition.position, gunBarrelPosition.rotation) as Projectile;
-            newProjectile.SetSpeed(shotVelocity);
+            // Loop through each projectile spawn point
+            foreach (var t in projectileSpawnPoints)
+            {
+                _nextShotTime = Time.time + timeBetweenShots / 1000;
+                Projectile newProjectile = Instantiate(projectile, t.position, t.rotation) as Projectile;
+                newProjectile.SetSpeed(shotVelocity);
+            }
 
+            // Only muzzle flash and eject shell once
             Instantiate(shell, shellEjectionPoint.position, shellEjectionPoint.rotation);
             _muzzleFlash.Activate();
         }
