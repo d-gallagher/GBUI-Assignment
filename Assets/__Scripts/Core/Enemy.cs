@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.AI;
 using static Enums;
+using System;
 
 /// <summary>
 /// Enemy Script - Basic Enemy AI script.
@@ -12,6 +13,7 @@ using static Enums;
 public class Enemy : BaseLivingEntity
 {
     public ParticleSystem deathEffect;
+    public static event Action OnDeathStatic;
 
     #region Private/Serialized Variables
     [SerializeField]
@@ -97,6 +99,9 @@ public class Enemy : BaseLivingEntity
         AudioManager.instance.PlaySound("Impact", transform.position);
         if (_damage >= health)
         {
+            // Invoke the action if not null.
+            OnDeathStatic?.Invoke();
+
             AudioManager.instance.PlaySound("Enemy Death", transform.position);
             // TODO: remove obsolete code
             Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)) as GameObject, deathEffect.startLifetime);
