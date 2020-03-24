@@ -8,6 +8,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     #region Public Variables
+    public bool isDeveloperMode;
+
     public EnemyWave[] waves;
     public Enemy enemy;
     public float timeBetweenCampCheck = 2;
@@ -67,7 +69,20 @@ public class Spawner : MonoBehaviour
                 _enemiesRemainingToSpawn--;
                 _nextSpawnTime = Time.time + _currentWave.timeBetweenSpawns;
 
-                StartCoroutine(SpawnEnemy());
+                StartCoroutine("SpawnEnemy");
+            }
+        }
+
+        if (isDeveloperMode)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                // TODO: Check whether Coroutine called normally can be stopped normally
+                // i.e. does this work without using call by string??
+                StopCoroutine("SpawnEnemy");
+                // Destroy any Enemy objects in the scene
+                foreach (Enemy enemy in FindObjectsOfType<Enemy>()) Destroy(enemy);
+                SpawnNewWave();
             }
         }
     }
