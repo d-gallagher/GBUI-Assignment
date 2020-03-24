@@ -25,13 +25,13 @@ public class Gun : MonoBehaviour
     /// </summary>
     public float shotVelocity = 35;
 
-    [Header("Fire Mode")]
+    [Header("Fire Mode / Rounds")]
     public FireMode fireMode;
     public int burstCount;
-    //public int roundsPerMag;
+    public int roundsPerMag;
 
     [Header("Recoil")]
-    public Vector2 minMaxRecoilAmount = new Vector2(3, 5);
+    public Vector2 minMaxRecoilAmount = new Vector2(3,5);
     public Vector2 minMaxRecoilAngle = new Vector2(0.05f, 0.2f);
     public float recoilMoveSettleTime = 0.1f;
     public float recoilRotationSettleTime = 0.1f;
@@ -50,7 +50,7 @@ public class Gun : MonoBehaviour
     // Fire Mode
     private bool _triggerReleasedSinceLastShot;
     private int _shotRemainingInBurst;
-    //private int _roundsRemainingInMag;
+    private int _roundsRemainingInMag;
 
     // Recoil
     private Vector3 _recoilSmoothDampVelocity;
@@ -63,7 +63,7 @@ public class Gun : MonoBehaviour
     {
         _muzzleFlash = GetComponent<MuzzleFlash>();
         _shotRemainingInBurst = burstCount;
-        //_roundsRemainingInMag = roundsPerMag;
+        _roundsRemainingInMag = roundsPerMag;
     }
 
     private void LateUpdate()
@@ -91,8 +91,7 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        if (Time.time > _nextShotTime)
-        //if (Time.time > _nextShotTime && _roundsRemainingInMag > 0)
+        if (Time.time > _nextShotTime && _roundsRemainingInMag > 0)
         {
             switch (fireMode)
             {
@@ -116,9 +115,9 @@ public class Gun : MonoBehaviour
             foreach (var t in projectileSpawnPoints)
             {
                 // Break from loop if mag is empty
-                //if (_roundsRemainingInMag == 0) break;
+                if (_roundsRemainingInMag == 0) break;
 
-                //_roundsRemainingInMag -= 1;
+                _roundsRemainingInMag -= 1;
                 _nextShotTime = Time.time + timeBetweenShots / 1000;
                 Projectile newProjectile = Instantiate(projectile, t.position, t.rotation) as Projectile;
                 newProjectile.SetSpeed(shotVelocity);
