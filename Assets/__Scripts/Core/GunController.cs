@@ -40,11 +40,19 @@ public class GunController : MonoBehaviour
         _equippedGun.transform.parent = weaponMountPosition;
     }
 
-    public void Shoot()
+    public void OnTriggerHold()
     {
         if (_equippedGun != null)
         {
-            _equippedGun.Shoot();
+            _equippedGun.OnTriggerHold();
+        }
+    }
+
+    public void OnTriggerrelease()
+    {
+        if (_equippedGun != null)
+        {
+            _equippedGun.OnTriggerRelease();
         }
     }
 }

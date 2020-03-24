@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static Enums;
 
 /// <summary>
 /// Gun Script
@@ -24,6 +25,11 @@ public class Gun : MonoBehaviour
     /// </summary>
     public float shotVelocity = 35;
 
+    [Header("Fire Mode Settings")]
+    public FireMode fireMode;
+    public int burstCount;
+
+
     [Header("Shell Settings")]
     // Shell
     public Transform shell;
@@ -35,16 +41,53 @@ public class Gun : MonoBehaviour
     private float _nextShotTime;
 
     private MuzzleFlash _muzzleFlash;
+
+    private bool _triggerReleasedSinceLastShot;
+    private int _shotRemainingInBurst;
     #endregion
 
     #region Unity Methods
-    private void Start() => _muzzleFlash = GetComponent<MuzzleFlash>();
+    private void Start()
+    {
+        _muzzleFlash = GetComponent<MuzzleFlash>();
+        _shotRemainingInBurst = burstCount;
+    }
     #endregion
 
-    public void Shoot()
+    public void OnTriggerHold()
+    {
+        Shoot();
+        _triggerReleasedSinceLastShot = false;
+    }
+
+    public void OnTriggerRelease()
+    {
+        _triggerReleasedSinceLastShot = true;
+        _shotRemainingInBurst = burstCount;
+    }
+
+    private void Shoot()
     {
         if (Time.time > _nextShotTime)
         {
+            switch (fireMode)
+            {
+                case FireMode.Single:
+                    if (!_triggerReleasedSinceLastShot) return;
+                    break;
+
+                case FireMode.Burst:
+                    if (_shotRemainingInBurst == 0) return;
+                    else _shotRemainingInBurst--;
+                    break;
+
+                case FireMode.Auto:
+                    break;
+
+                default:
+                    break;
+            }
+
             _nextShotTime = Time.time + timeBetweenShots / 1000;
             Projectile newProjectile = Instantiate(projectile, gunBarrelPosition.position, gunBarrelPosition.rotation) as Projectile;
             newProjectile.SetSpeed(shotVelocity);
@@ -53,4 +96,5 @@ public class Gun : MonoBehaviour
             _muzzleFlash.Activate();
         }
     }
+
 }
