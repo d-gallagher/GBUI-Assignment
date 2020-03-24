@@ -24,13 +24,15 @@ public class Player : BaseLivingEntity
     #endregion
 
     #region Unity Methods
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
         _playerController = GetComponent<PlayerController>();
         _gunController = GetComponent<GunController>();
         _cam = Camera.main;
+        FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
     }
+
+    protected override void Start()=>base.Start();
 
     private void Update()
     {
@@ -66,4 +68,10 @@ public class Player : BaseLivingEntity
         if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
     }
     #endregion
+
+    private void OnNewWave(int waveNumber)
+    {
+        health = startingHealth;
+        _gunController.EquipGun(waveNumber - 1);
+    }
 }

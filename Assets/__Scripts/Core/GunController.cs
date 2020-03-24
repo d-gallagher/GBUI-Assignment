@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Gun Controller Script
@@ -6,29 +7,21 @@
 public class GunController : MonoBehaviour
 {
     #region Public Variables
-    /// <summary>
-    /// Weapon mount position.
-    /// </summary>
     public Transform weaponMountPosition;
-    /// <summary>
-    /// Gun to equip on start.
-    /// </summary>
-    public Gun startingGun;
+    public Gun[] allGuns;
     #endregion
 
     #region Private Variables
-    /// <summary>
-    /// Currently equipped gun.
-    /// </summary>
     private Gun _equippedGun;
     #endregion
 
     #region Unity Methods
-    private void Start()
-    {
-        if (startingGun != null) EquipGun(startingGun);
-    }
+    private void Start() { }
     #endregion
+
+    public float GunHeight => weaponMountPosition.position.y;
+
+    public void EquipGun(int weaponIndex) => EquipGun(allGuns[weaponIndex]);
 
     public void EquipGun(Gun gunToEquip)
     {
@@ -52,13 +45,11 @@ public class GunController : MonoBehaviour
 
     public void OnTriggerHold()
     {
-        if (_equippedGun != null)_equippedGun.OnTriggerHold();
+        if (_equippedGun != null) _equippedGun.OnTriggerHold();
     }
 
     public void OnTriggerrelease()
     {
-        if (_equippedGun != null)_equippedGun.OnTriggerRelease();
+        if (_equippedGun != null) _equippedGun.OnTriggerRelease();
     }
-
-    public float GunHeight => weaponMountPosition.position.y;
 }
