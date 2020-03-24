@@ -8,6 +8,7 @@
 public class Gun : MonoBehaviour
 {
     #region Public Variables
+    [Header("Gun Settings")]
     /// <summary>
     /// Postion of the end of the gun barrel.
     /// </summary>
@@ -22,11 +23,22 @@ public class Gun : MonoBehaviour
     /// Initial speed of projectile fired from gun.
     /// </summary>
     public float shotVelocity = 35;
+
+    [Header("Shell Settings")]
+    // Shell
+    public Transform shell;
+    public Transform shellEjectionPoint;
     #endregion
 
     #region Private Variables
     // Keep tranck of when next projectile can be fired.
     private float _nextShotTime;
+
+    private MuzzleFlash _muzzleFlash;
+    #endregion
+
+    #region Unity Methods
+    private void Start() => _muzzleFlash = GetComponent<MuzzleFlash>();
     #endregion
 
     public void Shoot()
@@ -36,6 +48,9 @@ public class Gun : MonoBehaviour
             _nextShotTime = Time.time + timeBetweenShots / 1000;
             Projectile newProjectile = Instantiate(projectile, gunBarrelPosition.position, gunBarrelPosition.rotation) as Projectile;
             newProjectile.SetSpeed(shotVelocity);
+
+            Instantiate(shell, shellEjectionPoint.position, shellEjectionPoint.rotation);
+            _muzzleFlash.Activate();
         }
     }
 }
