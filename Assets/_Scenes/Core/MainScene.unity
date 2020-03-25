@@ -33171,6 +33171,8 @@ MonoBehaviour:
   newWaveBannerSpeed: 2.5
   newWaveBannerDelayTime: 1
   scoreUI: {fileID: 30696543}
+  healthBar: {fileID: 1984073952}
+  healthUI: {fileID: 0}
 --- !u!114 &1772305249
 MonoBehaviour:
   m_ObjectHideFlags: 0
