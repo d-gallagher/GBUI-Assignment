@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.AI;
 using static Enums;
-using System;
 
 /// <summary>
 /// Enemy Script - Basic Enemy AI script.
@@ -12,7 +11,6 @@ using System;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : BaseLivingEntity
 {
-
     public ParticleSystem deathEffect;
 
     #region Private/Serialized Variables
@@ -85,6 +83,7 @@ public class Enemy : BaseLivingEntity
                 if (sqrDstToTarget < Mathf.Pow(attackDistanceThreshold + _myCollisionRadius + _targetCollisionRadius, 2))
                 {
                     _nextAttackTime = Time.time + timeBetweenAttacks;
+                    AudioManager.instance.PlaySound("Enemy Attack", transform.position);
                     StartCoroutine(Attack());
                 }
             }
@@ -95,8 +94,10 @@ public class Enemy : BaseLivingEntity
     #region Overrides
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
+        AudioManager.instance.PlaySound("Impact", transform.position);
         if (_damage >= health)
         {
+            AudioManager.instance.PlaySound("Enemy Death", transform.position);
             // TODO: remove obsolete code
             Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)) as GameObject, deathEffect.startLifetime);
         }
