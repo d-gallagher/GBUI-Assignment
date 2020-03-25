@@ -12,7 +12,7 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     #endregion
 
     #region Protected Variables
-    protected float health;
+    public float health { get; protected set; }
     protected bool isDead;
     #endregion
 
