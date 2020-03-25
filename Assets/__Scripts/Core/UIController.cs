@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +18,9 @@ public class UIController : MonoBehaviour
     public Text newWaveEnemyCount;
     public float newWaveBannerSpeed = 2.5f;
     public float newWaveBannerDelayTime = 1;
+
+    [Header("Score")]
+    public Text scoreUI;
     #endregion
 
     #region Private Variables
@@ -36,6 +38,8 @@ public class UIController : MonoBehaviour
     {
         FindObjectOfType<Player>().OnDeath += OnGameOver;
     }
+
+    private void Update() => scoreUI.text = ScoreKeeper.Score.ToString("D6");
     #endregion
 
     private void OnNewWave(int waveNumber)
