@@ -33,7 +33,7 @@ public class MoveWithCrane : MonoBehaviour
 
     #region == Myo Pose Bools ==
     // Update references when the pose detected
-    bool updateReference = false;
+    //bool updateReference = false;
     bool fistReference = false;
     bool waveInReference = false;
     bool waveOutReference = false;

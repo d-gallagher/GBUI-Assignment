@@ -6,7 +6,7 @@ public abstract class BaseMyoBehaviour : MonoBehaviour
     protected Thalmic.Myo.Pose _lastPose;
 
     // Start is called before the first frame update
-    protected void OnStart()
+    protected virtual void Start()
     {
         _thalmicMyo = FindObjectOfType<ThalmicMyo>();
         bool myoFound = _thalmicMyo != null;
@@ -14,56 +14,19 @@ public abstract class BaseMyoBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected void OnUpdate()
+    protected virtual void Update()
     {
         if (_thalmicMyo.pose != _lastPose)
         {
             _lastPose = _thalmicMyo.pose;
             OnNewPose(_thalmicMyo.pose);
-        }
-    }
-
-    protected void OnNewPose(Thalmic.Myo.Pose newPose)
-    {
-        switch (newPose)
+        } else
         {
-            case Thalmic.Myo.Pose.Rest:
-                OnRest();
-                break;
-            case Thalmic.Myo.Pose.Fist:
-                OnFist();
-                break;
-            case Thalmic.Myo.Pose.WaveIn:
-                OnWaveIn();
-                break;
-            case Thalmic.Myo.Pose.WaveOut:
-                OnWaveOut();
-                break;
-            case Thalmic.Myo.Pose.FingersSpread:
-                OnFingerSpread();
-                break;
-            case Thalmic.Myo.Pose.DoubleTap:
-                OnDoubleTap();
-                break;
-            case Thalmic.Myo.Pose.Unknown:
-                OnUnknown();
-                break;
-            default:
-                break;
+            Debug.Log("HOLDING POSE");
+            HoldLastPose();
         }
     }
 
-    protected abstract void OnRest();
-
-    protected abstract void OnFist();
-
-    protected abstract void OnWaveIn();
-
-    protected abstract void OnWaveOut();
-
-    protected abstract void OnFingerSpread();
-
-    protected abstract void OnDoubleTap();
-
-    protected abstract void OnUnknown();
+    protected abstract void OnNewPose(Thalmic.Myo.Pose newPose);
+    protected abstract void HoldLastPose();
 }

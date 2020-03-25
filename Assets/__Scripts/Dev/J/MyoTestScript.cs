@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MyoTestScript : BaseMyoBehaviour
+public class MyoTestScript : BaseMyoBehaviour_OLD
 {
     // Start is called before the first frame update
     void Start() => base.OnStart();
