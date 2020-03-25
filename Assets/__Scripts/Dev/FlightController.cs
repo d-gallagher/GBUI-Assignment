@@ -25,7 +25,7 @@
 //    // so that actions are only performed upon making them rather than every frame during
 //    // which they are active.
 //    private Pose _lastPose = Pose.Unknown;
-    
+
 //    // Velocity of the Plane 
 //    public float velocity = 50f;
 //    float maxVelocity = 300f;
@@ -33,7 +33,7 @@
 //    // Start is called before the first frame update
 //    void Start()
 //    {
-        
+
 //    }
 
 //    private void Update()
@@ -42,7 +42,7 @@
 //        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
 
 
-        
+
 
 
 //        // Update references when the pose becomes fingers spread or the q key is pressed.
@@ -59,7 +59,7 @@
 //            //if (thalmicMyo.pose == Pose.FingersSpread)
 //            //{
 //            //    updateReference = true;
-                
+
 //            //    // Increase Velocity..?
 
 //            //    ExtendUnlockAndNotifyUserAction(thalmicMyo);
@@ -168,7 +168,7 @@
 //        {
 //            if (velocity > minVelocity)
 //            {
-//                velocity -= velocity / 2;            
+//                velocity -= velocity / 2;
 //            }
 //        }
 

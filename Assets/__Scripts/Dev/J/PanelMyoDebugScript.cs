@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PanelMyoDebugScript : BaseMyoBehaviour
+public class PanelMyoDebugScript : BaseMyoGestureBehaviour
 {
     public int textSize = 14;
+    public bool isLoggingToConsole = false;
     public GameObject panelPosePrefab;
     public Color activeColor = Color.green;
     public Color inActiveColor = Color.red;
@@ -33,8 +34,8 @@ public class PanelMyoDebugScript : BaseMyoBehaviour
 
     protected override void OnNewPose(Thalmic.Myo.Pose newPose)
     {
+        if (isLoggingToConsole) Debug.Log("NEW POSE: " + newPose);
         if (_lastPoseScript != null) _lastPoseScript.SetActive(false);
-
         var script = _poseScriptDict[newPose];
         script.SetActive(true);
         _lastPoseScript = script;
@@ -44,7 +45,7 @@ public class PanelMyoDebugScript : BaseMyoBehaviour
     {
         if (_lastPoseScript != null)
         {
-            Debug.Log("HOLDING POSE: " + _lastPoseScript.pose);
+            if(isLoggingToConsole) Debug.Log("HOLDING POSE: " + _lastPoseScript.pose);
             _lastPoseScript.SetActive(true);
         }
     }

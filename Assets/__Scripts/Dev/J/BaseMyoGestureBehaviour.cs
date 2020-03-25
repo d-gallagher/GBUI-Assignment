@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BaseMyoBehaviour : MonoBehaviour
+public abstract class BaseMyoGestureBehaviour : MonoBehaviour
 {
     protected ThalmicMyo _thalmicMyo;
     protected Thalmic.Myo.Pose _lastPose;
@@ -22,7 +22,6 @@ public abstract class BaseMyoBehaviour : MonoBehaviour
             OnNewPose(_thalmicMyo.pose);
         } else
         {
-            Debug.Log("HOLDING POSE");
             HoldLastPose();
         }
     }
