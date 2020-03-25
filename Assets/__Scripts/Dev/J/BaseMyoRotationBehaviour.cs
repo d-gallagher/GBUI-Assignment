@@ -2,6 +2,11 @@
 
 public class BaseMyoRotationBehaviour : MonoBehaviour
 {
+    [Header("Lock Axes")]
+    public bool lockX;
+    public bool lockY;
+    public bool lockZ;
+
     // A rotation that compensates for the Myo armband's orientation parallel to the ground, i.e. yaw.
     // Once set, the direction the Myo armband is facing becomes "forward" within the program.
     // Set by making the fingers spread pose or pressing "r".
@@ -13,10 +18,13 @@ public class BaseMyoRotationBehaviour : MonoBehaviour
 
     // Privates
     private ThalmicMyo _thalmicMyo;
+    private Rigidbody _rb;
 
     private void Start()
     {
         _thalmicMyo = FindObjectOfType<ThalmicMyo>();
+        _rb = GetComponent<Rigidbody>();
+
         PanelMyoDebugScript.OnDoubleTap += ResetRotation;
     }
 
@@ -35,7 +43,27 @@ public class BaseMyoRotationBehaviour : MonoBehaviour
 
         // Here the anti-roll and yaw rotations are applied to the _thalmicMyo Armband's forward direction to yield
         // the orientation of the joint.
-        transform.rotation = _antiYaw * antiRoll * Quaternion.LookRotation(_thalmicMyo.transform.forward);
+        var rotation = _antiYaw * antiRoll * Quaternion.LookRotation(_thalmicMyo.transform.forward);
+
+        // Is there a lock on any axis?
+        if (lockX || lockY || lockZ)
+        {
+            var euler = rotation.eulerAngles;
+
+            euler.x = lockX ? 0 : euler.x;
+            euler.y = lockY ? 0 : euler.y;
+            euler.z = lockZ ? 0 : euler.z;
+            // Apply the euler angles
+            _rb.MoveRotation(Quaternion.Euler(euler));
+        }
+        else
+        {
+            // No locks, can just apply quaternion
+            _rb.MoveRotation(rotation);
+        }
+
+        //transform.rotation = rotation;
+
 
         // The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,
         // was facing toward the wearer's elbow. If the Myo armband is worn with its +x direction facing the other way,
