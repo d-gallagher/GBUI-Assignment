@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4465374178179276258}
   - component: {fileID: 2292516307326426056}
   m_Layer: 0
-  m_Name: Gun03
+  m_Name: Gun02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     type: 3}
   timeBetweenShots: 50
   shotVelocity: 50
-  fireMode: 2
+  fireMode: 1
   burstCount: 5
   roundsPerMag: 50
   reloadTime: 0.25

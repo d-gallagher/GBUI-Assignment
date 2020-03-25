@@ -87,9 +87,9 @@ MonoBehaviour:
   projectile: {fileID: -5886198105835640310, guid: 9fe6dd36974d9814c86d7257212db15d,
     type: 3}
   timeBetweenShots: 150
-  shotVelocity: 80
-  fireMode: 2
-  burstCount: 3
+  shotVelocity: 150
+  fireMode: 0
+  burstCount: 1
   roundsPerMag: 18
   reloadTime: 1
   maxReloadAngle: 15
