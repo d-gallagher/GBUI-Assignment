@@ -16328,7 +16328,7 @@ GameObject:
   - component: {fileID: 809552383}
   - component: {fileID: 809552382}
   m_Layer: 5
-  m_Name: TxtWaveNumber
+  m_Name: TxtWaveTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32971,6 +32971,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadePlane: {fileID: 1253231973}
   gameOverUI: {fileID: 1246957570}
+  newWaveBanner: {fileID: 1516793474}
+  newWaveTitle: {fileID: 809552382}
+  newWaveEnemyCount: {fileID: 122048786}
+  newWaveBannerSpeed: 2.5
+  newWaveBannerDelayTime: 1
 --- !u!114 &1772305249
 MonoBehaviour:
   m_ObjectHideFlags: 0
