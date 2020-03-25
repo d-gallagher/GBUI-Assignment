@@ -6012,7 +6012,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &289676846
 GameObject:
@@ -27555,9 +27555,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cc35185ba8f8a4cbd2e7d8714727a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDeveloperMode: 0
+  isDeveloperMode: 1
   waves:
-  - enemyCount: 0
+  - enemyCount: 1
     isInfiniteWave: 0
     timeBetweenSpawns: 1.5
     moveSpeed: 1
@@ -39048,6 +39048,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: startingGun
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 2e280c49246bac847960cab20391ce89,
+        type: 3}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.data[0]
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 2e280c49246bac847960cab20391ce89,
+        type: 3}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.data[1]
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 519e9bde00ed0ea419c91f41f3b6e142,
+        type: 3}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.data[2]
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 8d2c68d858ffa1e46beb343621837f22,
+        type: 3}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.data[3]
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 1eba8cd507a798b47a5a597258da3089,
+        type: 3}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.data[4]
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 45fadac271cdfcc43878bac9018dd751,
+        type: 3}
     - target: {fileID: 6829391615241780338, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_Name
@@ -39096,7 +39130,7 @@ PrefabInstance:
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}

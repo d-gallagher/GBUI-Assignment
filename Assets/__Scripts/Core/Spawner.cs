@@ -81,7 +81,7 @@ public class Spawner : MonoBehaviour
                 // i.e. does this work without using call by string??
                 StopCoroutine("SpawnEnemy");
                 // Destroy any Enemy objects in the scene
-                foreach (Enemy enemy in FindObjectsOfType<Enemy>()) Destroy(enemy);
+                foreach (Enemy enemy in FindObjectsOfType<Enemy>()) Destroy(enemy.gameObject);
                 SpawnNewWave();
             }
         }
