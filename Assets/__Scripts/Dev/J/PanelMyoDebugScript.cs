@@ -11,6 +11,8 @@ public class PanelMyoDebugScript : BaseMyoGestureBehaviour
     public Color activeColor = Color.green;
     public Color inActiveColor = Color.red;
 
+    public static event Action OnDoubleTap;
+
     private Dictionary<Thalmic.Myo.Pose, PanelPoseScript> _poseScriptDict;
     private PanelPoseScript _lastPoseScript;
 
@@ -36,6 +38,9 @@ public class PanelMyoDebugScript : BaseMyoGestureBehaviour
     {
         if (isLoggingToConsole) Debug.Log("NEW POSE: " + newPose);
         if (_lastPoseScript != null) _lastPoseScript.SetActive(false);
+
+        if (newPose == Thalmic.Myo.Pose.DoubleTap) OnDoubleTap();
+
         var script = _poseScriptDict[newPose];
         script.SetActive(true);
         _lastPoseScript = script;
