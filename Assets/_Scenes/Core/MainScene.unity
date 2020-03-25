@@ -33060,6 +33060,7 @@ MonoBehaviour:
   newWaveEnemyCount: {fileID: 122048786}
   newWaveBannerSpeed: 2.5
   newWaveBannerDelayTime: 1
+  scoreUI: {fileID: 30696543}
 --- !u!114 &1772305249
 MonoBehaviour:
   m_ObjectHideFlags: 0
