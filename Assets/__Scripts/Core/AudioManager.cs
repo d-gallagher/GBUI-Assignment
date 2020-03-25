@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using static Enums;
 
 public class AudioManager : MonoBehaviour
 {
+    #region Public Variables
     public float masterVolumePercent = 1;
     public float sfxVolumePercent = 1;
     public float musicVolumePercent = 1f;
+    #endregion
 
+    #region Private Variables
     private AudioSource _soundEffect2DSource;
     private AudioSource[] _musicSources;
     private int _activeMusicSourceIndex;
 
-    // Singleton
-    public static AudioManager instance;
-
     private Transform _audioListenerTransform;
     private Transform _playerTransform;
     private SoundLibrary _soundLibrary;
+    #endregion
 
+    // Singleton
+    public static AudioManager instance;
+
+    #region Unity Methods
     private void Awake()
     {
         // Assign singleton
@@ -57,20 +61,9 @@ public class AudioManager : MonoBehaviour
     {
         if (_playerTransform != null) _audioListenerTransform.position = _playerTransform.position;
     }
+    #endregion
 
-    private void TryGetVolumePrefs()
-    {
-
-        var temp_masterVolumePercent = PlayerPrefs.GetFloat("master vol");
-        if (temp_masterVolumePercent > 0) masterVolumePercent = temp_masterVolumePercent;
-
-        var temp_sfxVolumePercent = PlayerPrefs.GetFloat("sfx vol");
-        if (temp_sfxVolumePercent > 0) sfxVolumePercent = temp_sfxVolumePercent;
-
-        var temp_musicVolumePercent = PlayerPrefs.GetFloat("music vol");
-        if (temp_musicVolumePercent > 0) musicVolumePercent = temp_musicVolumePercent;
-    }
-
+    #region Public Methods
     public void SetVolume(float volumePercent, AudioChannel channel)
     {
         switch (channel)
@@ -94,9 +87,7 @@ public class AudioManager : MonoBehaviour
         _musicSources[0].volume = musicVolumePercent * masterVolumePercent;
         _musicSources[1].volume = musicVolumePercent * masterVolumePercent;
 
-        PlayerPrefs.SetFloat("master vol", masterVolumePercent);
-        PlayerPrefs.SetFloat("sfx vol", sfxVolumePercent);
-        PlayerPrefs.SetFloat("music vol", musicVolumePercent);
+        TrySetVolumePrefs();
     }
 
     public void PlayMusic(AudioClip clip, float fadeDuration = 1)
@@ -116,7 +107,30 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(string soundName, Vector3 pos) => PlaySound(_soundLibrary.GetClipFromName(soundName), pos);
 
     public void PlaySound2D(string soundName) => _soundEffect2DSource.PlayOneShot(_soundLibrary.GetClipFromName(soundName), sfxVolumePercent * masterVolumePercent);
+    #endregion
 
+    #region Private Variables
+    private void TryGetVolumePrefs()
+    {
+        var temp_masterVolumePercent = PlayerPrefs.GetFloat("master vol");
+        Debug.Log("MASTER: " + temp_masterVolumePercent);
+        if (temp_masterVolumePercent > 0f) masterVolumePercent = temp_masterVolumePercent;
+
+        var temp_sfxVolumePercent = PlayerPrefs.GetFloat("sfx vol");
+        Debug.Log("SFX: " + temp_sfxVolumePercent);
+        if (temp_sfxVolumePercent > 0f) sfxVolumePercent = temp_sfxVolumePercent;
+
+        var temp_musicVolumePercent = PlayerPrefs.GetFloat("music vol");
+        Debug.Log("MUSIC: " + temp_musicVolumePercent);
+        if (temp_musicVolumePercent > 0f) musicVolumePercent = temp_musicVolumePercent;
+    }
+
+    private void TrySetVolumePrefs()
+    {
+        PlayerPrefs.SetFloat("master vol", masterVolumePercent);
+        PlayerPrefs.SetFloat("sfx vol", sfxVolumePercent);
+        PlayerPrefs.SetFloat("music vol", musicVolumePercent);
+    }
 
     private IEnumerator AnimateMusicCrossfade(float duration)
     {
@@ -129,4 +143,5 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 }
