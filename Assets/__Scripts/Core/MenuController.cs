@@ -45,7 +45,7 @@ public class MenuController : MonoBehaviour
 
 
     #region UI Methods
-    public void Play() => SceneManager.LoadScene("Game");
+    public void Play() => SceneManager.LoadScene("MainScene");
 
     public void Quit() => Application.Quit();
 

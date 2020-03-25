@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4465374178179276258}
   - component: {fileID: 2292516307326426056}
   m_Layer: 0
-  m_Name: GunTemplate
+  m_Name: Gun01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   projectile: {fileID: -5886198105835640310, guid: 9fe6dd36974d9814c86d7257212db15d,
     type: 3}
   timeBetweenShots: 100
-  shotVelocity: 20
+  shotVelocity: 30
   fireMode: 0
   burstCount: 1
   roundsPerMag: 12
@@ -65,6 +65,8 @@ MonoBehaviour:
   recoilRotationSettleTime: 0.1
   shell: {fileID: 5683633019261412990, guid: 032f432706d480145a3ef1e1077b37d5, type: 3}
   shellEjectionPoint: {fileID: 5559008562113814919}
+  shootAudio: {fileID: 8300000, guid: a0d1753a14c9bee45b2307e29bb3c645, type: 3}
+  reloadAudio: {fileID: 8300000, guid: 5456e8598df75f840bba46fa80273a18, type: 3}
 --- !u!114 &2292516307326426056
 MonoBehaviour:
   m_ObjectHideFlags: 0
