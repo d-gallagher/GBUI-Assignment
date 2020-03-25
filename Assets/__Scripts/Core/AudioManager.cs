@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using static Enums;
 
@@ -48,15 +49,26 @@ public class AudioManager : MonoBehaviour
             Player player = FindObjectOfType<Player>();
             if (player != null) _playerTransform = player.transform;
 
-            masterVolumePercent = PlayerPrefs.GetFloat("master vol");
-            sfxVolumePercent = PlayerPrefs.GetFloat("sfx vol");
-            musicVolumePercent = PlayerPrefs.GetFloat("music vol");
+            TryGetVolumePrefs();
         }
     }
 
     private void Update()
     {
         if (_playerTransform != null) _audioListenerTransform.position = _playerTransform.position;
+    }
+
+    private void TryGetVolumePrefs()
+    {
+
+        var temp_masterVolumePercent = PlayerPrefs.GetFloat("master vol");
+        if (temp_masterVolumePercent > 0) masterVolumePercent = temp_masterVolumePercent;
+
+        var temp_sfxVolumePercent = PlayerPrefs.GetFloat("sfx vol");
+        if (temp_sfxVolumePercent > 0) sfxVolumePercent = temp_sfxVolumePercent;
+
+        var temp_musicVolumePercent = PlayerPrefs.GetFloat("music vol");
+        if (temp_musicVolumePercent > 0) musicVolumePercent = temp_musicVolumePercent;
     }
 
     public void SetVolume(float volumePercent, AudioChannel channel)
