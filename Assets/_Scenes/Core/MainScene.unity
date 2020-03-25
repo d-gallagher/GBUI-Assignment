@@ -28185,7 +28185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cc35185ba8f8a4cbd2e7d8714727a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDeveloperMode: 1
+  isDeveloperMode: 0
   waves:
   - enemyCount: 1
     isInfiniteWave: 0
