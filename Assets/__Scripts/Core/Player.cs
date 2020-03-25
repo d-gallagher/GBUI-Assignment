@@ -66,6 +66,9 @@ public class Player : BaseLivingEntity
         if (Input.GetMouseButton(0)) _gunController.OnTriggerHold();
         if (Input.GetMouseButtonUp(0)) _gunController.OnTriggerrelease();
         if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
+
+        // Kill the Player if it falls off the map.
+        if (transform.position.y < 10) TakeDamage(health);
     }
     #endregion
 
