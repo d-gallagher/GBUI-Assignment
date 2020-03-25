@@ -37009,6 +37009,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2029514865}
+  - component: {fileID: 2029514867}
+  - component: {fileID: 2029514866}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -37031,6 +37033,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2029514866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029514864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1265882664bd864487115164260aaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTheme: {fileID: 8300000, guid: 5f80c8884d4647844a00a14c6b87b153, type: 3}
+  menuTheme: {fileID: 8300000, guid: a12b12b5b9d2500468c2ec29478a4680, type: 3}
+--- !u!114 &2029514867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029514864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19fe52c74345f964282f3f9f77f3678f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolumePercent: 1
+  sfxVolumePercent: 1
+  musicVolumePercent: 1
 --- !u!1 &2029614300
 GameObject:
   m_ObjectHideFlags: 0
