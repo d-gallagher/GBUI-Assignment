@@ -4887,7 +4887,7 @@ GameObject:
   - component: {fileID: 251894328}
   - component: {fileID: 251894329}
   m_Layer: 5
-  m_Name: dot
+  m_Name: Dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22758,7 +22758,7 @@ GameObject:
   - component: {fileID: 1240120083}
   - component: {fileID: 1240120085}
   m_Layer: 5
-  m_Name: crosshair
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22846,7 +22846,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   dot: {fileID: 251894329}
-  dotHighlightColor: {r: 1, g: 0, b: 0, a: 0}
+  dotHighlightColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1241488756
 GameObject:
   m_ObjectHideFlags: 0
