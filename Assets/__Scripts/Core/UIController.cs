@@ -1,22 +1,84 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    #region Public Variables
+    [Header("General")]
     public Image fadePlane;
+
+    [Header("Game Over")]
     public GameObject gameOverUI;
+
+    [Header("New Wave")]
+    public RectTransform newWaveBanner;
+    public Text newWaveTitle;
+    public Text newWaveEnemyCount;
+    public float newWaveBannerSpeed = 2.5f;
+    public float newWaveBannerDelayTime = 1;
+    #endregion
+
+    #region Private Variables
+    private Spawner _spawner;
+    #endregion
+
+    #region Unity Methods
+    private void Awake()
+    {
+        _spawner = FindObjectOfType<Spawner>();
+        _spawner.OnNewWave += OnNewWave;
+    }
 
     private void Start()
     {
         FindObjectOfType<Player>().OnDeath += OnGameOver;
+    }
+    #endregion
+
+    private void OnNewWave(int waveNumber)
+    {
+        int index = waveNumber - 1;
+
+        string[] numbers = { "One", "Two", "Three", "Four", "Five" };
+        newWaveTitle.text = $"- Wave {numbers[index]} -";
+
+        string enemyCountString = _spawner.waves[index].isInfiniteWave ? "Infinite" : $"Enemies {_spawner.waves[index].enemyCount}";
+        newWaveEnemyCount.text = enemyCountString;
+
+        StopCoroutine("AnimateNewWaveBanner");
+        StartCoroutine("AnimateNewWaveBanner");
     }
 
     private void OnGameOver()
     {
         StartCoroutine(Fade(Color.clear, Color.black, 1));
         gameOverUI.SetActive(true);
+    }
+
+    private IEnumerator AnimateNewWaveBanner()
+    {
+        float animatePercent = 0;
+        float endDelayTime = (Time.time + 1 / newWaveBannerSpeed) + newWaveBannerDelayTime;
+        float direction = 1;
+
+        while (animatePercent >= 0)
+        {
+            animatePercent += Time.deltaTime * newWaveBannerSpeed * direction;
+            if (animatePercent >= 1)
+            {
+                animatePercent = 1;
+                if (Time.time > endDelayTime)
+                {
+                    direction = -1;
+                }
+            }
+
+            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(-170, 45, animatePercent);
+            yield return null;
+        }
     }
 
     private IEnumerator Fade(Color from, Color to, float duration)
