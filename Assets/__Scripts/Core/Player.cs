@@ -63,6 +63,7 @@ public class Player : BaseLivingEntity
         // Weapon Input
         if (Input.GetMouseButton(0)) _gunController.OnTriggerHold();
         if (Input.GetMouseButtonUp(0)) _gunController.OnTriggerrelease();
+        if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
     }
     #endregion
 }

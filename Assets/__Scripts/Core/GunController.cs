@@ -45,6 +45,11 @@ public class GunController : MonoBehaviour
         if (_equippedGun != null) _equippedGun.Aim(aimPoint);
     }
 
+    public void Reload()
+    {
+        if (_equippedGun != null) _equippedGun.Reload();
+    }
+
     public void OnTriggerHold()
     {
         if (_equippedGun != null)_equippedGun.OnTriggerHold();
