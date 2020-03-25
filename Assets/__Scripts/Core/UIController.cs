@@ -11,6 +11,8 @@ public class UIController : MonoBehaviour
 
     [Header("Game Over")]
     public GameObject gameOverUI;
+    public Text gameOverScoreUI;
+    public Color gameOverFadeToColor = new Color(0, 0, 0, 0.95f);
 
     [Header("New Wave")]
     public RectTransform newWaveBanner;
@@ -55,6 +57,23 @@ public class UIController : MonoBehaviour
     }
     #endregion
 
+    #region Public Methods
+    public void StartNewGame() => SceneManager.LoadScene("MainScene");
+
+    public void ReturnToMainMenu() => SceneManager.LoadScene("Menu");
+    #endregion
+
+    #region Private Methods
+    private void OnGameOver()
+    {
+        Cursor.visible = true;
+        StartCoroutine(Fade(Color.clear, gameOverFadeToColor, 1));
+        gameOverScoreUI.text = scoreUI.text;
+        scoreUI.gameObject.SetActive(false);
+        healthBar.transform.parent.gameObject.SetActive(false);
+        gameOverUI.SetActive(true);
+    }
+
     private void OnNewWave(int waveNumber)
     {
         int index = waveNumber - 1;
@@ -67,12 +86,6 @@ public class UIController : MonoBehaviour
 
         StopCoroutine("AnimateNewWaveBanner");
         StartCoroutine("AnimateNewWaveBanner");
-    }
-
-    private void OnGameOver()
-    {
-        StartCoroutine(Fade(Color.clear, Color.black, 1));
-        gameOverUI.SetActive(true);
     }
 
     private IEnumerator AnimateNewWaveBanner()
@@ -110,7 +123,5 @@ public class UIController : MonoBehaviour
             yield return null;
         }
     }
-
-    // Input
-    public void StartNewGame() => SceneManager.LoadScene("MainScene");
+    #endregion
 }
