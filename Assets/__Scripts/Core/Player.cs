@@ -68,7 +68,7 @@ public class Player : BaseLivingEntity
         if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
 
         // Kill the Player if it falls off the map.
-        if (transform.position.y < 10) TakeDamage(health);
+        if (transform.position.y < -10) TakeDamage(health);
     }
     #endregion
 
