@@ -40154,6 +40154,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
+        type: 3}
+      propertyPath: soundGroups.Array.data[1].groupID
+      value: Enemy Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
+        type: 3}
+      propertyPath: soundGroups.Array.data[2].groupID
+      value: Enemy Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
+        type: 3}
+      propertyPath: soundGroups.Array.data[4].groupID
+      value: Player Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
+        type: 3}
+      propertyPath: soundGroups.Array.data[3].groupID
+      value: Level Complete
+      objectReference: {fileID: 0}
     - target: {fileID: 8060936766190947508, guid: b4e144c1f40465f4ebf3d352cc12141a,
         type: 3}
       propertyPath: masterVolumePercent

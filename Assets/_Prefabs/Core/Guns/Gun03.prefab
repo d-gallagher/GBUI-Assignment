@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 4390282610500051449}
   projectile: {fileID: -5886198105835640310, guid: 9fe6dd36974d9814c86d7257212db15d,
     type: 3}
-  timeBetweenShots: 200
+  timeBetweenShots: 125
   shotVelocity: 35
   fireMode: 2
   burstCount: 5
