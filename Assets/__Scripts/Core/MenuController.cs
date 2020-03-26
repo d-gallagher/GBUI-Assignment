@@ -29,6 +29,7 @@ public class MenuController : MonoBehaviour
         activeScreenResIndex = PlayerPrefs.GetInt("screen res index");
         bool isFullscreen = (PlayerPrefs.GetInt("fullscreen") == 1) ? true : false;
 
+        Debug.Log("MATSER VOL: " + AudioManager.instance.masterVolumePercent);
         volumeSliders[0].value = AudioManager.instance.masterVolumePercent;
         volumeSliders[1].value = AudioManager.instance.musicVolumePercent;
         volumeSliders[2].value = AudioManager.instance.sfxVolumePercent;
@@ -45,7 +46,7 @@ public class MenuController : MonoBehaviour
 
 
     #region UI Methods
-    public void Play() => SceneManager.LoadScene("Game");
+    public void Play() => SceneManager.LoadScene("MainScene");
 
     public void Quit() => Application.Quit();
 
