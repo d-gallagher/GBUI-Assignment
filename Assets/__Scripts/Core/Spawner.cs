@@ -117,9 +117,9 @@ public class Spawner : MonoBehaviour
         spawnedEnemy.SetCharacteristics(_currentWave.moveSpeed, _currentWave.hitsToKillPlayer, _currentWave.enemyHealth, _currentWave.skinColor);
     }
 
-    private void OnPlayerDeath() => _isDisabled = true;
-
     private void ResetPlayerPosition() => _playerTransform.position = _map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+
+    private void OnPlayerDeath() => _isDisabled = true;
 
     /// <summary>
     /// Check to see if any enemies remain in this wave and spawn a new wave if needed.

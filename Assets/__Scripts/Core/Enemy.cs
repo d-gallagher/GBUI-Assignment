@@ -93,6 +93,8 @@ public class Enemy : BaseLivingEntity
     }
     #endregion
 
+    #region Public Methods
+
     #region Overrides
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
@@ -108,29 +110,34 @@ public class Enemy : BaseLivingEntity
         }
         base.TakeHit(damage, hitPoint, hitDirection);
     }
-
     #endregion
 
     public void SetCharacteristics(float moveSpeed, int hitsToKillPlayer, float enemyHealth, Color skinColor)
     {
         // Speed
         _pathfinder.speed = moveSpeed;
+        
         // Damage and Health
         if (_hasTarget) _damage = Mathf.Ceil(_targetEntity.startingHealth / hitsToKillPlayer);
         startingHealth = enemyHealth;
+
         // Appearance
-        _skinMaterial = GetComponent<Renderer>().sharedMaterial;
+        //// TODO: remove obsolete code
+        deathEffect.startColor = new Color(skinColor.r, skinColor.g, skinColor.b, 1);
+        _skinMaterial = GetComponent<Renderer>().material;
         _skinMaterial.color = skinColor;
         _originalColour = _skinMaterial.color;
     }
+    #endregion
 
-    void OnTargetDeath()
+    #region Private Methods
+    private void OnTargetDeath()
     {
         _hasTarget = false;
         _currentState = EnemyState.Idle;
     }
 
-    IEnumerator Attack()
+    private IEnumerator Attack()
     {
         _currentState = EnemyState.Attacking;
         _pathfinder.enabled = false;
@@ -165,7 +172,7 @@ public class Enemy : BaseLivingEntity
         _pathfinder.enabled = true;
     }
 
-    IEnumerator UpdatePath()
+    private IEnumerator UpdatePath()
     {
         // Limit the frequency of updates to ease CPU cycles.
         float refreshRate = .25f;
@@ -187,4 +194,5 @@ public class Enemy : BaseLivingEntity
             yield return new WaitForSeconds(refreshRate);
         }
     }
+    #endregion
 }
