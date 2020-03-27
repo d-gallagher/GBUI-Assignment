@@ -48,7 +48,7 @@ public class GunController : MonoBehaviour
         if (_equippedGun != null) _equippedGun.OnTriggerHold();
     }
 
-    public void OnTriggerrelease()
+    public void OnTriggerRelease()
     {
         if (_equippedGun != null) _equippedGun.OnTriggerRelease();
     }
