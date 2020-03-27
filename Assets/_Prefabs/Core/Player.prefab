@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 6829391615241780340}
   - component: {fileID: 6829391615241780341}
   - component: {fileID: 1137348006}
+  - component: {fileID: 1968395352}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -217,8 +218,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMountPosition: {fileID: 8163151327580335862}
   allGuns:
-  - {fileID: 4465374178179276258, guid: 9c1d91347d1df774d8aaca62b793ae21, type: 3}
+  - {fileID: 4465374178179276258, guid: 2e280c49246bac847960cab20391ce89, type: 3}
   - {fileID: 4465374178179276258, guid: 519e9bde00ed0ea419c91f41f3b6e142, type: 3}
   - {fileID: 4465374178179276258, guid: 8d2c68d858ffa1e46beb343621837f22, type: 3}
   - {fileID: 4465374178179276258, guid: 1eba8cd507a798b47a5a597258da3089, type: 3}
   - {fileID: 4465374178179276258, guid: 45fadac271cdfcc43878bac9018dd751, type: 3}
+--- !u!114 &1968395352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6829391615241780338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946977cce3665d24b92eb4d395bec7f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beltMount: {fileID: 910569538}
+  _equippedBelt: {fileID: 7960028634522724970, guid: 9c1d91347d1df774d8aaca62b793ae21,
+    type: 3}

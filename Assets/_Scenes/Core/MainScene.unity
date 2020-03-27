@@ -27656,7 +27656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDeveloperMode: 1
   waves:
-  - enemyCount: 10
+  - enemyCount: 0
     isInfiniteWave: 0
     timeBetweenSpawns: 1.5
     moveSpeed: 1.5
@@ -40045,11 +40045,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: allGuns.Array.data[0]
-      value: 
-      objectReference: {fileID: 4465374178179276258, guid: 2e280c49246bac847960cab20391ce89,
-        type: 3}
     - target: {fileID: 6829391615241780338, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_Name
