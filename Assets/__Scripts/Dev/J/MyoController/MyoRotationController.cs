@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class BaseMyoRotationBehaviour : MonoBehaviour
+public class MyoRotationController : MonoBehaviour, IMyoGesturable
 {
+    [Header("Target GameObject")]
+    public GameObject target;
     [Header("Lock Axes")]
     public bool lockX;
     public bool lockY;
@@ -18,15 +20,27 @@ public class BaseMyoRotationBehaviour : MonoBehaviour
 
     // Privates
     private ThalmicMyo _thalmicMyo;
-    private Rigidbody _rb;
+    private Rigidbody _targetRb;
 
     private void Start()
     {
         _thalmicMyo = FindObjectOfType<ThalmicMyo>();
-        _rb = GetComponent<Rigidbody>();
+        _targetRb = target.GetComponent<Rigidbody>();
 
-        PanelMyoDebugScript.OnDoubleTap += ResetRotation;
+        // Subsribe to OnNewPose event of the controller
+        MyoGestureController.OnNewPose += OnNewPose;
     }
+
+    #region Implementation of IMyoGesturable
+    public void OnNewPose(Thalmic.Myo.Pose newPose)
+    {
+        // This script only needs to handle the double-tap pose
+        if (newPose == Thalmic.Myo.Pose.DoubleTap) ResetRotation();
+    }
+
+    // Not needed but do not throw exception
+    public void OnHoldPose() { }
+    #endregion
 
     private void Update()
     {
@@ -54,32 +68,32 @@ public class BaseMyoRotationBehaviour : MonoBehaviour
             euler.y = lockY ? 0 : euler.y;
             euler.z = lockZ ? 0 : euler.z;
             // Apply the euler angles
-            _rb.MoveRotation(Quaternion.Euler(euler));
+            _targetRb.MoveRotation(UnityEngine.Quaternion.Euler(euler));
         }
         else
         {
             // No locks, can just apply quaternion
-            _rb.MoveRotation(rotation);
+            _targetRb.MoveRotation(rotation);
         }
 
         //transform.rotation = rotation;
 
 
-        // The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,
-        // was facing toward the wearer's elbow. If the Myo armband is worn with its +x direction facing the other way,
-        // the rotation needs to be updated to compensate.
-        if (_thalmicMyo.xDirection == Thalmic.Myo.XDirection.TowardWrist)
-        {
-            // Mirror the rotation around the XZ plane in Unity's coordinate system (XY plane in Myo's coordinate
-            // system). This makes the rotation reflect the arm's orientation, rather than that of the Myo armband.
-            transform.rotation = new Quaternion(transform.localRotation.x,
-                                                -transform.localRotation.y,
-                                                transform.localRotation.z,
-                                                -transform.localRotation.w);
-        }
+        //// The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,
+        //// was facing toward the wearer's elbow. If the Myo armband is worn with its +x direction facing the other way,
+        //// the rotation needs to be updated to compensate.
+        //if (_thalmicMyo.xDirection == Thalmic.Myo.XDirection.TowardWrist)
+        //{
+        //    // Mirror the rotation around the XZ plane in Unity's coordinate system (XY plane in Myo's coordinate
+        //    // system). This makes the rotation reflect the arm's orientation, rather than that of the Myo armband.
+        //    transform.rotation = new UnityEngine.Quaternion(transform.localRotation.x,
+        //                                        -transform.localRotation.y,
+        //                                        transform.localRotation.z,
+        //                                        -transform.localRotation.w);
+        //}
     }
 
-    public void ResetRotation()
+    private void ResetRotation()
     {
         // Update references. This anchors the joint on-screen such that it faces forward away
         // from the viewer when the Myo armband is oriented the way it is when these references are taken.
