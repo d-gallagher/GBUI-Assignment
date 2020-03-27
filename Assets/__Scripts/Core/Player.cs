@@ -99,6 +99,12 @@ public class Player : BaseLivingEntity, IMyoGesturable
                 }
             }
         }
+        else
+        {
+            Vector3 aimPoint = transform.position + (transform.forward * 100 * _gunController.GunHeight);
+            Debug.Log(aimPoint);
+            _gunController.Aim(aimPoint);
+        }
 
         // Weapon Input
         if (Input.GetMouseButton(0)) _gunController.OnTriggerHold();

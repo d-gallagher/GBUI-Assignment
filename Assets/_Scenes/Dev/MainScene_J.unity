@@ -27314,7 +27314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDeveloperMode: 1
   waves:
-  - enemyCount: 0
+  - enemyCount: 5
     isInfiniteWave: 0
     timeBetweenSpawns: 1.5
     moveSpeed: 1.5
