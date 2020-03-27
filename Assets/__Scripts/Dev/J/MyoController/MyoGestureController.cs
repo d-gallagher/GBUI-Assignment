@@ -27,7 +27,7 @@ public sealed class MyoGestureController : MonoBehaviour
         }
         else
         {
-            OnHoldPose();
+            OnHoldPose?.Invoke();
         }
     }
 }
