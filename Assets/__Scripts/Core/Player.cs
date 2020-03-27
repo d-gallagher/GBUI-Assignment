@@ -6,6 +6,7 @@
 /// </summary>
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(GunController))]
+[RequireComponent(typeof(RadialBeltController))]
 public class Player : BaseLivingEntity
 {
     #region Public Variables
@@ -21,6 +22,7 @@ public class Player : BaseLivingEntity
     private Camera _cam;
     private PlayerController _playerController;
     private GunController _gunController;
+    private RadialBeltController _beltController;
     #endregion
 
     #region Unity Methods
@@ -28,6 +30,7 @@ public class Player : BaseLivingEntity
     {
         _playerController = GetComponent<PlayerController>();
         _gunController = GetComponent<GunController>();
+        _beltController = GetComponent<RadialBeltController>();
         _cam = Camera.main;
         FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
     }
@@ -66,6 +69,7 @@ public class Player : BaseLivingEntity
         if (Input.GetMouseButton(0)) _gunController.OnTriggerHold();
         if (Input.GetMouseButtonUp(0)) _gunController.OnTriggerrelease();
         if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
+        if (Input.GetMouseButton(1)) _beltController.OnTriggerHold();
 
         // Kill the Player if it falls off the map.
         if (transform.position.y < -10) TakeDamage(health);
