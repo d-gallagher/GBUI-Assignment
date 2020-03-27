@@ -459,42 +459,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 670844682, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 35554481}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
---- !u!1 &670844678 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: a8fb79c10f7470b4da70b58a942e8d56,
-    type: 3}
-  m_PrefabInstance: {fileID: 504048067}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &670844681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670844678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb64700769d2ae940957ccd93b5d515a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &670844682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670844678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5efdce58ac65112468267cd4f3d5ea11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 35554481}
-  lockX: 0
-  lockY: 0
-  lockZ: 0
 --- !u!1 &676649303
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +723,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739546840}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1987461873
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_Name
+      value: Hub - 1 Myo
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 863250160b56e46dbb2d227833b7338a, type: 3}
 --- !u!224 &2018103033 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1882487191258780987, guid: f1313a27478b86e47b26a8d84fc48ff5,
