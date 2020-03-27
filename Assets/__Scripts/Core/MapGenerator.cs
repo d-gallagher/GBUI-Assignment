@@ -14,7 +14,7 @@ public class MapGenerator : MonoBehaviour
     public Transform mapFloor;
     public Transform navmeshFloor;
     public Transform navmeshMaskPrefab;
-    public Vector2 mapSize;
+    //public Vector2 mapSize;
     public Vector2 maxMapSize;
     [Range(0, 1)]
     public float outlinePercent;
@@ -181,7 +181,7 @@ public class MapGenerator : MonoBehaviour
         return targetAccessibleTileCount == accessibleTileCount;
     }
 
-    private Vector3 CoordToPosition(int x, int y) => new Vector3(-mapSize.x / 2 + 0.5f + x, 0, -mapSize.y / 2 + 0.5f + y);
+    private Vector3 CoordToPosition(int x, int y) => new Vector3(-_currentMap.mapSize.x / 2 + 0.5f + x, 0, -_currentMap.mapSize.y / 2 + 0.5f + y);
 
     public Transform GetTileFromPosition(Vector3 position)
     {
