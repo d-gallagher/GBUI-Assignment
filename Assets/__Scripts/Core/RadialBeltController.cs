@@ -8,6 +8,7 @@ public class RadialBeltController : MonoBehaviour
     public Transform beltMount;
     public RadialBelt _equippedBelt;
 
+    public void EquipBelt() => EquipBelt(_equippedBelt);
     public void EquipBelt(RadialBelt radialBelt)
     {
 
