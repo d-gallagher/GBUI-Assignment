@@ -7,7 +7,7 @@ using static Enums;
 /// <para>Set gunBarrelPosition to transform where projectile will spawn.</para>
 /// <para>Set Should projectile to the object to spawn wwhen gun is fired.</para>
 /// </summary>
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviour, IFireable
 {
     #region Public Variables
     [Header("Gun Settings")]
@@ -93,7 +93,7 @@ public class Gun : MonoBehaviour
     }
     #endregion
 
-    #region Public Methods
+    #region Implementation of IFireable
     public void OnTriggerHold()
     {
         Shoot();
@@ -105,7 +105,9 @@ public class Gun : MonoBehaviour
         _triggerReleasedSinceLastShot = true;
         _shotRemainingInBurst = burstCount;
     }
+    #endregion
 
+    #region Public Methods
     public void Aim(Vector3 aimPoint)
     {
         // Only aim if not reloading

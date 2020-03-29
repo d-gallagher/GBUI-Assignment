@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Gun Controller Script
@@ -9,6 +8,7 @@ public class GunController : MonoBehaviour
     #region Public Variables
     public Transform weaponMountPosition;
     public Gun[] allGuns;
+    public float GunHeight => weaponMountPosition.position.y;
     #endregion
 
     #region Private Variables
@@ -19,8 +19,19 @@ public class GunController : MonoBehaviour
     private void Start() { }
     #endregion
 
-    public float GunHeight => weaponMountPosition.position.y;
+    #region Implementation of IFireable
+    public void OnTriggerHold()
+    {
+        if (_equippedGun != null) _equippedGun.OnTriggerHold();
+    }
 
+    public void OnTriggerRelease()
+    {
+        if (_equippedGun != null) _equippedGun.OnTriggerRelease();
+    }
+    #endregion
+
+    #region Public Methods
     public void EquipGun(int weaponIndex) => EquipGun(allGuns[weaponIndex]);
 
     public void EquipGun(Gun gunToEquip)
@@ -42,14 +53,5 @@ public class GunController : MonoBehaviour
     {
         if (_equippedGun != null) _equippedGun.Reload();
     }
-
-    public void OnTriggerHold()
-    {
-        if (_equippedGun != null) _equippedGun.OnTriggerHold();
-    }
-
-    public void OnTriggerRelease()
-    {
-        if (_equippedGun != null) _equippedGun.OnTriggerRelease();
-    }
+    #endregion
 }

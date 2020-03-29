@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class RadialBeltController : MonoBehaviour
+public class RadialBeltController : MonoBehaviour, IFireable
 {
 
     public Transform beltMount;
@@ -27,7 +25,7 @@ public class RadialBeltController : MonoBehaviour
     {
         if (_equippedBelt != null) _equippedBelt.OnTriggerHold();
     }
-    public void OnTriggerrelease()
+    public void OnTriggerRelease()
     {
         if (_equippedBelt != null) _equippedBelt.OnTriggerRelease();
     }

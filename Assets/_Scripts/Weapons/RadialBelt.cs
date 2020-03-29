@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using static Enums;
 
-public class RadialBelt : MonoBehaviour
+public class RadialBelt : MonoBehaviour, IFireable
 {
     public Transform[] projectileSpawnPoints;
     public Projectile projectile;
@@ -21,6 +19,7 @@ public class RadialBelt : MonoBehaviour
     private FireMode fireMode;
     private bool _triggerReleasedSinceLastShot;
 
+    #region Implementation of IFireable
     public void OnTriggerHold()
     {
          Shoot();
@@ -31,8 +30,9 @@ public class RadialBelt : MonoBehaviour
     {
         _triggerReleasedSinceLastShot = true;
     }
+    #endregion
 
- 
+    #region Private Methods
     private void Shoot()
     {
         // Loop through each projectile spawn point
@@ -46,6 +46,6 @@ public class RadialBelt : MonoBehaviour
         Instantiate(shell, shellEjectionPoint.position, shellEjectionPoint.rotation);
 
         AudioManager.instance.PlaySound(shootAudio, transform.position);
-         
     }
+    #endregion
 }
