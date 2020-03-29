@@ -35,7 +35,7 @@ public class Enemy : BaseLivingEntity
     private float _myCollisionRadius;
     private float _targetCollisionRadius;
 
-    private bool _hasTarget;
+    private bool _hasTarget => _target != null;
     #endregion
 
     #region Unity Methods
@@ -47,7 +47,7 @@ public class Enemy : BaseLivingEntity
         // Check that player exists and is still alive...
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            _hasTarget = true;
+            //_hasTarget = true;
             // Set up target variables.
             _target = GameObject.FindGameObjectWithTag("Player").transform;
             _targetEntity = _target.GetComponent<BaseLivingEntity>();
@@ -65,7 +65,7 @@ public class Enemy : BaseLivingEntity
         // Check that player exists and is still alive...
         if (_hasTarget)
         {
-            _hasTarget = true;
+            //_hasTarget = true;
             _currentState = EnemyState.Chasing;
             _targetEntity.OnDeath += OnTargetDeath;
 
@@ -116,7 +116,7 @@ public class Enemy : BaseLivingEntity
     {
         // Speed
         _pathfinder.speed = moveSpeed;
-        
+
         // Damage and Health
         if (_hasTarget) _damage = Mathf.Ceil(_targetEntity.startingHealth / hitsToKillPlayer);
         startingHealth = enemyHealth;
@@ -133,7 +133,7 @@ public class Enemy : BaseLivingEntity
     #region Private Methods
     private void OnTargetDeath()
     {
-        _hasTarget = false;
+        //_hasTarget = false;
         _currentState = EnemyState.Idle;
     }
 

@@ -44,53 +44,56 @@ public class MyoRotationController : MonoBehaviour, IMyoGesturable
 
     private void Update()
     {
-        // Current zero roll vector and roll value.
-        Vector3 zeroRoll = RotationMaths.ComputeZeroRollVector(_thalmicMyo.transform.forward);
-        float roll = RotationMaths.RollFromZero(zeroRoll, _thalmicMyo.transform.forward, _thalmicMyo.transform.up);
-
-        // The relative roll is simply how much the current roll has changed relative to the reference roll.
-        // adjustAngle simply keeps the resultant value within -180 to 180 degrees.
-        float relativeRoll = RotationMaths.NormalizeAngle(roll - _referenceRoll);
-
-        // antiRoll represents a rotation about the _thalmicMyo Armband's forward axis adjusting for reference roll.
-        Quaternion antiRoll = Quaternion.AngleAxis(relativeRoll, _thalmicMyo.transform.forward);
-
-        // Here the anti-roll and yaw rotations are applied to the _thalmicMyo Armband's forward direction to yield
-        // the orientation of the joint.
-        var rotation = _antiYaw * antiRoll * Quaternion.LookRotation(_thalmicMyo.transform.forward);
-
-        // Is there a lock on any axis?
-        if (lockX || lockY || lockZ)
+        if (_targetRb != null)
         {
-            var euler = rotation.eulerAngles;
+            // Current zero roll vector and roll value.
+            Vector3 zeroRoll = RotationMaths.ComputeZeroRollVector(_thalmicMyo.transform.forward);
+            float roll = RotationMaths.RollFromZero(zeroRoll, _thalmicMyo.transform.forward, _thalmicMyo.transform.up);
 
-            euler.x = lockX ? 0 : euler.x;
-            euler.y = lockY ? 0 : euler.y;
-            euler.z = lockZ ? 0 : euler.z;
-            // Apply the euler angles
-            _targetRb.MoveRotation(UnityEngine.Quaternion.Euler(euler));
+            // The relative roll is simply how much the current roll has changed relative to the reference roll.
+            // adjustAngle simply keeps the resultant value within -180 to 180 degrees.
+            float relativeRoll = RotationMaths.NormalizeAngle(roll - _referenceRoll);
+
+            // antiRoll represents a rotation about the _thalmicMyo Armband's forward axis adjusting for reference roll.
+            Quaternion antiRoll = Quaternion.AngleAxis(relativeRoll, _thalmicMyo.transform.forward);
+
+            // Here the anti-roll and yaw rotations are applied to the _thalmicMyo Armband's forward direction to yield
+            // the orientation of the joint.
+            var rotation = _antiYaw * antiRoll * Quaternion.LookRotation(_thalmicMyo.transform.forward);
+
+            // Is there a lock on any axis?
+            if (lockX || lockY || lockZ)
+            {
+                var euler = rotation.eulerAngles;
+
+                euler.x = lockX ? 0 : euler.x;
+                euler.y = lockY ? 0 : euler.y;
+                euler.z = lockZ ? 0 : euler.z;
+                // Apply the euler angles
+                _targetRb.MoveRotation(UnityEngine.Quaternion.Euler(euler));
+            }
+            else
+            {
+                // No locks, can just apply quaternion
+                _targetRb.MoveRotation(rotation);
+            }
+
+            //transform.rotation = rotation;
+
+
+            //// The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,
+            //// was facing toward the wearer's elbow. If the Myo armband is worn with its +x direction facing the other way,
+            //// the rotation needs to be updated to compensate.
+            //if (_thalmicMyo.xDirection == Thalmic.Myo.XDirection.TowardWrist)
+            //{
+            //    // Mirror the rotation around the XZ plane in Unity's coordinate system (XY plane in Myo's coordinate
+            //    // system). This makes the rotation reflect the arm's orientation, rather than that of the Myo armband.
+            //    transform.rotation = new UnityEngine.Quaternion(transform.localRotation.x,
+            //                                        -transform.localRotation.y,
+            //                                        transform.localRotation.z,
+            //                                        -transform.localRotation.w);
+            //}
         }
-        else
-        {
-            // No locks, can just apply quaternion
-            _targetRb.MoveRotation(rotation);
-        }
-
-        //transform.rotation = rotation;
-
-
-        //// The above calculations were done assuming the Myo armbands's +x direction, in its own coordinate system,
-        //// was facing toward the wearer's elbow. If the Myo armband is worn with its +x direction facing the other way,
-        //// the rotation needs to be updated to compensate.
-        //if (_thalmicMyo.xDirection == Thalmic.Myo.XDirection.TowardWrist)
-        //{
-        //    // Mirror the rotation around the XZ plane in Unity's coordinate system (XY plane in Myo's coordinate
-        //    // system). This makes the rotation reflect the arm's orientation, rather than that of the Myo armband.
-        //    transform.rotation = new UnityEngine.Quaternion(transform.localRotation.x,
-        //                                        -transform.localRotation.y,
-        //                                        transform.localRotation.z,
-        //                                        -transform.localRotation.w);
-        //}
     }
 
     private void ResetRotation()
