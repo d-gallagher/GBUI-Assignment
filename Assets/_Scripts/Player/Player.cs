@@ -126,6 +126,6 @@ public class Player : BaseLivingEntity, IMyoGesturable
     {
         health = startingHealth;
         _gunController.EquipGun(waveNumber - 1);
-        _beltController.EquipBelt();
+        //_beltController.EquipBelt();
     }
 }
