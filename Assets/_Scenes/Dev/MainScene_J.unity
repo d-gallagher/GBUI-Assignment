@@ -32980,56 +32980,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 670844682, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
+    - target: {fileID: 1759769038, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 123232364}
-    - target: {fileID: 670844682, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
-      propertyPath: lockZ
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 670844682, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
-      propertyPath: lockX
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 670844681, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
-    - {fileID: 670844682, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8fb79c10f7470b4da70b58a942e8d56, type: 3}
---- !u!1 &1759769037 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: a8fb79c10f7470b4da70b58a942e8d56,
-    type: 3}
-  m_PrefabInstance: {fileID: 1759769036}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1759769038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759769037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12aba25e4ccb3a347a9ca2b405785f7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 123232364}
-  lockX: 1
-  lockY: 0
-  lockZ: 1
---- !u!114 &1759769039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759769037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a6b70d78ff86940a6489b91da4cc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1765356933
 GameObject:
   m_ObjectHideFlags: 0
@@ -40383,40 +40339,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: allGuns.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: startingGun
-      value: 
-      objectReference: {fileID: 4465374178179276258, guid: 2e280c49246bac847960cab20391ce89,
-        type: 3}
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: allGuns.Array.data[0]
-      value: 
-      objectReference: {fileID: 4465374178179276258, guid: 2e280c49246bac847960cab20391ce89,
-        type: 3}
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: allGuns.Array.data[1]
-      value: 
-      objectReference: {fileID: 4465374178179276258, guid: 519e9bde00ed0ea419c91f41f3b6e142,
-        type: 3}
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: allGuns.Array.data[2]
-      value: 
-      objectReference: {fileID: 4465374178179276258, guid: 8d2c68d858ffa1e46beb343621837f22,
-        type: 3}
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: allGuns.Array.data[3]
-      value: 
-      objectReference: {fileID: 4465374178179276258, guid: 1eba8cd507a798b47a5a597258da3089,
-        type: 3}
-    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: allGuns.Array.data[4]
-      value: 
-      objectReference: {fileID: 4465374178179276258, guid: 45fadac271cdfcc43878bac9018dd751,
-        type: 3}
     - target: {fileID: 6829391615241780338, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_Name
@@ -40427,11 +40349,6 @@ PrefabInstance:
       propertyPath: crosshairs
       value: 
       objectReference: {fileID: 1240120085}
-    - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
-        type: 3}
-      propertyPath: isUsingMyo
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40496,41 +40413,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
-        type: 3}
-      propertyPath: soundGroups.Array.data[1].groupID
-      value: Enemy Death
-      objectReference: {fileID: 0}
-    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
-        type: 3}
-      propertyPath: soundGroups.Array.data[2].groupID
-      value: Enemy Attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
-        type: 3}
-      propertyPath: soundGroups.Array.data[4].groupID
-      value: Player Death
-      objectReference: {fileID: 0}
-    - target: {fileID: 8060936766190947506, guid: b4e144c1f40465f4ebf3d352cc12141a,
-        type: 3}
-      propertyPath: soundGroups.Array.data[3].groupID
-      value: Level Complete
-      objectReference: {fileID: 0}
-    - target: {fileID: 8060936766190947508, guid: b4e144c1f40465f4ebf3d352cc12141a,
-        type: 3}
-      propertyPath: masterVolumePercent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8060936766190947508, guid: b4e144c1f40465f4ebf3d352cc12141a,
-        type: 3}
-      propertyPath: sfxVolumePercent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8060936766190947508, guid: b4e144c1f40465f4ebf3d352cc12141a,
-        type: 3}
-      propertyPath: musicVolumePercent
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8060936766190947510, guid: b4e144c1f40465f4ebf3d352cc12141a,
         type: 3}
       propertyPath: m_LocalPosition.x

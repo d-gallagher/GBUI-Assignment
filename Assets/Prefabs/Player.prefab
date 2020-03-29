@@ -204,6 +204,7 @@ MonoBehaviour:
   moveSpeed: 5
   crosshairs: {fileID: 0}
   minCrosshairDistance: 1
+  isUsingMyo: 1
 --- !u!114 &1137348006
 MonoBehaviour:
   m_ObjectHideFlags: 0
