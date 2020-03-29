@@ -50,10 +50,14 @@ public class Player : BaseLivingEntity, IMyoGesturable
     #region Implementation of IMyoGesturable
     public void OnNewPose(Thalmic.Myo.Pose newPose)
     {
-        bool isFiring = newPose == Thalmic.Myo.Pose.Fist;
+        bool isPrimaryFiring = newPose == Thalmic.Myo.Pose.Fist;
+        bool isSecondaryFiring = newPose == Thalmic.Myo.Pose.FingersSpread;
 
         if (newPose == Thalmic.Myo.Pose.Fist) _gunController.OnTriggerHold();
-        if (_lastPose == Thalmic.Myo.Pose.Fist && !isFiring) _gunController.OnTriggerRelease();
+        if (_lastPose == Thalmic.Myo.Pose.Fist && !isPrimaryFiring) _gunController.OnTriggerRelease();
+
+        if (newPose == Thalmic.Myo.Pose.FingersSpread) _beltController.OnTriggerHold();
+        if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
 
         _lastPose = newPose;
     }
