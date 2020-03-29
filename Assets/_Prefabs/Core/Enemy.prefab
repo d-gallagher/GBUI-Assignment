@@ -126,10 +126,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7092875020546075562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 530f36b3a49f24d4ea2d3117b4767bd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fea946e2da0fd747af1bd91071c7a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
+  startingHealth: 3
   deathEffect: {fileID: 4600487369385775733, guid: 5b2b0246a7cf908419dbee054f5d5da3,
     type: 3}
   _currentState: 0
