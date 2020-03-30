@@ -16,7 +16,7 @@ public class RadialBelt : MonoBehaviour, IFireable
     public AudioClip shootAudio;
 
     // Fire Mode
-    private FireMode fireMode;
+    public FireMode fireMode;
     private bool _triggerReleasedSinceLastShot;
 
     #region Implementation of IFireable
@@ -35,6 +35,24 @@ public class RadialBelt : MonoBehaviour, IFireable
     #region Private Methods
     private void Shoot()
     {
+
+        //switch (fireMode)
+        //{
+        //    case FireMode.Single:
+        //        if (!_triggerReleasedSinceLastShot) return;
+        //        break;
+
+        //    //case FireMode.Burst:
+        //    //    if (_shotRemainingInBurst == 0) return;
+        //    //    else _shotRemainingInBurst--;
+        //    //    break;
+
+        //    case FireMode.Auto:
+        //        break;
+
+        //    default:
+        //        break;
+        //}
         // Loop through each projectile spawn point
         foreach (var t in projectileSpawnPoints)
         {

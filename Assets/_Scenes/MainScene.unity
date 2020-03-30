@@ -27656,35 +27656,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDeveloperMode: 1
   waves:
-  - enemyCount: 3
+  - enemyCount: 0
     isInfiniteWave: 0
     timeBetweenSpawns: 1.5
     moveSpeed: 1.5
     hitsToKillPlayer: 3
     enemyHealth: 3
     skinColor: {r: 0.06607044, g: 1, b: 0, a: 0.5019608}
-  - enemyCount: 15
+  - enemyCount: 0
     isInfiniteWave: 0
     timeBetweenSpawns: 1
     moveSpeed: 1
     hitsToKillPlayer: 3
     enemyHealth: 3
     skinColor: {r: 0.2747835, g: 0.5283019, b: 0.256675, a: 0.5019608}
-  - enemyCount: 20
+  - enemyCount: 0
     isInfiniteWave: 0
     timeBetweenSpawns: 1
     moveSpeed: 1
     hitsToKillPlayer: 3
     enemyHealth: 3
     skinColor: {r: 1, g: 0.9696857, b: 0, a: 0.5019608}
-  - enemyCount: 25
+  - enemyCount: 0
     isInfiniteWave: 0
     timeBetweenSpawns: 0.8
     moveSpeed: 1
     hitsToKillPlayer: 3
     enemyHealth: 4
     skinColor: {r: 1, g: 0.25382882, b: 0, a: 0.5019608}
-  - enemyCount: 30
+  - enemyCount: 0
     isInfiniteWave: 0
     timeBetweenSpawns: 0.5
     moveSpeed: 1
@@ -40053,6 +40053,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.data[3]
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 1eba8cd507a798b47a5a597258da3089,
+        type: 3}
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: allGuns.Array.data[0]
+      value: 
+      objectReference: {fileID: 4465374178179276258, guid: 1eba8cd507a798b47a5a597258da3089,
+        type: 3}
     - target: {fileID: 6829391615241780338, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_Name
@@ -40063,6 +40073,11 @@ PrefabInstance:
       propertyPath: crosshairs
       value: 
       objectReference: {fileID: 1240120085}
+    - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
+        type: 3}
+      propertyPath: isUsingMyo
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_LocalPosition.x
