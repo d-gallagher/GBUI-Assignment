@@ -19,33 +19,6 @@ public class GunController : MonoBehaviour
 
     #region Unity Methods
     private void Start() { }
-    private void Update()
-    {
-        int previousWeapon = selectedWeapon;
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            if (selectedWeapon >= allGuns.Length - 1)
-            {
-                selectedWeapon = 0;
-            }
-            else selectedWeapon++;
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            if (selectedWeapon <= 0)
-            {
-                selectedWeapon = allGuns.Length - 1;
-            }
-            else selectedWeapon--;
-        }
-
-        if (previousWeapon != selectedWeapon)
-        {
-            OnSwitchWeapon();
-        }
-    }
     #endregion
 
     #region Implementation of IFireable
@@ -84,16 +57,19 @@ public class GunController : MonoBehaviour
         if (_equippedGun != null) _equippedGun.Reload();
     }
 
-
-    #endregion
-
-    // This is returning -1 all the time instead of the equipped gun array index..
-    private int EquippedGunIndex(Gun t)
+    public void OnSwitchWeapon(int weaponIncrement)
     {
-        return System.Array.IndexOf(allGuns, t);
-    }
-    public void OnSwitchWeapon()
-    {
+        selectedWeapon += weaponIncrement;
+        if (selectedWeapon >= allGuns.Length - 1)
+        {
+            selectedWeapon = 0;
+        }
+
+        if (selectedWeapon < 0)
+        {
+            selectedWeapon = allGuns.Length - 1;
+        }
+
         int index = 0;
         foreach (Gun g in allGuns)
         {
@@ -104,4 +80,7 @@ public class GunController : MonoBehaviour
             index++;
         }
     }
+    #endregion
+
+
 }

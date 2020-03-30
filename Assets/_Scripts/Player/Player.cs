@@ -59,25 +59,8 @@ public class Player : BaseLivingEntity, IMyoGesturable
         if (newPose == Thalmic.Myo.Pose.FingersSpread) _beltController.OnTriggerHold();
         if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
 
-        if (newPose == Thalmic.Myo.Pose.WaveIn)
-        {
-            if (_gunController.selectedWeapon >= _gunController.allGuns.Length - 1)
-            {
-                _gunController.selectedWeapon = 0;
-            }
-            else _gunController.selectedWeapon--;
-            _gunController.OnSwitchWeapon();
-        }
-
-        if (newPose == Thalmic.Myo.Pose.WaveOut)
-        {
-            if (_gunController.selectedWeapon <= 0)
-            {
-                _gunController.selectedWeapon = _gunController.allGuns.Length - 1;
-            }
-            else _gunController.selectedWeapon++;
-            _gunController.OnSwitchWeapon();
-        }
+        if (newPose == Thalmic.Myo.Pose.WaveIn) _gunController.OnSwitchWeapon(1);
+        if (newPose == Thalmic.Myo.Pose.WaveOut) _gunController.OnSwitchWeapon(-1);
 
         _lastPose = newPose;
     }
@@ -134,6 +117,9 @@ public class Player : BaseLivingEntity, IMyoGesturable
         if (Input.GetMouseButtonUp(0)) _gunController.OnTriggerRelease();
         if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
         if (Input.GetMouseButton(1)) _beltController.OnTriggerHold();
+        // testing weapon switch
+        if (Input.GetKeyDown(KeyCode.X)) _gunController.OnSwitchWeapon(1);
+        if (Input.GetKeyDown(KeyCode.Z)) _gunController.OnSwitchWeapon(-1);
 
         // Kill the Player if it falls off the map.
         if (transform.position.y < -10) TakeDamage(health);
