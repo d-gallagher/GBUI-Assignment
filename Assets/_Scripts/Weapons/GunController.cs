@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Gun Controller Script
@@ -7,6 +8,7 @@ public class GunController : MonoBehaviour
 {
     #region Public Variables
     public Transform weaponMountPosition;
+    public int selectedWeapon = 0;
     public Gun[] allGuns;
     public float GunHeight => weaponMountPosition.position.y;
     #endregion
@@ -17,6 +19,33 @@ public class GunController : MonoBehaviour
 
     #region Unity Methods
     private void Start() { }
+    private void Update()
+    {
+        int previousWeapon = selectedWeapon;
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            if (selectedWeapon >= allGuns.Length - 1)
+            {
+                selectedWeapon = 0;
+            }
+            else selectedWeapon++;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            if (selectedWeapon <= 0)
+            {
+                selectedWeapon = allGuns.Length - 1;
+            }
+            else selectedWeapon--;
+        }
+
+        if (previousWeapon != selectedWeapon)
+        {
+            OnSwitchWeapon();
+        }
+    }
     #endregion
 
     #region Implementation of IFireable
@@ -29,6 +58,7 @@ public class GunController : MonoBehaviour
     {
         if (_equippedGun != null) _equippedGun.OnTriggerRelease();
     }
+
     #endregion
 
     #region Public Methods
@@ -53,5 +83,25 @@ public class GunController : MonoBehaviour
     {
         if (_equippedGun != null) _equippedGun.Reload();
     }
+
+
     #endregion
+
+    // This is returning -1 all the time instead of the equipped gun array index..
+    private int EquippedGunIndex(Gun t)
+    {
+        return System.Array.IndexOf(allGuns, t);
+    }
+    public void OnSwitchWeapon()
+    {
+        int index = 0;
+        foreach (Gun g in allGuns)
+        {
+            if (index == selectedWeapon)
+            {
+                EquipGun(index);
+            }
+            index++;
+        }
+    }
 }
