@@ -2,5 +2,5 @@
 
 public interface IVibrateable 
 {
-	void HapticFeedback(int vibrationType);
+	void HapticFeedback(string vibrationType);
 }
