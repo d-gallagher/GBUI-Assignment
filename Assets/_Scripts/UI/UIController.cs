@@ -27,6 +27,9 @@ public class UIController : MonoBehaviour
     [Header("Health")]
     public RectTransform healthBar;
     public Text healthUI;
+
+    [Header("Weapon")]
+    public Text equippedWeapon;
     #endregion
 
     #region Private Variables
@@ -54,6 +57,8 @@ public class UIController : MonoBehaviour
         float healthPercent = 0;
         if (_player != null) healthPercent = _player.health / _player.startingHealth;
         healthBar.localScale = new Vector3(healthPercent, 1, 1);
+
+        equippedWeapon.text = _player.GetComponentInChildren<Gun>().name.Split('(')[0];
     }
     #endregion
 
