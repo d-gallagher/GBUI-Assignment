@@ -37,30 +37,33 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable, IVibrateabl
     public virtual void TakeDamage(float damage)
     {
         health -= damage;
-        HapticFeedback(0);
+        //HapticFeedback(0);
 
         if (health <= 0 && !isDead)
         {
             shake.CamShake();
-            HapticFeedback(2);
+            //HapticFeedback(2);
             Die();
         }
     }
     public virtual void HapticFeedback(int vibrationType)
     {
-        switch (vibrationType)
-        {
-            case 0:
-                _thalmicMyo.Vibrate(VibrationType.Short);
-                break;
-            case 1:
-                _thalmicMyo.Vibrate(VibrationType.Medium);
-                break;
-            case 2:
-                _thalmicMyo.Vibrate(VibrationType.Long);
-                break;
-            default:
-                break;
+        if (_thalmicMyo != null)
+        {         
+            switch (vibrationType)
+            {
+                case 0:
+                    _thalmicMyo.Vibrate(VibrationType.Short);
+                    break;
+                case 1:
+                    _thalmicMyo.Vibrate(VibrationType.Medium);
+                    break;
+                case 2:
+                    _thalmicMyo.Vibrate(VibrationType.Long);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
