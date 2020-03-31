@@ -8,6 +8,21 @@ public class Shake : MonoBehaviour
 
     public void CamShake()
     {
-        animateCam.SetTrigger("Shake_X-axis");
+        int allShakes = Random.Range(0,3);
+        switch (allShakes)
+        {
+            case 0:
+                animateCam.SetTrigger("Shake_X-axis");
+                break;
+            case 1:
+                animateCam.SetTrigger("Shake_Y-axis");
+                break;
+            case 2:
+                animateCam.SetTrigger("Shake_Z-axis");
+                break;
+            default:
+                break;
+        }
+        
     }
 }
