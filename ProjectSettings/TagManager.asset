@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Maptile
   - Projectile
+  - ScreenShake
   layers:
   - Default
   - TransparentFX

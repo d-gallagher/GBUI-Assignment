@@ -16,12 +16,17 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     protected bool isDead;
     #endregion
 
+    private Shake shake;
+
     #region Events
     public event Action OnDeath;
     #endregion
 
     #region Unity Methods
-    protected virtual void Start() => health = startingHealth;
+    protected virtual void Start() {
+        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        health = startingHealth;
+    }
     #endregion
 
     public virtual void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection) => TakeDamage(damage);
@@ -30,7 +35,11 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     {
         health -= damage;
 
-        if (health <= 0 && !isDead) Die();
+        if (health <= 0 && !isDead)
+        {
+            shake.CamShake();
+            Die();
+        }
     }
 
     [ContextMenu("Self Destruct")]
