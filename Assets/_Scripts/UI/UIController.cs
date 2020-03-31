@@ -58,7 +58,10 @@ public class UIController : MonoBehaviour
         if (_player != null) healthPercent = _player.health / _player.startingHealth;
         healthBar.localScale = new Vector3(healthPercent, 1, 1);
 
-        equippedWeapon.text = _player.GetComponentInChildren<Gun>().name.Split('(')[0];
+        if (_player != null)
+        {
+            equippedWeapon.text = _player.GetComponentInChildren<Gun>().name.Split('(')[0];
+        }
     }
     #endregion
 
