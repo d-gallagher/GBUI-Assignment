@@ -6,7 +6,7 @@ using UnityEngine;
 /// Base class for any 'Living' game entities.
 /// <para>Implementation of IDamageable.</para>
 /// </summary>
-public abstract class BaseLivingEntity : MonoBehaviour, IDamageable, IVibrateable
+public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
 {
     #region Public Variables
     public float startingHealth;
@@ -25,7 +25,8 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable, IVibrateabl
     #endregion
 
     #region Unity Methods
-    protected virtual void Start() {
+    protected virtual void Start()
+    {
         shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
         _thalmicMyo = FindObjectOfType<ThalmicMyo>();
         health = startingHealth;
@@ -44,26 +45,29 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable, IVibrateabl
             Die();
         }
     }
-    public virtual void HapticFeedback(string vibrationType)
-    {
-        if (_thalmicMyo != null)
-        {         
-            switch (vibrationType)
-            {
-                case "Short":
-                    _thalmicMyo.Vibrate(VibrationType.Short);
-                    break;
-                case "Medium":
-                    _thalmicMyo.Vibrate(VibrationType.Medium);
-                    break;
-                case "Long":
-                    _thalmicMyo.Vibrate(VibrationType.Long);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+
+    //public void Vibrate(VibrationType vibrationType) => _thalmicMyo.Vibrate(vibrationType);
+
+    //public virtual void HapticFeedback(string vibrationType)
+    //{
+    //    if (_thalmicMyo != null)
+    //    {
+    //        switch (vibrationType)
+    //        {
+    //            case "Short":
+    //                _thalmicMyo.Vibrate(VibrationType.Short);
+    //                break;
+    //            case "Medium":
+    //                _thalmicMyo.Vibrate(VibrationType.Medium);
+    //                break;
+    //            case "Long":
+    //                _thalmicMyo.Vibrate(VibrationType.Long);
+    //                break;
+    //            default:
+    //                break;
+    //        }
+    //    }
+    //}
 
 
     [ContextMenu("Self Destruct")]
