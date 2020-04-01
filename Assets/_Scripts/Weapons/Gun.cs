@@ -71,7 +71,7 @@ public class Gun : MonoBehaviour, IFireable
     private bool _isReloading;
 
     // Vibration
-    private MyoVibrationController _vibrationController;
+    private IVibrateable _vibrationController;
     #endregion
 
     #region Unity Methods

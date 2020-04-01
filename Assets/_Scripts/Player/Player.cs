@@ -31,7 +31,7 @@ public class Player : BaseLivingEntity, IMyoGesturable
     private PlayerController _playerController;
     private GunController _gunController;
     private RadialBeltController _beltController;
-    private MyoVibrationController _vibrationController;
+    private IVibrateable _vibrationController;
     #endregion
 
     #region Unity Methods
