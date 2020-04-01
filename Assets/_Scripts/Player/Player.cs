@@ -23,6 +23,7 @@ public class Player : BaseLivingEntity, IMyoGesturable
 
     #region Private Variables
     private Thalmic.Myo.Pose _lastPose;
+    float hapticOnDamegeReceived;
     #endregion
 
     #region References
@@ -56,8 +57,8 @@ public class Player : BaseLivingEntity, IMyoGesturable
         if (newPose == Thalmic.Myo.Pose.Fist) _gunController.OnTriggerHold();
         if (_lastPose == Thalmic.Myo.Pose.Fist && !isPrimaryFiring) _gunController.OnTriggerRelease();
 
-        if (newPose == Thalmic.Myo.Pose.FingersSpread) _beltController.OnTriggerHold();
-        if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
+        if (newPose == Thalmic.Myo.Pose.FingersSpread) { _beltController.OnTriggerHold(); HapticFeedback("Long"); }
+            if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
 
         if (newPose == Thalmic.Myo.Pose.WaveIn) _gunController.OnSwitchWeapon(1);
         if (newPose == Thalmic.Myo.Pose.WaveOut) _gunController.OnSwitchWeapon(-1);
@@ -72,7 +73,12 @@ public class Player : BaseLivingEntity, IMyoGesturable
     }
     #endregion
 
-    protected override void Start() => base.Start();
+    protected override void Start()
+    {
+        //=> 
+        base.Start();
+        hapticOnDamegeReceived = health;
+    }
 
     private void Update()
     {
@@ -121,14 +127,26 @@ public class Player : BaseLivingEntity, IMyoGesturable
         if (Input.GetKeyDown(KeyCode.X)) _gunController.OnSwitchWeapon(1);
         if (Input.GetKeyDown(KeyCode.Z)) _gunController.OnSwitchWeapon(-1);
 
+        // Haptic if the player takes damage
+        if (health < hapticOnDamegeReceived)
+        {
+            HapticFeedback("Short");
+            hapticOnDamegeReceived = health;
+        }
+
         // Kill the Player if it falls off the map.
-        if (transform.position.y < -10) TakeDamage(health);
+        if (transform.position.y < -10)
+        {
+            HapticFeedback("Long");
+            TakeDamage(health);
+        }
     }
     #endregion
 
     protected override void Die()
     {
         AudioManager.instance.PlaySound("Player Death", UnityEngine.Vector3.zero);
+        HapticFeedback("Long");
         base.Die();
     }
 
