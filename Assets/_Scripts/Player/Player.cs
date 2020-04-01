@@ -130,14 +130,14 @@ public class Player : BaseLivingEntity, IMyoGesturable
         // Haptic if the player takes damage
         if (health < hapticOnDamegeReceived)
         {
-            HapticFeedback("Short");
+            //HapticFeedback("Short");
             hapticOnDamegeReceived = health;
         }
 
         // Kill the Player if it falls off the map.
         if (transform.position.y < -10)
         {
-            HapticFeedback("Long");
+            //HapticFeedback("Long");
             TakeDamage(health);
         }
     }
@@ -146,7 +146,7 @@ public class Player : BaseLivingEntity, IMyoGesturable
     protected override void Die()
     {
         AudioManager.instance.PlaySound("Player Death", UnityEngine.Vector3.zero);
-        HapticFeedback("Long");
+        //HapticFeedback("Long");
         base.Die();
     }
 
