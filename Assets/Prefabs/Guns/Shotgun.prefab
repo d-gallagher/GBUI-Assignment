@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 4465374178179276258}
   - component: {fileID: 2292516307326426056}
   m_Layer: 0
-  m_Name: Gun04
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,9 +86,9 @@ MonoBehaviour:
   - {fileID: 4434300247997896221}
   projectile: {fileID: -5886198105835640310, guid: 9fe6dd36974d9814c86d7257212db15d,
     type: 3}
-  timeBetweenShots: 150
+  timeBetweenShots: 800
   shotVelocity: 75
-  fireMode: 0
+  fireMode: 2
   burstCount: 1
   roundsPerMag: 18
   reloadTime: 1
