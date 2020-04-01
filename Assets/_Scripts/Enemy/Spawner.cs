@@ -117,7 +117,8 @@ public class Spawner : MonoBehaviour
         spawnedEnemy.SetCharacteristics(_currentWave.moveSpeed, _currentWave.hitsToKillPlayer, _currentWave.enemyHealth, _currentWave.skinColor);
     }
 
-    private void ResetPlayerPosition() => _playerTransform.position = _map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+    //private void ResetPlayerPosition() => _playerTransform.position = _map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
+    private void ResetPlayerPosition() => _playerTransform.position = _map.GetTileFromPosition(new Vector3(0, 0, -1000)).position + Vector3.up * 3;
 
     private void OnPlayerDeath() => _isDisabled = true;
 
