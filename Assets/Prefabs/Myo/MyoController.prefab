@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 1759769038}
   - component: {fileID: 7401018147456951363}
+  - component: {fileID: 7914053676611772484}
   m_Layer: 0
   m_Name: MyoController
   m_TagString: Untagged
@@ -58,5 +59,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93a6b70d78ff86940a6489b91da4cc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7914053676611772484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5deb534db1e09e47822f06914b997bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

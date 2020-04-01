@@ -31,6 +31,7 @@ public class Player : BaseLivingEntity, IMyoGesturable
     private PlayerController _playerController;
     private GunController _gunController;
     private RadialBeltController _beltController;
+    private IVibrateable _vibrationController;
     #endregion
 
     #region Unity Methods
@@ -39,6 +40,8 @@ public class Player : BaseLivingEntity, IMyoGesturable
         _playerController = GetComponent<PlayerController>();
         _gunController = GetComponent<GunController>();
         _beltController = GetComponent<RadialBeltController>();
+        _vibrationController = FindObjectOfType<MyoVibrationController>();
+
         _cam = Camera.main;
         FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
 
@@ -47,31 +50,6 @@ public class Player : BaseLivingEntity, IMyoGesturable
         MyoGestureController.OnHoldPose += OnHoldPose;
 
     }
-
-    #region Implementation of IMyoGesturable
-    public void OnNewPose(Thalmic.Myo.Pose newPose)
-    {
-        bool isPrimaryFiring = newPose == Thalmic.Myo.Pose.Fist;
-        bool isSecondaryFiring = newPose == Thalmic.Myo.Pose.FingersSpread;
-
-        if (newPose == Thalmic.Myo.Pose.Fist) _gunController.OnTriggerHold();
-        if (_lastPose == Thalmic.Myo.Pose.Fist && !isPrimaryFiring) _gunController.OnTriggerRelease();
-
-        if (newPose == Thalmic.Myo.Pose.FingersSpread) { _beltController.OnTriggerHold(); HapticFeedback("Long"); }
-            if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
-
-        if (newPose == Thalmic.Myo.Pose.WaveIn) _gunController.OnSwitchWeapon(1);
-        if (newPose == Thalmic.Myo.Pose.WaveOut) _gunController.OnSwitchWeapon(-1);
-
-        _lastPose = newPose;
-    }
-
-    public void OnHoldPose()
-    {
-        // Not needed yet...
-        if (_lastPose == Thalmic.Myo.Pose.Fist) _gunController.OnTriggerHold();
-    }
-    #endregion
 
     protected override void Start()
     {
@@ -143,12 +121,48 @@ public class Player : BaseLivingEntity, IMyoGesturable
     }
     #endregion
 
+    #region Implementation of IMyoGesturable
+    public void OnNewPose(Thalmic.Myo.Pose newPose)
+    {
+        bool isPrimaryFiring = newPose == Thalmic.Myo.Pose.Fist;
+        bool isSecondaryFiring = newPose == Thalmic.Myo.Pose.FingersSpread;
+
+        if (newPose == Thalmic.Myo.Pose.Fist) _gunController.OnTriggerHold();
+        if (_lastPose == Thalmic.Myo.Pose.Fist && !isPrimaryFiring) _gunController.OnTriggerRelease();
+
+        if (newPose == Thalmic.Myo.Pose.FingersSpread) _beltController.OnTriggerHold();
+
+        if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
+
+        if (newPose == Thalmic.Myo.Pose.WaveIn) _gunController.OnSwitchWeapon(1);
+        if (newPose == Thalmic.Myo.Pose.WaveOut) _gunController.OnSwitchWeapon(-1);
+
+        _lastPose = newPose;
+    }
+
+    public void OnHoldPose()
+    {
+        // Not needed yet...
+        if (_lastPose == Thalmic.Myo.Pose.Fist) _gunController.OnTriggerHold();
+    }
+    #endregion
+
+    #region BaseLivingEntity Overrides
     protected override void Die()
     {
         AudioManager.instance.PlaySound("Player Death", UnityEngine.Vector3.zero);
         //HapticFeedback("Long");
         base.Die();
+        _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Long);
     }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Medium);
+    }
+
+    #endregion
 
     private void OnNewWave(int waveNumber)
     {
