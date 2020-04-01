@@ -105,6 +105,9 @@ public class Player : BaseLivingEntity, IMyoGesturable
         if (Input.GetKeyDown(KeyCode.X)) _gunController.OnSwitchWeapon(1);
         if (Input.GetKeyDown(KeyCode.Z)) _gunController.OnSwitchWeapon(-1);
 
+        // Enable/Disable Myo
+        if (Input.GetKeyDown(KeyCode.P)) isUsingMyo = !isUsingMyo;
+
         // Haptic if the player takes damage
         if (health < hapticOnDamegeReceived)
         {
@@ -127,13 +130,15 @@ public class Player : BaseLivingEntity, IMyoGesturable
         bool isPrimaryFiring = newPose == Thalmic.Myo.Pose.Fist;
         bool isSecondaryFiring = newPose == Thalmic.Myo.Pose.FingersSpread;
 
+        // Fist
         if (newPose == Thalmic.Myo.Pose.Fist) _gunController.OnTriggerHold();
         if (_lastPose == Thalmic.Myo.Pose.Fist && !isPrimaryFiring) _gunController.OnTriggerRelease();
 
+        // Finger Spread
         if (newPose == Thalmic.Myo.Pose.FingersSpread) _beltController.OnTriggerHold();
-
         if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
 
+        // Wave In/Out
         if (newPose == Thalmic.Myo.Pose.WaveIn) _gunController.OnSwitchWeapon(1);
         if (newPose == Thalmic.Myo.Pose.WaveOut) _gunController.OnSwitchWeapon(-1);
 
