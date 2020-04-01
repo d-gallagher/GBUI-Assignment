@@ -114,7 +114,7 @@ public class UIController : MonoBehaviour
                 }
             }
 
-            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(-170, 45, animatePercent);
+            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(970, 825, animatePercent);
             yield return null;
         }
     }
