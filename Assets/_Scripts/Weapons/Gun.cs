@@ -70,7 +70,8 @@ public class Gun : MonoBehaviour, IFireable
     // Reload
     private bool _isReloading;
 
-
+    // Vibration
+    private MyoVibrationController _vibrationController;
     #endregion
 
     #region Unity Methods
@@ -79,6 +80,8 @@ public class Gun : MonoBehaviour, IFireable
         _muzzleFlash = GetComponent<MuzzleFlash>();
         _shotRemainingInBurst = burstCount;
         _roundsRemainingInMag = roundsPerMag;
+
+        _vibrationController = FindObjectOfType<MyoVibrationController>();
     }
 
     private void LateUpdate()
@@ -168,6 +171,8 @@ public class Gun : MonoBehaviour, IFireable
             _recoilAngle = Mathf.Clamp(_recoilAngle, 0, 30.0f);
 
             AudioManager.instance.PlaySound(shootAudio, transform.position);
+            // Trigger vibration
+            _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Short);
         }
     }
 

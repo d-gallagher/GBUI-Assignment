@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using Thalmic.Myo;
 
 public interface IVibrateable 
 {
-	void HapticFeedback(string vibrationType);
+	void Vibrate(VibrationType vibrationType);
 }
