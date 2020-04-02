@@ -15,9 +15,10 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     #region Protected Variables
     public float health { get; protected set; }
     protected bool isDead;
+    protected ShakeScript _shakeScript;
     #endregion
 
-    private Shake shake;
+    //private Shake shake;
     private ThalmicMyo _thalmicMyo;
 
     #region Events
@@ -27,7 +28,8 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     #region Unity Methods
     protected virtual void Start()
     {
-        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        _shakeScript = Camera.main.GetComponent<ShakeScript>();
+        //shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
         _thalmicMyo = FindObjectOfType<ThalmicMyo>();
         health = startingHealth;
     }
@@ -41,7 +43,7 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
 
         if (health <= 0 && !isDead)
         {
-            shake.CamShake();
+            _shakeScript.Shake();
             Die();
         }
     }

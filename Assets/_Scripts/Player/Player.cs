@@ -131,6 +131,12 @@ public class Player : BaseLivingEntity, IMyoGesturable
             //HapticFeedback("Long");
             TakeDamage(health);
         }
+
+
+        // Debugging
+        if (Input.GetKeyDown(KeyCode.F10)) _shakeScript.Shake();
+
+
     }
     #endregion
 
