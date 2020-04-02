@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
     float _lifetime = 3;
     [SerializeField]
     float _skinWidth = .1f;
+    private bool _isPenetrating;
 
     #endregion
 
@@ -42,6 +43,9 @@ public class Projectile : MonoBehaviour
     }
     #endregion
 
+    public void SetDamage(int damage) => _damage = damage;
+    public void SetPenetrating(bool isPenetrating) => _isPenetrating = isPenetrating;
+
     public void SetSpeed(float newSpeed) => _speed = newSpeed;
 
     private void CheckCollisions(float moveDistance)
@@ -60,6 +64,6 @@ public class Projectile : MonoBehaviour
     {
         IDamageable damageableObject = c.GetComponent<IDamageable>();
         if (damageableObject != null) damageableObject.TakeHit(_damage, hitPoint, transform.forward);
-        Destroy(gameObject);
+        if (!_isPenetrating) Destroy(gameObject);
     }
 }

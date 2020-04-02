@@ -4,10 +4,8 @@ using UnityEngine.UI;
 public class PanelPoseScript : MonoBehaviour
 {
     public Thalmic.Myo.Pose pose { get; private set; }
-    [SerializeField]
-    private Text _text;
-    [SerializeField]
-    private Image _image;
+    public Text _text;
+    public Image _image;
 
     private Color _activeColor;
     private Color _inActiveColor;

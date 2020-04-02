@@ -3,7 +3,7 @@
 public class RadialBeltController : MonoBehaviour, IFireable
 {
 
-    public Transform beltMount;
+    public Transform radialBeltMount;
     public RadialBelt _equippedBelt;
 
 

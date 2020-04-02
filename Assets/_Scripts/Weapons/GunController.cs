@@ -81,6 +81,4 @@ public class GunController : MonoBehaviour
         }
     }
     #endregion
-
-
 }

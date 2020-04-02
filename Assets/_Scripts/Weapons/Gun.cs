@@ -61,6 +61,7 @@ public class Gun : MonoBehaviour, IFireable
     private bool _triggerReleasedSinceLastShot;
     private int _shotRemainingInBurst;
     private int _roundsRemainingInMag;
+    private IVibrateable _vibrationController;
 
     // Recoil
     private Vector3 _recoilSmoothDampVelocity;
@@ -70,8 +71,7 @@ public class Gun : MonoBehaviour, IFireable
     // Reload
     private bool _isReloading;
 
-    // Vibration
-    private IVibrateable _vibrationController;
+    private Transform _bulletParent;
     #endregion
 
     #region Unity Methods
@@ -80,8 +80,9 @@ public class Gun : MonoBehaviour, IFireable
         _muzzleFlash = GetComponent<MuzzleFlash>();
         _shotRemainingInBurst = burstCount;
         _roundsRemainingInMag = roundsPerMag;
-
         _vibrationController = FindObjectOfType<MyoVibrationController>();
+
+        _bulletParent = GameObject.Find("BulletParent").transform;
     }
 
     private void LateUpdate()
@@ -159,19 +160,19 @@ public class Gun : MonoBehaviour, IFireable
 
                 _roundsRemainingInMag -= 1;
                 _nextShotTime = Time.time + timeBetweenShots / 1000;
-                Projectile newProjectile = Instantiate(projectile, t.position, t.rotation) as Projectile;
+                Projectile newProjectile = Instantiate(projectile, t.position, t.rotation, _bulletParent) as Projectile;
                 newProjectile.SetSpeed(shotVelocity);
             }
 
             // Only muzzle flash and eject shell once
-            Instantiate(shell, shellEjectionPoint.position, shellEjectionPoint.rotation);
+            Instantiate(shell, shellEjectionPoint.position, shellEjectionPoint.rotation, _bulletParent);
             _muzzleFlash.Activate();
             transform.localPosition = Vector3.forward * Random.Range(minMaxRecoilAmount.x, minMaxRecoilAmount.y);
             _recoilAngle += Random.Range(minMaxRecoilAngle.x, minMaxRecoilAngle.y);
             _recoilAngle = Mathf.Clamp(_recoilAngle, 0, 30.0f);
 
             AudioManager.instance.PlaySound(shootAudio, transform.position);
-            // Trigger vibration
+
             _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Short);
         }
     }

@@ -113,15 +113,15 @@ public class AudioManager : MonoBehaviour
     private void TryGetVolumePrefs()
     {
         var temp_masterVolumePercent = PlayerPrefs.GetFloat("master vol");
-        Debug.Log("MASTER: " + temp_masterVolumePercent);
+        //Debug.Log("MASTER: " + temp_masterVolumePercent);
         if (temp_masterVolumePercent > 0f) masterVolumePercent = temp_masterVolumePercent;
 
         var temp_sfxVolumePercent = PlayerPrefs.GetFloat("sfx vol");
-        Debug.Log("SFX: " + temp_sfxVolumePercent);
+        //Debug.Log("SFX: " + temp_sfxVolumePercent);
         if (temp_sfxVolumePercent > 0f) sfxVolumePercent = temp_sfxVolumePercent;
 
         var temp_musicVolumePercent = PlayerPrefs.GetFloat("music vol");
-        Debug.Log("MUSIC: " + temp_musicVolumePercent);
+        //Debug.Log("MUSIC: " + temp_musicVolumePercent);
         if (temp_musicVolumePercent > 0f) musicVolumePercent = temp_musicVolumePercent;
     }
 

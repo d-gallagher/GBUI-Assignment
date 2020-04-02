@@ -89,6 +89,10 @@ public class MapGenerator : MonoBehaviour
 
         List<Coord> allOpenCoords = new List<Coord>(_allTileCoords);
 
+
+
+
+
         for (int i = 0; i < obstacleCount; i++)
         {
             Coord randomCoord = GetRandomCoord();
@@ -118,6 +122,8 @@ public class MapGenerator : MonoBehaviour
                 currentObstacleCount--;
             }
         }
+
+
 
         _shuffledOpenTileCoords = new Queue<Coord>(Utility.ShuffleArray(allOpenCoords.ToArray(), _currentMap.seed));
 
@@ -204,16 +210,22 @@ public class MapGenerator : MonoBehaviour
 
     public Transform GetRandomOpenTile()
     {
-        Coord randomCoord = _shuffledOpenTileCoords.Dequeue();
-        _shuffledOpenTileCoords.Enqueue(randomCoord);
-
-        return _tileMap[randomCoord.x, randomCoord.y];
+        while (true)
+        {
+            Coord randomCoord = _shuffledOpenTileCoords.Dequeue();
+            if (randomCoord.y >= _currentMap.numSafeRows)
+            {
+                _shuffledOpenTileCoords.Enqueue(randomCoord);
+                return _tileMap[randomCoord.x, randomCoord.y];
+            }
+        }
     }
 
     [Serializable]
     public class GameMap
     {
         public Coord mapSize;
+        public int numSafeRows = 4;
         [Range(0, 1)]
         public float obstaclePercent;
         public int seed;

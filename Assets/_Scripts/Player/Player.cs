@@ -16,6 +16,8 @@ public class Player : BaseLivingEntity, IMyoGesturable
     public float moveSpeed = 5;
     public Crosshairs crosshairs;
     public float minCrosshairDistance = 1.0f;
+    public float myoCrosshairDistance = 5.0f;
+    public bool isInvincible;
 
     [Header("Use Myo")]
     public bool isUsingMyo;
@@ -30,8 +32,9 @@ public class Player : BaseLivingEntity, IMyoGesturable
     private Camera _cam;
     private PlayerController _playerController;
     private GunController _gunController;
-    private RadialBeltController _beltController;
+    //private RadialBeltController _beltController;
     private IVibrateable _vibrationController;
+    private RadialBeltScript _radialBeltScript;
     #endregion
 
     #region Unity Methods
@@ -39,8 +42,10 @@ public class Player : BaseLivingEntity, IMyoGesturable
     {
         _playerController = GetComponent<PlayerController>();
         _gunController = GetComponent<GunController>();
-        _beltController = GetComponent<RadialBeltController>();
+        //_beltController = GetComponent<RadialBeltController>();
         _vibrationController = FindObjectOfType<MyoVibrationController>();
+
+        _radialBeltScript = GetComponentInChildren<RadialBeltScript>();
 
         _cam = Camera.main;
         FindObjectOfType<Spawner>().OnNewWave += OnNewWave;
@@ -66,10 +71,9 @@ public class Player : BaseLivingEntity, IMyoGesturable
         _playerController.Move(moveVelocity);
 
 
-        // Mouse Control
         if (!isUsingMyo)
         {
-            // Look Input
+            // Mouse Control
             Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             Plane groundPlane = new Plane(UnityEngine.Vector3.up, UnityEngine.Vector3.up * _gunController.GunHeight);
 
@@ -92,16 +96,22 @@ public class Player : BaseLivingEntity, IMyoGesturable
         }
         else
         {
-            Vector3 aimPoint = transform.position + (transform.forward * 100 * _gunController.GunHeight);
+            // Myo Control
+            Vector3 aimPoint = transform.position + (transform.forward * myoCrosshairDistance * _gunController.GunHeight);
+            crosshairs.transform.position = aimPoint;
             _gunController.Aim(aimPoint);
         }
 
-        // Weapon Input
+        // Primary Weapon Input
         if (Input.GetMouseButton(0)) _gunController.OnTriggerHold();
         if (Input.GetMouseButtonUp(0)) _gunController.OnTriggerRelease();
         if (Input.GetKeyDown(KeyCode.R)) _gunController.Reload();
-        if (Input.GetMouseButton(1)) _beltController.OnTriggerHold();
-        // testing weapon switch
+
+        // Special Weapon Input
+        if (Input.GetMouseButton(1)) _radialBeltScript.OnTriggerHold();
+        if (Input.GetMouseButton(1)) _radialBeltScript.OnTriggerRelease();
+
+        // Weapon Switch Input
         if (Input.GetKeyDown(KeyCode.X)) _gunController.OnSwitchWeapon(1);
         if (Input.GetKeyDown(KeyCode.Z)) _gunController.OnSwitchWeapon(-1);
 
@@ -135,8 +145,8 @@ public class Player : BaseLivingEntity, IMyoGesturable
         if (_lastPose == Thalmic.Myo.Pose.Fist && !isPrimaryFiring) _gunController.OnTriggerRelease();
 
         // Finger Spread
-        if (newPose == Thalmic.Myo.Pose.FingersSpread) _beltController.OnTriggerHold();
-        if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _beltController.OnTriggerRelease();
+        if (newPose == Thalmic.Myo.Pose.FingersSpread) _radialBeltScript.OnTriggerHold();
+        if (_lastPose == Thalmic.Myo.Pose.FingersSpread && !isSecondaryFiring) _radialBeltScript.OnTriggerRelease();
 
         // Wave In/Out
         if (newPose == Thalmic.Myo.Pose.WaveIn) _gunController.OnSwitchWeapon(1);
@@ -156,23 +166,23 @@ public class Player : BaseLivingEntity, IMyoGesturable
     protected override void Die()
     {
         AudioManager.instance.PlaySound("Player Death", UnityEngine.Vector3.zero);
-        //HapticFeedback("Long");
         base.Die();
         _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Long);
     }
 
     public override void TakeDamage(float damage)
     {
-        base.TakeDamage(damage);
+        if (!isInvincible)
+        {
+            base.TakeDamage(damage);
+        }
         _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Medium);
     }
-
     #endregion
 
     private void OnNewWave(int waveNumber)
     {
         health = startingHealth;
         _gunController.EquipGun(waveNumber - 1);
-        //_beltController.EquipBelt();
     }
 }
