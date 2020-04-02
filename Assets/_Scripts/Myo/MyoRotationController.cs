@@ -98,23 +98,26 @@ public class MyoRotationController : MonoBehaviour, IMyoGesturable
 
     private void ResetRotation()
     {
-        // Update references. This anchors the joint on-screen such that it faces forward away
-        // from the viewer when the Myo armband is oriented the way it is when these references are taken.
-        //
-        // _antiYaw represents a rotation of the Myo armband about the Y axis (up) which aligns the forward
-        // vector of the rotation with Z = 1 when the wearer's arm is pointing in the reference direction.
-        _antiYaw = Quaternion.FromToRotation(
-            new Vector3(_thalmicMyo.transform.forward.x, 0, _thalmicMyo.transform.forward.z),
-            new Vector3(0, 0, 1)
-        );
+        if (_targetRb != null && _thalmicMyo != null)
+        {
+            // Update references. This anchors the joint on-screen such that it faces forward away
+            // from the viewer when the Myo armband is oriented the way it is when these references are taken.
+            //
+            // _antiYaw represents a rotation of the Myo armband about the Y axis (up) which aligns the forward
+            // vector of the rotation with Z = 1 when the wearer's arm is pointing in the reference direction.
+            _antiYaw = Quaternion.FromToRotation(
+                new Vector3(_thalmicMyo.transform.forward.x, 0, _thalmicMyo.transform.forward.z),
+                new Vector3(0, 0, 1)
+            );
 
-        // _referenceRoll represents how many degrees the Myo armband is rotated clockwise
-        // about its forward axis (when looking down the wearer's arm towards their hand) from the reference zero
-        // roll direction. This direction is calculated and explained below. When this reference is
-        // taken, the joint will be rotated about its forward axis such that it faces upwards when
-        // the roll value matches the reference.
-        Vector3 referenceZeroRoll = RotationMaths.ComputeZeroRollVector(_thalmicMyo.transform.forward);
-        _referenceRoll = RotationMaths.RollFromZero(referenceZeroRoll, _thalmicMyo.transform.forward, _thalmicMyo.transform.up);
+            // _referenceRoll represents how many degrees the Myo armband is rotated clockwise
+            // about its forward axis (when looking down the wearer's arm towards their hand) from the reference zero
+            // roll direction. This direction is calculated and explained below. When this reference is
+            // taken, the joint will be rotated about its forward axis such that it faces upwards when
+            // the roll value matches the reference.
+            Vector3 referenceZeroRoll = RotationMaths.ComputeZeroRollVector(_thalmicMyo.transform.forward);
+            _referenceRoll = RotationMaths.RollFromZero(referenceZeroRoll, _thalmicMyo.transform.forward, _thalmicMyo.transform.up);
+        }
     }
 
     //// Extend the unlock if ThalmcHub's locking policy is standard, and notifies the given _thalmicMyo that a user action was
