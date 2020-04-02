@@ -10,6 +10,8 @@ public class RadialBeltScript : MonoBehaviour, IFireable
     public float shotVelocity = 35;
     public float cooldownTime = 3.0f;
 
+    public bool IsCoolingDown => _timeUntilNextShot > 0f;
+
     [Header("Audio")]
     public AudioClip shootAudio;
 
