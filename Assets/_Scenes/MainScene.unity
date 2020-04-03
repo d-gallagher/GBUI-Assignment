@@ -2748,12 +2748,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6829391616295236049}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &123232373 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
-    type: 3}
-  m_PrefabInstance: {fileID: 6829391616295236049}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &124901308
 GameObject:
   m_ObjectHideFlags: 0
@@ -21140,7 +21134,7 @@ MonoBehaviour:
     shakeConfig:
       shakeDuration: 0.3
       shakeIntensity: 0.1
-      shakeDecreaseFactor: 10
+      shakeDecreaseFactor: 1
   - feedbackType: 1
     vibrateConfig:
       vibrationType: 1
@@ -21148,7 +21142,7 @@ MonoBehaviour:
     shakeConfig:
       shakeDuration: 0.6
       shakeIntensity: 0.1
-      shakeDecreaseFactor: 1
+      shakeDecreaseFactor: 0.1
   - feedbackType: 2
     vibrateConfig:
       vibrationType: 2
@@ -21156,7 +21150,7 @@ MonoBehaviour:
     shakeConfig:
       shakeDuration: 1
       shakeIntensity: 0.1
-      shakeDecreaseFactor: 1
+      shakeDecreaseFactor: 0.1
 --- !u!4 &1243894990
 Transform:
   m_ObjectHideFlags: 0
@@ -28064,6 +28058,7 @@ MonoBehaviour:
   newWaveEnemyCount: {fileID: 122048786}
   newWaveBannerSpeed: 2.5
   newWaveBannerDelayTime: 1
+  anchorPosition: {x: 970, y: 825}
   scoreUI: {fileID: 673527672}
   healthBar: {fileID: 1984073952}
   healthUI: {fileID: 1358235298}
@@ -33082,101 +33077,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144523677}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &4316349143242514720
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 123232373}
-    m_Modifications:
-    - target: {fileID: 138330107135652036, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_Name
-      value: RadialBelt
-      objectReference: {fileID: 0}
-    - target: {fileID: 138330107135652037, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: -5886198105835640310, guid: 9fe6dd36974d9814c86d7257212db15d,
-        type: 3}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743030606824738514, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2722988835110047043, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4316349142801961386, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4316349143812179777, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7791418806971396994, guid: 10d0f61cce243f44586c276383a2af98,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 10d0f61cce243f44586c276383a2af98, type: 3}
 --- !u!1001 &6829391616295236049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33184,10 +33084,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 910569537, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
-      propertyPath: m_Name
-      value: RadialBeltMount
-      objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780338, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_Name
@@ -33198,21 +33094,6 @@ PrefabInstance:
       propertyPath: crosshairs
       value: 
       objectReference: {fileID: 1240120085}
-    - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
-        type: 3}
-      propertyPath: isUsingMyo
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
-        type: 3}
-      propertyPath: isInvincible
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
-        type: 3}
-      propertyPath: myoCrosshairDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_LocalPosition.x

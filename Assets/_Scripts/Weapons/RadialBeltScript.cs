@@ -20,6 +20,7 @@ public class RadialBeltScript : MonoBehaviour, IFireable
     private bool _triggerReleasedSinceLastShot;
 
     private Transform _bulletParent;
+    private IFeedbackController _feedbackController;
 
     #region Unity Methods
     private void Start()
@@ -30,6 +31,7 @@ public class RadialBeltScript : MonoBehaviour, IFireable
         _beltNotchDict = new Dictionary<Transform, MuzzleFlash>();
 
         _bulletParent = GameObject.Find("BulletParent").transform;
+        _feedbackController = FindObjectOfType<FeedbackController>();
 
         GameObject prefab;
         foreach (Transform child in transform)
@@ -80,8 +82,8 @@ public class RadialBeltScript : MonoBehaviour, IFireable
                 newProjectile.SetSpeed(shotVelocity);
                 m.Activate();
             }
-
             AudioManager.instance.PlaySound(shootAudio, transform.position);
+            _feedbackController.Shake(Enums.FeedbackType.Short);
         }
     }
     #endregion
