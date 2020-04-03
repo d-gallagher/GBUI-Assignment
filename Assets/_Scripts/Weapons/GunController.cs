@@ -9,6 +9,7 @@ public class GunController : MonoBehaviour
     #region Public Variables
     public Transform weaponMountPosition;
     public int selectedWeapon = 0;
+    public AudioClip weaponSwitchAudio;
     public Gun[] allGuns;
     public float GunHeight => weaponMountPosition.position.y;
     #endregion
@@ -79,6 +80,8 @@ public class GunController : MonoBehaviour
             }
             index++;
         }
+
+        AudioManager.instance.PlaySound(weaponSwitchAudio, transform.position);
     }
     #endregion
 }

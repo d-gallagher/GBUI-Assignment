@@ -34530,6 +34530,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1137348006, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
+      propertyPath: weaponSwitchAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: ebb15cc2551d37242b8940054718a3ca, type: 3}
     - target: {fileID: 6829391615241780338, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_Name
@@ -34540,6 +34544,11 @@ PrefabInstance:
       propertyPath: crosshairs
       value: 
       objectReference: {fileID: 1240120085}
+    - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
+        type: 3}
+      propertyPath: isUsingMyo
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34595,6 +34604,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7263019424218161204, guid: c8fed8f3cdf57c345a8d67e89190b033,
+        type: 3}
+      propertyPath: cooldownTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263019424218161204, guid: c8fed8f3cdf57c345a8d67e89190b033,
+        type: 3}
+      propertyPath: reloadAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: c4c09e36dbcf35e408a4ed970c0a73e2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8fed8f3cdf57c345a8d67e89190b033, type: 3}
 --- !u!1001 &8060936766318017735

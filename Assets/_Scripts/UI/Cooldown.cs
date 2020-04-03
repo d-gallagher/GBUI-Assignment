@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class Cooldown : MonoBehaviour
 {
+    [Header("Images")]
     public Image imageFireReady;
     public Image imageCooldown;
 
+
     private RadialBeltScript _radialBeltScript;
-    private Color col;
 
     private void Start()
     {

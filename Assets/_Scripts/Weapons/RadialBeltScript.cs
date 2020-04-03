@@ -14,11 +14,12 @@ public class RadialBeltScript : MonoBehaviour, IFireable
 
     [Header("Audio")]
     public AudioClip shootAudio;
+    public AudioClip reloadAudio;
 
     private float _timeUntilNextShot;
     private Dictionary<Transform, MuzzleFlash> _beltNotchDict;
     private bool _triggerReleasedSinceLastShot;
-
+    private bool _isReloading;
     private Transform _bulletParent;
     private IFeedbackController _feedbackController;
 
@@ -45,6 +46,12 @@ public class RadialBeltScript : MonoBehaviour, IFireable
     private void Update()
     {
         if (_timeUntilNextShot > 0) _timeUntilNextShot -= Time.deltaTime;
+       
+    }
+
+    private void FixedUpdate()
+    {
+        Reload();
     }
     #endregion
 
@@ -84,7 +91,17 @@ public class RadialBeltScript : MonoBehaviour, IFireable
             }
             AudioManager.instance.PlaySound(shootAudio, transform.position);
             _feedbackController.Shake(Enums.FeedbackType.Short);
+        _isReloading = true;
         }
+    }
+
+    private void Reload()
+    {
+        if (_isReloading)
+        {
+            _isReloading = false;
+            AudioManager.instance.PlaySound(reloadAudio, transform.position);
+        }        
     }
     #endregion
 }
