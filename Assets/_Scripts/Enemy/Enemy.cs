@@ -99,16 +99,13 @@ public class Enemy : BaseLivingEntity
     public override void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
     {
         AudioManager.instance.PlaySound("Impact", transform.position);
-        if (_damage >= health)
+        if (damage >= health)
         {
             // Invoke the action if not null.
             OnDeathStatic?.Invoke();
 
             AudioManager.instance.PlaySound("Enemy Death", transform.position);
-            // TODO: remove obsolete code
-#pragma warning disable CS0618 // Type or member is obsolete
-            Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)) as GameObject, deathEffect.startLifetime);
-#pragma warning restore CS0618 // Type or member is obsolete
+            Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)), deathEffect.main.startLifetime.constant);
         }
         base.TakeHit(damage, hitPoint, hitDirection);
     }
