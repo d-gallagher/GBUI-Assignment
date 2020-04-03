@@ -121,10 +121,6 @@ public class Enemy : BaseLivingEntity
         startingHealth = enemyHealth;
 
         // Appearance
-        //// TODO: remove obsolete code
-#pragma warning disable CS0618 // Type or member is obsolete
-        deathEffect.startColor = new Color(skinColor.r, skinColor.g, skinColor.b, 1);
-#pragma warning restore CS0618 // Type or member is obsolete
         _skinMaterial = GetComponent<Renderer>().material;
         _skinMaterial.color = skinColor;
         _originalColour = _skinMaterial.color;
