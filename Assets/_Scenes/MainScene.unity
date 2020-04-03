@@ -7149,25 +7149,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &419316526
-Animator:
-  serializedVersion: 3
+--- !u!114 &419316526
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419316525}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cae92c7a1bdb96747a037f1a37536f13, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ed97a5a2b9ee742bf998811fd2465a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &419316527
 Camera:
   m_ObjectHideFlags: 0
@@ -20970,6 +20963,74 @@ MonoBehaviour:
     m_Bits: 256
   dot: {fileID: 251894329}
   dotHighlightColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!1 &1243894988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1243894990}
+  - component: {fileID: 1243894989}
+  m_Layer: 0
+  m_Name: FeedbackController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1243894989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243894988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7c989df90c6b34089578064b68dfbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feedbackConfigs:
+  - feedbackType: 0
+    vibrateConfig:
+      vibrationType: 0
+      vibrateDuration: 0.3
+    shakeConfig:
+      shakeDuration: 0.3
+      shakeIntensity: 0.1
+      shakeDecreaseFactor: 10
+  - feedbackType: 1
+    vibrateConfig:
+      vibrationType: 1
+      vibrateDuration: 0.5
+    shakeConfig:
+      shakeDuration: 0.6
+      shakeIntensity: 0.1
+      shakeDecreaseFactor: 1
+  - feedbackType: 2
+    vibrateConfig:
+      vibrationType: 2
+      vibrateDuration: 1
+    shakeConfig:
+      shakeDuration: 1
+      shakeIntensity: 0.1
+      shakeDecreaseFactor: 1
+--- !u!4 &1243894990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243894988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.003000021, y: 1.3, z: 0.986}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1246776845
 GameObject:
   m_ObjectHideFlags: 0
@@ -21816,50 +21877,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291576061}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1291734719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1291734721}
-  - component: {fileID: 1291734720}
-  m_Layer: 0
-  m_Name: ShakeManager
-  m_TagString: ScreenShake
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1291734720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291734719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fe7e73b931e1a946996583be263b585, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animateCam: {fileID: 419316526}
---- !u!4 &1291734721
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291734719}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 29, z: -12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1292342398
 GameObject:
   m_ObjectHideFlags: 0
@@ -23955,9 +23972,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDeveloperMode: 1
   waves:
-  - enemyCount: 20
+  - enemyCount: 10
     isInfiniteWave: 0
-    timeBetweenSpawns: 1
+    timeBetweenSpawns: 1.5
     moveSpeed: 1.5
     hitsToKillPlayer: 3
     enemyHealth: 3

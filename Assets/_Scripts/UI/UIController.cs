@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour
     public Text newWaveEnemyCount;
     public float newWaveBannerSpeed = 2.5f;
     public float newWaveBannerDelayTime = 1;
+    public Vector2 anchorPosition = new Vector2(970, 825);
 
     [Header("Score")]
     public Text scoreUI;
@@ -114,7 +115,7 @@ public class UIController : MonoBehaviour
                 }
             }
 
-            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(970, 825, animatePercent);
+            newWaveBanner.anchoredPosition = Vector2.up * Mathf.Lerp(anchorPosition.x, anchorPosition.y, animatePercent);
             yield return null;
         }
     }

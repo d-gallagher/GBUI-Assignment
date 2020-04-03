@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour, IFireable
     private bool _triggerReleasedSinceLastShot;
     private int _shotRemainingInBurst;
     private int _roundsRemainingInMag;
-    private IVibrateable _vibrationController;
+    private IFeedbackController _feedbackController;
 
     // Recoil
     private Vector3 _recoilSmoothDampVelocity;
@@ -80,7 +80,7 @@ public class Gun : MonoBehaviour, IFireable
         _muzzleFlash = GetComponent<MuzzleFlash>();
         _shotRemainingInBurst = burstCount;
         _roundsRemainingInMag = roundsPerMag;
-        _vibrationController = FindObjectOfType<MyoVibrationController>();
+        _feedbackController = FindObjectOfType<FeedbackController>();
 
         _bulletParent = GameObject.Find("BulletParent").transform;
     }
@@ -173,7 +173,7 @@ public class Gun : MonoBehaviour, IFireable
 
             AudioManager.instance.PlaySound(shootAudio, transform.position);
 
-            _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Short);
+            _feedbackController.ShakeAndVibrate(FeedbackType.Short);
         }
     }
 

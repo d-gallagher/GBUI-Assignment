@@ -1,9 +1,7 @@
-﻿using Thalmic.Myo;
-using UnityEngine;
+﻿using UnityEngine;
 
 public sealed class MyoVibrationController : MonoBehaviour, IVibrateable
 {
-    public float timeBetweenShort = 0.3f;
     private ThalmicMyo _thalmicMyo;
     private float _timeUntilNext;
 
@@ -14,13 +12,12 @@ public sealed class MyoVibrationController : MonoBehaviour, IVibrateable
         if (!(_timeUntilNext <= 0f)) _timeUntilNext -= Time.deltaTime;
     }
 
-    public void Vibrate(VibrationType vibrationType)
+    public void Vibrate(VibrateConfig vibrateConfig)
     {
-        if (_timeUntilNext <= 0f)
+        if (_timeUntilNext <= 0f && _thalmicMyo != null)
         {
-            _thalmicMyo.Vibrate(vibrationType);
-            _timeUntilNext += timeBetweenShort;
+            _thalmicMyo.Vibrate(vibrateConfig.vibrationType);
+            _timeUntilNext += vibrateConfig.vibrateDuration;
         }
-
     }
 }

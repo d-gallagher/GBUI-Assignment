@@ -1,5 +1,4 @@
 ﻿using System;
-using Thalmic.Myo;
 using UnityEngine;
 
 /// <summary>
@@ -15,10 +14,8 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     #region Protected Variables
     public float health { get; protected set; }
     protected bool isDead;
+    protected IFeedbackController _feedbackController;
     #endregion
-
-    private Shake shake;
-    private ThalmicMyo _thalmicMyo;
 
     #region Events
     public event Action OnDeath;
@@ -27,8 +24,7 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
     #region Unity Methods
     protected virtual void Start()
     {
-        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
-        _thalmicMyo = FindObjectOfType<ThalmicMyo>();
+        _feedbackController = FindObjectOfType<FeedbackController>();
         health = startingHealth;
     }
     #endregion
@@ -41,34 +37,9 @@ public abstract class BaseLivingEntity : MonoBehaviour, IDamageable
 
         if (health <= 0 && !isDead)
         {
-            shake.CamShake();
             Die();
         }
     }
-
-    //public void Vibrate(VibrationType vibrationType) => _thalmicMyo.Vibrate(vibrationType);
-
-    //public virtual void HapticFeedback(string vibrationType)
-    //{
-    //    if (_thalmicMyo != null)
-    //    {
-    //        switch (vibrationType)
-    //        {
-    //            case "Short":
-    //                _thalmicMyo.Vibrate(VibrationType.Short);
-    //                break;
-    //            case "Medium":
-    //                _thalmicMyo.Vibrate(VibrationType.Medium);
-    //                break;
-    //            case "Long":
-    //                _thalmicMyo.Vibrate(VibrationType.Long);
-    //                break;
-    //            default:
-    //                break;
-    //        }
-    //    }
-    //}
-
 
     [ContextMenu("Self Destruct")]
     protected virtual void Die()

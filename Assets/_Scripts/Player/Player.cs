@@ -32,8 +32,6 @@ public class Player : BaseLivingEntity, IMyoGesturable
     private Camera _cam;
     private PlayerController _playerController;
     private GunController _gunController;
-    //private RadialBeltController _beltController;
-    private IVibrateable _vibrationController;
     private RadialBeltScript _radialBeltScript;
     #endregion
 
@@ -43,7 +41,7 @@ public class Player : BaseLivingEntity, IMyoGesturable
         _playerController = GetComponent<PlayerController>();
         _gunController = GetComponent<GunController>();
         //_beltController = GetComponent<RadialBeltController>();
-        _vibrationController = FindObjectOfType<MyoVibrationController>();
+        _feedbackController = FindObjectOfType<FeedbackController>();
 
         _radialBeltScript = GetComponentInChildren<RadialBeltScript>();
 
@@ -66,7 +64,7 @@ public class Player : BaseLivingEntity, IMyoGesturable
     private void Update()
     {
         // Move Input
-        UnityEngine.Vector3 moveInput = new UnityEngine.Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        UnityEngine.Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         UnityEngine.Vector3 moveVelocity = moveInput.normalized * moveSpeed;
         _playerController.Move(moveVelocity);
 
@@ -131,6 +129,14 @@ public class Player : BaseLivingEntity, IMyoGesturable
             //HapticFeedback("Long");
             TakeDamage(health);
         }
+
+
+        // Debugging - Feedback
+        if (Input.GetKeyDown(KeyCode.F10)) _feedbackController.ShakeAndVibrate(Enums.FeedbackType.Short);
+        if (Input.GetKeyDown(KeyCode.F11)) _feedbackController.ShakeAndVibrate(Enums.FeedbackType.Medium);
+        if (Input.GetKeyDown(KeyCode.F12)) _feedbackController.ShakeAndVibrate(Enums.FeedbackType.Long);
+
+
     }
     #endregion
 
@@ -165,9 +171,9 @@ public class Player : BaseLivingEntity, IMyoGesturable
     #region BaseLivingEntity Overrides
     protected override void Die()
     {
-        AudioManager.instance.PlaySound("Player Death", UnityEngine.Vector3.zero);
+        AudioManager.instance.PlaySound("Player Death", Vector3.zero);
         base.Die();
-        _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Long);
+        _feedbackController.ShakeAndVibrate(Enums.FeedbackType.Long);
     }
 
     public override void TakeDamage(float damage)
@@ -176,7 +182,7 @@ public class Player : BaseLivingEntity, IMyoGesturable
         {
             base.TakeDamage(damage);
         }
-        _vibrationController.Vibrate(Thalmic.Myo.VibrationType.Medium);
+        _feedbackController.ShakeAndVibrate(Enums.FeedbackType.Medium);
     }
     #endregion
 
