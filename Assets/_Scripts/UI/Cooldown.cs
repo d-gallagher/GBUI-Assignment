@@ -20,22 +20,11 @@ public class Cooldown : MonoBehaviour
     {
         if (_radialBeltScript.IsCoolingDown)
         {
-                
-            //// DB2C36 red
-            //if( ColorUtility.TryParseHtmlString("#DB2C36", out col)){
-            //    imageFireReady.color = col;
-            //}
             imageCooldown.fillAmount += 1 / _radialBeltScript.cooldownTime * Time.deltaTime;
-            if (imageCooldown.fillAmount >=1)
+            if (imageCooldown.fillAmount >= 0.9965995)
             {
                 imageCooldown.fillAmount = 0;
-
-                //if (ColorUtility.TryParseHtmlString("#95E01C", out col))
-                //{
-                //    imageFireReady.color = col;
-                //}
             }
-            // 95E01C green
         }
     }
 }
