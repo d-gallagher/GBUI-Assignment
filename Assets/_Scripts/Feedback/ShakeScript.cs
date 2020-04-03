@@ -17,7 +17,7 @@ public class ShakeScript : MonoBehaviour, IShakeable
 
     void Update()
     {
-        if (_timeToShake >= 0f)
+        if (_timeToShake >= 0f && _originalPos!=null)
         {
             transform.localPosition = _originalPos + Random.insideUnitSphere * _shakeConfig.shakeIntensity;
             _timeToShake -= Time.deltaTime * _shakeConfig.shakeDecreaseFactor;

@@ -46,7 +46,7 @@ public class ThalmicMyo : MonoBehaviour {
 
     // Vibrate the Myo with the provided type of vibration, e.g. VibrationType.Short or VibrationType.Medium.
     public void Vibrate (VibrationType type) {
-        _myo.Vibrate (type);
+        if(_myo!=null)_myo.Vibrate (type);
     }
 
     // Cause the Myo to unlock with the provided type of unlock. e.g. UnlockType.Timed or UnlockType.Hold.
