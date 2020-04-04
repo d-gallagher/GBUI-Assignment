@@ -355,11 +355,21 @@ Myo Armband\\
 % References
 \chapter{References}
 \label{sec:References}
-\href{https://unity3d.com/get-unity/download}{Download Unity}
-\href{https://support.getMyo.com/hc/en-us/articles/360018409792-Myo-Connect-SDK-and-firmware-downloads}{Myo SDK and resources}
-\href{https://github.com/d-gallagher/GBUI-Assignment}{Github repository fit this project}
+\href{https://developerblog.Myo.com/author/thalmic-labs/}{Thalmic Labs' Myo Gesture Control Armband}\\
+\href{https://support.getMyo.com/hc/en-us/articles/360018409792-Myo-Connect-SDK-and-firmware-downloads}{Myo SDK and resources}\\
+\href{https://support.getMyo.com/hc/en-us/articles/360019733832}{Myo Marketplace}\\
+\href{https://www.researchgate.net/publication/324889539}{Technical Features and Functionalities of Myo Armband}\\
+\href{https://iopscience.iop.org/article/10.1088/1742-6596/1279/1/012040/pdf}{A Wearable Rehabilitation System to Assist Partially Hand ParalyzedPatients in Repetitive Exercises}\\
+\href{https://ieeexplore.ieee.org/document/7439933}{MYO Armband for physiotherapy healthcare: A case study using gesture recognition application}\\
+\href{https://en.wikipedia.org/wiki/Kinect}{Microsoft Kinect}\\
+\href{https://www.ncbi.nlm.nih.gov/pubmed/22254685}{Development and evaluation of low cost game-based balance rehabilitation tool using the Microsoft Kinect sensor}\\
+\href{https://developer.leapmotion.com/}{Leap Motion Controller}\\
+\href{http://jpirker.com/wp-content/uploads/2013/09/hcii2017-gesture-based.pdf}{Gesture-based Interactions in Video Games with the Leap Motion Controller}\\
+\href{https://unity3d.com/get-unity/download}{Unity Engine}\\
+\href{https://godotengine.org/}{Godot Engine}\\
+\href{https://github.com/d-gallagher/GBUI-Assignment}{Github repository for this project}\\
 
-
+\subsection{Reference Images}
 \begin{figure}
     \centering
     \includegraphics[width=15cm]{images/myo_radialFire.PNG}
