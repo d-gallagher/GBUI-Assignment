@@ -16926,24 +16926,24 @@ MonoBehaviour:
     hitsToKillPlayer: 5
     enemyHealth: 3
     skinColor: {r: 0.17928976, g: 0.7396815, b: 0.745283, a: 0.5019608}
-  - enemyCount: 20
+  - enemyCount: 30
     isInfiniteWave: 0
     timeBetweenSpawns: 1
     moveSpeed: 1.8
     hitsToKillPlayer: 4
     enemyHealth: 4
     skinColor: {r: 1, g: 0.9696857, b: 0, a: 0.5019608}
-  - enemyCount: 25
+  - enemyCount: 50
     isInfiniteWave: 0
     timeBetweenSpawns: 0.8
-    moveSpeed: 1
+    moveSpeed: 2
     hitsToKillPlayer: 3
     enemyHealth: 4
     skinColor: {r: 1, g: 0.25382882, b: 0, a: 0.5019608}
-  - enemyCount: 30
-    isInfiniteWave: 0
+  - enemyCount: 150
+    isInfiniteWave: 1
     timeBetweenSpawns: 0.5
-    moveSpeed: 0.8
+    moveSpeed: 2
     hitsToKillPlayer: 2
     enemyHealth: 5
     skinColor: {r: 0, g: 0.2212646, b: 1, a: 0.5019608}
@@ -24062,7 +24062,7 @@ PrefabInstance:
     - target: {fileID: 6829391615241780341, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}
       propertyPath: isInvincible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6829391615241780346, guid: c8fed8f3cdf57c345a8d67e89190b033,
         type: 3}

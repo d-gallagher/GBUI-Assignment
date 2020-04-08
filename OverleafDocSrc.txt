@@ -16,16 +16,17 @@
 
 \title{Thalmic Labs - Myo gesture control armband. Exploring Myo's potential as a game controller}
 \author{David Gallagher, Justin Servis}
-\subtitle{Gesture based Isometric Shooter game using the Myo Thalmic Armband}
+\subtitle{Gesture based Isometric Shooter game using the Myo Thalmic Armband\\
+\href{https://github.com/d-gallagher/GBUI-Assignment}{Github repository for this project}}
 \titlehead{\centering\includegraphics[width=6cm]{images/Myo-armband.png}}
 \date{February 2020}
 
 \begin{document}
 \maketitle
 
-% \begin{abstract}
-% A gesture based UI project which utilises the Myo Thalmic Armband to control a gun wielding 'loose cannon' type guy who's got guns, bullets, a belt that fires bullets.. and a taste for carnage..
-% \end{abstract}
+\begin{abstract}
+A gesture based UI project utilising Thalmic Labs Myo Armband technology as a game controller. Control a gun wielding 'loose cannon' type guy who's got guns, bullets, a belt that fires bullets.. and a taste for carnage..
+\end{abstract}
 
 \tableofcontents
 % Overview of the Project
