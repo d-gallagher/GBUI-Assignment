@@ -4,7 +4,7 @@
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
-
+\usepackage{caption}
 %% Sets page size and margins
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 
@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
 
 \title{Thalmic Labs - Myo gesture control armband. Exploring Myo's potential as a game controller}
 \author{David Gallagher, Justin Servis}
@@ -58,7 +59,7 @@ Our intention is to examine whether the Myo can really replace something as reli
     \item Is it reliable enough to replace other gaming controllers..
 \end{itemize}
 
-\subsection{Game Concept}
+\section{Game Concept}
 \label{sec:GameConcept}
 Single player game in which the player controls a character. The player will face enemies who are literally programmed to attack on sight and must 'shoot first and ask questions later'. The player will wear the Myo armband, which recognises a number of gestures outlined in \hyperref[sec:Gestures&Poses]{Gestures and Poses}. The character has access to a series of guns and a radical belt which fires bullets in multiple directions at once, decimating the wave of approaching enemies.\\
 The player will face waves of enemies across a series of maps. Each map progresses with increasing difficulty, as more enemies populate subsequent maps. The player is free to swap weapons as they try to eliminate the waves of enemies, making use of the secondary fire option, and using the terrain to their advantage to attempt to slow the enemies approach.\\
@@ -69,7 +70,7 @@ The game serves as a platform to test using 5 of the Myo's gestures, the vibrati
 The use of gestures in this project are based on the well designed and developed gestures which are provided with the Myo Thalmic Armband. We knew from the outset that we would want to use two input devices. The gestures and how they are used in relation to controlling the player character are further explained in \hyperref[sec:Gameplay&Controls]{Gameplay and Controls}.
 % Gestures should be intuitive to the user, where possible, and feel appropriate for the purpose for which they are used.\\
 % In our application we have designed the game around the 5 gestures provided with the Myo Armband.\\
-\subsection{Gestures and Poses}
+\section{Gestures and Poses}
 \label{sec:Gestures&Poses}
 % Research about the use of gestures and how they relate to actions performed in game
 \begin{itemize}
@@ -107,7 +108,7 @@ The use of gestures in this project are based on the well designed and developed
 % You are not limited to the hardware listed above.  If you have your own hardware, or hardware simulator that you wish to use, then feel free.  The purpose of each piece of hardware should be given with a comparison to other options available.
 \chapter{Hardware used in creating the application}
 \label{sec:Hardware-All}
-\subsection{Thalmic Labs - Myo Armband}
+\section{Thalmic Labs - Myo Armband}
 In this Project our hardware is the Myo Armband from Thalmic Labs. Myo has in-built gestures as outlined in \hyperref[sec:Gestures&Poses]{Gestures and Poses} which we will use to control our player character, replacing the role of the mouse in a generic keyboard and mouse style control scheme.\\
 We will leverage the Gyroscope in order to replicate moving the mouse, while the gestures will perform specific actions, each of which will be outlined in the section on  \hyperref[sec:Gameplay&Controls]{Gameplay and Controls}.\\
 We referred also to the \href{https://www.researchgate.net/publication/324889539}{Technical Features and Functionalities of Myo Armband} which has a detailed breakdown of the components in the armband.In particular the section on 'Myo armband: functionalities and technical features'.\\
@@ -117,13 +118,13 @@ The inclusion of a vibration motor allows the armband to alert users to events, 
 The armband transmits information wirelessly over Bluetooth via a  BLE NRF51822 chip to communicate with compatible, connected devices. The range of this connection differes depending on the environment but is generally accepted to be in the range of 10 metres indoors to 50 metres outdoor.\\
 Myo also streams the raw EMG and IMU data. There are a litany of research papers available which leverage the Myo armbands EMG and IMU extensively in the field of \href{https://iopscience.iop.org/article/10.1088/1742-6596/1279/1/012040/pdf}{rehabilitation} and \href{https://ieeexplore.ieee.org/document/7439933}{recovery}.\\
 
-\subsection{Alternatives to the Myo}
+\section{Alternatives to the Myo}
  Other hardware options to use for a game of this nature are not limited to devices with an IMU, however a gyroscope is very useful for controlling the movement of a character.
-\subsubsection{Microsoft Kinect}
+\subsection{Microsoft Kinect}
 It would be feasible to use a \href{https://en.wikipedia.org/wiki/Kinect}{Kinect}, using it's camera and adding your own custom gestures to control your game character.
 The Kinect contains three vital pieces that work together to detect your motion and create your physical image on the screen: an RGB color VGA video camera, a depth sensor, and a multi-array microphone. Kinect shows great promise in the area of rehabilitation. The authors of \href{https://www.ncbi.nlm.nih.gov/pubmed/22254685}{Development and evaluation of low cost game-based balance rehabilitation tool using the Microsoft Kinect sensor.} identify the increasing popularity of health and fitness based games using Kinect and other controllers capable of motion detection. Their paper explores and assess "an interactive game-based rehabilitation tool for balance training of adults with neurological injury".
 We believe the Kinect would offer a more active alternative to the Myo, or the Leap, as it's a motion detector using a camera system it can recognize full body gestures such as waving arms, jumping up and down, ducking.. 
-\subsubsection{Leap Motion Controller}
+\subsection{Leap Motion Controller}
 \href{https://developer.leapmotion.com/}{Leap Motion Controller} is another promising piece of hardware for use in gaming.
 Leap Motion consists of two cameras and three infrared LEDs. These track infrared light with a wavelength of 850 nanometers, which is outside the visible light spectrum.
 Due to its wide angle lenses, the device has a large interaction space of about eight cubic feet while it’s viewing range is limited to roughly 2 feet (60 cm) above the device.
@@ -133,33 +134,150 @@ As with any motion detecting technology, the Leap, Myo or Kinect to name a few, 
 
 % the full architecture for the solution, including the class diagrams, any data models, communications and distributed elements that you are creating.The architecture must make sense when the gestures and the hardware are combined. Justification is necessary in the documentation for this.You need to include a list of relevant libraries that you used in the project.
 \chapter{Architecture for the solution}
-\subsection{Classes}
-\begin{itemize}
-    \item AudioManager - In game audio controller.
-    \item BaseLivingEntity - Abstract class for any living entity in game. (Player, Enemy)
-    \item Crosshairs - TBD - UI gun crosshair.
-    \item Enemy - Enemy behaviour script, movement, attacking and chasing.
-    \item EnemyWave - Controller for waves of enemy spawns.
-    \item Enums - States for enemy behaviour (Idle, Attacking, etc), Gun fire mode (Single, Burst, ect).
-	\item Gun - Gun instance represents anything that is a gun.
-	\item GunController - Gun manager for 'guns' in the game. Manages starting gun and available guns.
-	\item IDamageable - Interface for applying damage to any damageable game object.
-	\item MapGenerator - Generates map of size, populates with obstacles of size and with percentage of occurrance.
-	\item Menu - UI Menu for starting and quitting the game, options for screen resolution and volume controls.
-	\item MusicManager - Manage the in-game menu and gameplay music.
-	\item MuzzleFlash - Muzzle flash for guns, container for sprites to display muzzleflash upon firing a gun.
-	\item Player - Player behaviour script. Player abilities such as shooting.
-	\item PlayerController - Player controller, player movement controls configuration.
-	\item Projectile - Defines a projectile, handles collisions with other objects, destroys self after time.
-	\item ScoreKeeper - TBD - Keeping player score
-	\item Shell - Defines and behaviour for shells ejected from gun barrel after firing projectiles.
-	\item SoundLibrary - Audioclips for firing projectiles, dieing, bullet impact. Selects random appropriate clip for a list.
-	\item Spawner - Manage spawning mechanics and locations for waves of enemies.
-	\item UIController - Game UI manager. Handles Game over scenario.
-	\item Utility - Generates a seed to randomize the appearance of generated maps from MapGenerator.
-\end{itemize}
-\subsection{Class Diagram}
-\subsection{temp}
+
+\section{Classes}
+This section contains an overview of the class structure used within the application. It is not intended to be exhaustive and encompass every aspect of the game, rather the main systems and how the components within those systems interact with each other. Each section below refers to one of the UML diagrams from section 5.0.2.
+
+\subsection{Input} %  - figure \ref{fig:UML_Input}
+
+\noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[keepaspectratio=true,scale=0.38]{uml/UML_Input.png}}
+\captionof{figure}{UML for Input System}\label{UML_Input}%      only if needed  
+\end{minipage}
+
+\begin{description}
+    \item \textbf{ThalmicMyo} - provided by the Thalmic Myo SDK, this class is the representation of a Myo device within the Unity application. It maintains an instance of the Myo C Sharp class which is used to interact with the Myo device.
+    
+    \item \textbf{IMyoGesturable} - an interface which defines behaviours for entities which can be controlled by the Thalmic Myo gesture recognition funcionality through the MyoGestureController GameObject. Any implementing class is expected to add the implemented methods to the static events of the MyoGestureController. These methods will then be invoked once the related event has been fired.
+    
+    \item \textbf{MyoGestureController} - handles the Myo gesture recognition functionality. It maintains a reference to the ThalmicMyo GameObject and can access properties from this object to determine when a new gesture is performed by the user or when a gesture is being held by the user. The check for the current gesture recognised by the Myo is performed each frame in the Update method.
+    \begin{itemize}
+        \item When a new gesture is recognised by the Myo, the OnNewPose event is invoked.
+	    \item When a gesture is recognised as being held by the Myo, the OnHoldPose event is invoked.
+    \end{itemize}
+	By using the two static events above, any implementations of IMyoGesturable will also have their OnNewPose or OnHoldPose methods called during the appropriate frames.
+	
+	\item \textbf{MyoRotationController} - handles the reading of the current rotation from the Myo device, calculates the rotation for Unity to use and applies this rotation to the 'target' GameObject (i.e. the Player entity). It maintains a reference to the ThalmicMyo GameObject from which it can read the rotational values.
+	
+	Through its implementation of IMyoGesturable, when a new Double-Tap gesture is detected, the target's rotation is reset to the 12 o'clock position on screen regardless of the current rotation of the Myo. This allows for a correction to be applied and the user to use the device in a more comfortable position.
+\end{description}
+
+\pagebreak
+\subsection{Feedback System} % - figure \ref{fig:UML_Feedback}
+This system is designed as a set of Plain Old CLR Objects (POCOs) for configurations and a set of interfaces to define the expected functionality. In the scope of this project, the use of these interfaces is not entirely necessary but it would allow for the easy addition of another device in future. It would be a simple task to create new implementations of the required interfaces, e.g. in the case of IVibrateable, if a different device with haptic feeedback was to be used instead of the Myo.
+
+\noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[keepaspectratio=true,scale=0.37,angle=270]{uml/UML_Feedback.png}}
+\captionof{figure}{UML for Feedback System}\label{UML_Feedback}%      only if needed  
+\end{minipage}
+
+\begin{description}
+    \item \textbf{VibrateConfig} - Plain Old CLR Object (POCO) class which describes a vibration configuration. A vibration configuration is composed of a type and duration, e.g. (Short, 300ms)
+
+    \item \textbf{ShakeConfig} - similar to a VibrateConfig this is also just a POCO class which describes a shake configuration. A shake configuration is composed of a duration, intensity and a decrease factor.
+
+    \item \textbf{FeedbackConfig} - another POCO class which is composed of a FeedbackType enum, a VibrateConfig and ShakeConfig.
+
+    \item \textbf{IShakeable} - interface which contains a single Shake method which takes a ShakeConfig object as its argument. This should be implemented by any class which needs the functionality to shake the screen as a form of user feedback.
+
+    \item \textbf{IVibrateable} - interface which contains a single Vibrate method which takes a VibrateConfig object as its argument. This should be implemented by any class which needs the functionality to perform vibration as a form of user feedback.
+
+    \item \textbf{MyoVibrationController} - an implementation of IVibrateable for the Myo device.
+
+    \item \textbf{ShakeScript} - an implementation of IShakeable to shake the screen.
+
+    \item \textbf{IFeedbackController} - interface which defines the feedback operations which can be performed: Shake, Vibrate and ShakeAndVibrate.  Each method takes a parameter of enumerated type FeedbackType of which there are three values: Short, Medium and Long.  This functionality has been abstracted to an interface to ease the support of multiple different devices with haptic feedback as desired.
+
+    \item \textbf{FeedbackController} - implementation of IFeedbackController for Myo haptic and screen shaking feedback. The typical usage involves a single instance of this in the game scene, which other objects can obtain a reference to and invoke the IFeedbackController methods as needed.
+\end{description}
+
+\subsection{Weapons}%  - figure \ref{fig:UML_LivingEntities}
+
+\noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[keepaspectratio=true,scale=0.38]{uml/UML_LivingEntities.png}}
+\captionof{figure}{UML for Living Entities and Weapons}\label{UML_LivingEntities}%      only if needed  
+\end{minipage}
+\begin{description}
+    \item \textbf{Projectile} - represents any projectile fired from any weapon, be it a Gun weapon or the RadialBelt weapon. When a projectile collides with an IDamageable entity, it will call that entity's implementation of the IDamageable.TakeHit method. Once time has passed in the game equal to the projectile's lifetime variable, the projectile is destroyed so as to not waste memory.
+    Three public methods are present which allow the projectile's damage, speed and penetrating variables to be set on instantiation.
+    
+    \item \textbf{Shell} - the script component of a GameObject which is instantiated each time a Gun weapon is fired. This is designed to appear as a bullet casing being ejected from the weapon and once its lifetime has expired, it is destroyed within the game.
+	
+	\item \textbf{Gun} - represents one of the Player's main weapons in the game. It is an implementation of IFireable and handles firing, reloading and weapon sounds.  Public variables are present so that guns have different rates of fire, reloading times, magazine sizes, sounds, etc.  
+	Its methods are typically called from the GunController component of the Player entity. A gun can have multiple Projectile spawn points, e.g. a shotgun weapon has multiple pellets which are each spawned from a projectile spawn point.
+	
+    \item \textbf{IFireable} - interface which defines behaviour similar to a weapon's trigger through two methods - OnTriggerHold and OnTriggerRelease.
+    
+    \item \textbf{RadialBelt} - represents the Player's secondary weapon which can be fired only once before initiating a cooldown timer. Radial Belt notches act the same as projectile spawn points, with each one spawning a separate projectile. Similar to Gun, it is also an implementation of IFireable.
+    Projectiles fired from this weapon are penetrating, i.e. they may travel through an enemy after applying damage and continue on to damage any more enemies which they collide with.
+\end{description}
+
+
+\subsection{Living Entities} % - figure \ref{fig:UML_LivingEntities}
+\begin{flushleft} The UML for this section can be seen in Fig. \ref{UML_LivingEntities}
+\end{flushleft}
+\begin{description}
+    \item \textbf{IDamageable} - an interface which defines behaviours for entities which can be damaged. Currently, Enemy entities can take damage from projectiles fired by any of the Player entity's weapons and the Player entity can take damage from a direct hit from an Enemy or by falling off the playing map.
+    
+    \item \textbf{BaseLivingEntity} - abstract class which is the base class for living entities within the application, i.e. Player and Enemy.  Keeps track of the entity's health and whether the entity is currently 'alive'.
+    
+    This class is an implementation of IDamageable and since BaseLivingEntity is abstract, both methods are implemented but marked as virtual to allow overriding where required.
+
+    An implementation of IFeedbackController is referenced which allows for any subtype to initiate user feedback (see Feedback Section)
+
+    \item \textbf{Player} - The Player class adds a lot of functionality to its supertype, most notably the ability for the Player entity to receive input from the user which allows it to be controlled on screen. This class holds a number of references to script components which facilitate certain behaviours:
+    \begin{itemize}
+        \item PlayerController - controls the Player entity's movement and rotation through the invocation of its two public methods: Move and LookAt.
+        
+        \item GunController - controls the firing, reloading and switching of the Player's main weapons. After performing checks, this funcionality is generally delegated to the equipped Gun instance.
+        
+        \item RadialBeltScript - controls the firing and cooldown timer of the Player's secondary weapon. Similar to the relationship between Gun and GunController, this script delegates firing to the RadialBelt GameObject.
+    \end{itemize}
+	
+	\item \textbf{Enemy} - In contrast to the Player class, each Enemy entity's movement is controlled by Unity's NavMeshAgent class which is an AI implementation. Each enemy entity has a target variable of type BaseLivingEntity (which is set to the Player) and will track and home in on this target when instantiated. Once an enemy is within a certain distance of the target, it will attack and call the target's IDamageable.TakeDamage method. 
+\end{description}
+
+\pagebreak
+\subsection{Other Classes}
+    \subsubsection{Sound and Effects}
+    \begin{itemize}
+        \item \textbf{AudioManager} - In game audio controller for managing audio sources and volumes.
+    	\item \textbf{MusicManager} - Manages the in-game menu and gameplay music.
+    	\item \textbf{SoundLibrary} - Central store for all AudioClip used in the game, e.g. sounds for firing projectiles, dying, bullet impact. Allows for retrieval of sound effects by name.
+    	\item \textbf{MuzzleFlash} - Muzzle flash effect for weapons. A container for sprites to display MuzzleFlash upon firing a gun.
+    \end{itemize}
+    
+    \subsubsection{Map Generator and Enemy Spawning}
+    \begin{itemize}
+        \item \textbf{EnemyWave} - POCO class which reperesents a wave of enemies in the game. Each level of the game is defined by an instance of this class.
+    	\item \textbf{MapGenerator} - Utility to generate a map of size and populates it with obstacles of size and with percentage of occurrence.
+    	\item \textbf{Spawner} - Manage spawning mechanics and locations for enemies in each wave.
+    \end{itemize}
+
+    \subsubsection{UI and Menus}
+    \begin{itemize}
+        \item \textbf{Crosshairs} - Controls the display and rotation of the crosshairs GameObject on the UI. The position of the crosshairs is handled by the Player class.
+    	\item \textbf{UIController} - The main game UI manager. Handles scene transition, displaying or hiding various UI elements such as the Game Over screen, updating the score in the UI and animating the New Wave popup.
+    	\item \textbf{Menu} - UI Menu for starting and quitting the game, options for screen resolution and volume controls.
+    	\item \textbf{ScoreKeeper} - Keeps track of the score in the game.
+    \end{itemize}
+    
+    \subsubsection{Utility}
+    \begin{itemize}
+        \item \textbf{Enums} - Definitions of states for enemy behaviours (Idle, Chasing, Attacking), gun firing modes (Single, Burst, Auto), audio channels (Master, Music, Sfx) and durations of feedback (Short, Medium, Long).
+    	\item \textbf{Utility} - Generates a seed to randomize the appearance of generated maps from MapGenerator.
+    	\item \textbf{RotationMaths} - Contains static methods for performing rotational manipulations of vectors. Used by the MyoRotationController class to apply the rotational data from the Myo device to the Player GameObject.
+    	
+	\end{itemize}
+
+\section{Class Diagrams}
+Full size class diagrams available \href{https://github.com/d-gallagher/GBUI-Assignment/tree/master/ClassDiagrams}{here} in the github repository.
 
 % Explanation for the poses used in the game
 \chapter{Game play and Controls}
@@ -167,7 +285,7 @@ As with any motion detecting technology, the Leap, Myo or Kinect to name a few, 
 Character movement is a mixture of keyboard input and Myo armband.
 The Myo armband is the perfect candidate hardware to use for a shooting game. It's worn on the users arm and interacting with it requires the user to perform hand gestures. We have put careful consideration into which hand gestures are used for which in-game action and further outline these decisions in the section on \hyperref[sec:Gameplay&Controls-Actions]{Actions}.\\
 The fact you would hold a gun in your hand and that you wear the Myo on your arm is not lost on us, this factored into us choosing the Myo. We feel this adds a layer of realism to the game, which is important in providing the experience we were aiming for.\\
-\subsection{Movement}
+\section{Movement}
 Arrow keys and WASD keys for character navigation in a game environment are ubiquitous in the vast majority of pc games, similar to using thumb-sticks on a game controller has become more ubiquitous since the release of the first playstation/original xbox. Though thumbsticks existed before the release of Sony and Microsoft's consoles, their popularity really fastened the concept into the game controller control scheme. As the Myo has a gyroscope to capture rotation in real time we decided to use the armband to manage the character rotation. In a game of this nature, the rotation would often be controlled by a thumb-stick or a mouse.
 \begin{itemize}
     \item Up Arrow / W key.
@@ -192,7 +310,7 @@ Arrow keys and WASD keys for character navigation in a game environment are ubiq
     \end{itemize}
 \end{itemize}
 
-\subsection{Actions}
+\section{Actions}
 \label{sec:Gameplay&Controls-Actions}
 Assigning intuitive gestures to appropriate actions is important for the player to quickly absorb the control system and immerse themselves in the game play. We are replacing some well understood controls for character movement and actions, with the use of arm tracking and Myo gestures.\\
 Where a player might normally expect to use a key such as 'E', or 'mouse button 1', or a game pad button such as 'X' or 'Y' to perform an in game action - here they will be replaced with gestures recognised by the Myo.
@@ -200,26 +318,52 @@ Where a player might normally expect to use a key such as 'E', or 'mouse button 
     \item Fingers Spread
     \begin{itemize}
         \item \hyperref[fig:FireSecondary]{Fire secondary weapon}. 
+        \item \noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[width=10cm]{images/myo_radialFire.PNG}}
+\end{minipage}
+
     \end{itemize}
     \item Fist
         \begin{itemize}
         \item \hyperref[fig:FirePrimary]{Fire primary weapon}. 
+                \item \noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[width=10cm]{images/myo_priFire.PNG}}
+\end{minipage}
     \end{itemize}
     \item Wave In
         \begin{itemize}
         \item \hyperref[fig:prvWpn]{Switch to previous weapon}.
+                \item \noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[width=10cm]{images/myo_prvWpn.PNG}}
+\end{minipage}
     \end{itemize}
     \item Wave Out
         \begin{itemize}
         \item \hyperref[fig:nxtWpn]{Switch to next weapon}.
+                \item \noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[width=10cm]{images/myo_nxtWpn.PNG}}
+\end{minipage}
     \end{itemize}
     \item Double Tap
         \begin{itemize}
         \item \hyperref[fig:resetAim]{Reset Player aim direction}.
+                \item \noindent%
+\begin{minipage}{\linewidth}% to keep image and caption on one page
+\makebox[\linewidth]{%        to center the image
+  \includegraphics[width=10cm]{images/myo_resetAim.PNG}}
+\end{minipage}
     \end{itemize}
 \end{itemize}
 
-\subsection{Using Myo gestures.}
+\section{Using Myo gestures.}
 Careful consideration went into planning which gesture would be assigned to which in-game action.\\
 In our \hyperref[sec:Gameplay&Controls-Actions]{Actions} section we outline the gestures and actions relationship in our control scheme. The most intuitive use of the gestures are those that the player only needs to think about once and can then perform as though they had always known that 'this gesture performs this action'.\\
 The following is a list of Myo gestures and examples of an intuitive behaviour to attach to that gesture. This should be viewed in the context of a game, but is also appropriate for other software or hardware applications. In theory, anyone could argue a wide range of actions could apply to this list of gestures, but we've kept it concise and are only referring to well understood intuitive gestures.
@@ -274,7 +418,7 @@ The 'Wave In' and 'Wave Out' poses are used to cycle forwards and backwards thro
 Finally the 'Double Tap Middle finger to Thumb' pose. This is used in game to reset the aim direction of the player. We had to assign one of the poses to this action as we felt the game really needed this feature. For reasons outlined in the \hyperref[sec:conclusions&reccomendations]{conclusions and reccommendations} section regarding some unexpected behaviour from the Myo, there was a need to be able to make the player character aim to 12 O'Clock. In some instances when beginning the game the player rotation would be pointing the wrong direction, or upon changing the map we also observed this behaviour.\\ 
 We assigned the poses on order of what we thought would be the most fitting application and were left with the double tap pose, so it became the reset aim direction action. Not the most intuitive, but still a useful gesture in terms of gameplay.
 
-\subsection{Haptic Feedback}
+\section{Haptic Feedback}
 Myo provides haptic feedback in the form of vibration with three vibrationTypes. We will be leveraging these to provide feedback to the player about in game events, like taking damage from the enemies, offloading projectiles from a weapon, and player death, adding to player engagement.\\
 Haptic feedback is common in many games, and many games controllers have a vibration motor in them. It would be a shame not to put the Myo's vibration to work! The following is a breakdown of our approach to using the vibration as a form of player feedback, we coupled it with screen shake to further enhance the effect of the feedback to the player in certain situations.\\\\
 \emph{\textbf{General Outline of Haptic Feedback and Screen Shake}}\\
@@ -291,13 +435,13 @@ Haptic feedback is common in many games, and many games controllers have a vibra
     \item Long   - N/A.
 \end{itemize}
 
-\subsection{Player Engagement}
+\section{Player Engagement}
 Considering fun in games is important to keep the player interested, invested and immersed in your game.\\
 \hyperlink{http://algorithmancy.8kindsoffun.com/}{8 Types of Fun in Games} identifies key points in this regard and explores different types of fun a game can deliver to a player. 
 While Myo Isometric Shooter will incorporate most of the points made to some degree, the following are the key focus points:\\
-\subsubsection {Sensation}
+\subsection {Sensation}
 Game as sense-pleasure.\\ The player will get a sense of fulfillment and enjoyment from learning the game mechanics during the early stages and then being put through their paces as the game progresses. Haptic feedback may also play a role in this regard as the Myo has vibration available, and will alert the user to having been attacked.  
-\subsubsection {Challenge}
+\subsection {Challenge}
 Think outside the box to complete the level.\\ Challenge will be core to the game feel and design. The player has a gun.. but it doesn't shoot bullets. To defeat the enemies the player will need to throw objects at them. \\
 
 % Test Plan
@@ -310,7 +454,7 @@ The software will be deemed good enough to deliver after it is noted that the ch
 % Conclusions are what you have learned from this project and the associated research.  Recommendations are what you would do differently if you were to undertake the project again.  The Reflective Piece–what I learned and “enjoyed”! This gives scope for a critical evaluation of the project and the objective that you tried to achieve.
 \chapter{Conclusions and Recommendations}
 \label{sec:conclusions&reccomendations}
-\subsection{A Gesture based Myo project}
+\section{A Gesture based Myo project}
 We had numerous ideas in terms of which direction to take this project. 
 \begin{itemize}
     \item As remote control.
@@ -329,7 +473,7 @@ We had numerous ideas in terms of which direction to take this project.
 \end{itemize}
 Given that we settled on building a game and using the Myo as a controller, we are confident that we produced an ideal test-bed for implementing gestures in an informed and intuitive manner. We tested the Myo's viability as a games controller. We made appropriate use of gestures and reasoned that the gestures we used were fit for purpose in our game. Throughout our project we researched our decisions as they related to both user experience and game play controls.\\
 As we have shown in our research, there are many papers written about the use of appropriate gestures in games development, and we sought to leverage this and implement it in a meaningful way. Additionally there are papers written about other uses for the Myo armband, which were a valuable source of insight for us during this project.
-\subsection{Myo as a game controller.}
+\section{Myo as a game controller.}
 The Myo has a lot of promise as a game controller, the scope for developing interesting game mechanics using one or multiple armbands has a high ceiling, and is a lot of fun to think about. As with all hardware it's a demanding development process and presents challenges with configuration and implementation. Myo's gyroscope allows angular tracking in 3D space, while it's EMG sensors recognize 5 unique hand gestures.\\
 We discovered limitations to using the Myo as a controller during development. \\
 Overloading the player with controls for the game is a concern, and this can be demonstrated by removing the keyboard input and relying solely on the Myo as a controller. During early testing and talks about our control scheme we realized that the player would need more than just the Myo in order to navigate around the in game terrain and also react to enemy behaviour.
@@ -337,13 +481,13 @@ We decided on having keyboard input for moving the player left/right/forward/bac
 The Myo will occasionally recognize gestures while no gesture has been performed by the user. During gameplay this becomes an issue as player character actions are unexpectedly fired, perhaps causing distraction, breaking immersion, and being a general nuisance for the player. Note that on occasion the firing of an unexpected action can be helpful if it's destroys your enemies.. But the broader concern is when using the Myo in a more serious manner, where unexpected gesture recognition might cause injury or obscure test results.\\
 A minor limitation of the Myo, though this applies to anytime the Myo is being used, is that it need to warm up so the sensors can accurately detect your hand gestures. This is not the most ideal scenario when it comes to playing games. Generally games are more suited to 'pick up and play' type controllers, with no down time while the player waits for the controller to warm up or sync or configure. This is more of an observation however, and doesn't impact on the Myo performance as a controller. Once it has warmed up, it requests a re-sync and is good to go.\\
 Another minor concern which partly falls into the limitations is that if the user moves the Myo armband on their arm, the armband must re-sync to the users machine. Generally this might not be an issue, however as we discovered during development, wearing the armband for extended periods of time  can become a little uncomfortable, require moving the Myo a little bit to relieve pressure on the arm, and hence a re-sync. This interrupts the flow of gameplay and along with the aforementioned factors could discourage engagement with the Myo as a controller when there are other means available.
-\subsection{Future development ideas for this project.}
+\section{Future development ideas for this project.}
 \label{sec:FutureDevelopment}
 Two Myos!\\
 With the limited development time available to us for this project, implementing two Myos as controllers was a bit outside of what we thought achievable. However it would make sense that the next stage of development for this project might include a secondary control scheme for the second Myo.\\ With two Myo's, the player could control the directional movement of the player using one arm.For example:\\
 Wave In/Out for left right movement, Fingers extended and Fist for forwards/backwards, or actually moving the movement Myo arm forwards/backwards.
 There are many more options available with the second Myo armband.
-\subsection{Final Thoughts}
+\section{Final Thoughts}
 We are confident that, while there are some limitations to using the Myo as a game controller, it is still feasible. Tweaking the configuration of the controller takes a little more time but the results are encouraging once some time and consideration are spent here. It's normal to spend time balancing inputs for games so this is nothing serious. It makes for a fun and engaging experience, provides immersion, and the possibilities of coupling Myos with VR units would make further immersion achievable.\\
 Aside from games development, during research we discovered many other avenues for development with the Myo. Arguably the most appropriate use of the Myo armband is in the medical field where it is used in numerous rehabilitative applications, from tracking arm movement to assisting people with inoperable limbs to operate remote robotic arms. The applications in this area are profound and life changing for people.\\
 % Tech specs for where the game runs OS/Requirements?
@@ -370,7 +514,7 @@ Myo Armband\\
 \href{https://godotengine.org/}{Godot Engine}\\
 \href{https://github.com/d-gallagher/GBUI-Assignment}{Github repository for this project}\\
 
-\subsection{Reference Images}
+\section{Reference Images}
 \begin{figure}
     \centering
     \includegraphics[width=15cm]{images/myo_radialFire.PNG}
